@@ -37,3 +37,8 @@
 * Upload the thread to the github
 * Collect 7 days a week 
 [pomodoro timer info link](https://zapier.com/blog/best-pomodoro-apps/)
+
+# End of Meeting decisions
+* Project Manager : Rui Cai
+* Discussed automative tools for standup notes
+* **Meeting next Wednesday **
