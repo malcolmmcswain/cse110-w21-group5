@@ -14,7 +14,7 @@
 ### Did we face any issues? 
 * No issues faced so far
 
-### What we you plan to do this week?
+### What do we plan to do this week?
 * To figure out how our timer works, and the exact specifications
 * Brainstorming
 * Come up with a document by the end of this week 
