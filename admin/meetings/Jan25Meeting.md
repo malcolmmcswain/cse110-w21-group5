@@ -1,4 +1,4 @@
-# Meeting - Jan 25 at 9:30 PST
+# Team #5 Meeting - Jan 25 at 9:30 PST
 
 ## Members present
 * Yunha
@@ -26,8 +26,8 @@
 * Brainstorming
 * Come up with a document by the end of this week 
 * Research
-
-## Advice from our TA
+* Come up with roles for programmers, designers, project managers, etc
+# Advice from our TA
 * Come up with your own specs
 * Think of the project as deliverables and results
 * Need a state diagram and design
@@ -40,3 +40,7 @@
 * 2 weeks come up with a simple webpage
 * Start adding features
 * Basic version beginning of week 6
+* Project manager should create a stand up thread so everyone can fill in their updates
+* Upload the thread to the github
+* Collect 7 days a week 
+[pomodoro timer info link](https://zapier.com/blog/best-pomodoro-apps/)
