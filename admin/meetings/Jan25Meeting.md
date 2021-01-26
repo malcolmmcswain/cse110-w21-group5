@@ -19,7 +19,7 @@
 * Brainstorming
 * Come up with a document by the end of this week 
 * Research
-* Come up with roles for programmers, designers, project managers, etc
+* Come up with roles for programmers, designers, project managers, etc.
 # Advice from our TA
 * Come up with your own specs
 * Think of the project as deliverables and results
