@@ -1,15 +1,8 @@
 # Team #5 Meeting - Jan 25 at 9:30 PST
 
 ## Members present
-* Yunha
-* Juhmer
-* Rui
-* Neelima
-* Tiffany
-* Rui
-* Malcolm
-* Kaiyuan
-* Kevin
+<img width="1049" alt="Screen Shot 2021-01-25 at 10 56 59 PM" src="https://user-images.githubusercontent.com/50184924/105806283-e5b0cb00-5f60-11eb-8960-7330027b8299.png">
+
 
 # General Topics Discussed
 - meeting times, and discussion about the rubric and our expectations 
