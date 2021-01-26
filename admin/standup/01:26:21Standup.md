@@ -65,15 +65,15 @@
 - What did you do yesterday?
   - Team meeting
 - What do you plan to do today?
-  - None
+  - Research on pomodoro timers and reference pomodoro apps
 - Anything blocking your progress?
-  - None
+  - nil
 
 
 ### Kaiyuan Wang
 - What did you do yesterday?
   - Team meeting
 - What do you plan to do today?
-  - None
+  - Do some research on Pomodoro
 - Anything blocking your progress?
-  - None
+  - Nothing yet
