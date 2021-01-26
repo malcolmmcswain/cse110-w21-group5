@@ -1,0 +1,42 @@
+# Meeting - Jan 25 at 9:30 PST
+
+## Members present
+* Yunha
+* Juhmer
+* Rui
+* Neelima
+* Tiffany
+* Rui
+* Malcolm
+* Kaiyuan
+* Kevin
+
+# General Topics Discussed
+- meeting times, and discussion about the rubric and our expectations 
+
+### What did we do last week?
+* We did the group contract, met to discuss logistics and made our github page
+* Used Slack to communicate
+
+### Did we face any issues? 
+* No issues faced so far
+
+### What we you plan to do this week?
+* To figure out how our timer works, and the exact specifications
+* Brainstorming
+* Come up with a document by the end of this week 
+* Research
+
+## Advice from our TA
+* Come up with your own specs
+* Think of the project as deliverables and results
+* Need a state diagram and design
+* **Wire frame**
+### Suggested Timeline
+* Background research
+* Maybe have 1 half an hour discussion
+* Come up with sub teams
+* Start coding by next week
+* 2 weeks come up with a simple webpage
+* Start adding features
+* Basic version beginning of week 6
