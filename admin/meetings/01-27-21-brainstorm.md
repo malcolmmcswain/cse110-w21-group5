@@ -36,3 +36,4 @@ Project based or task based so upon creation of task, set how many pomodoro when
 ## Next Time
 - Meeting @ Saturday 8:00 PM PST
 - Go over ideas, start brainstorming and designing wireframe/ framework
+- Formalize rest of the team member's roles
