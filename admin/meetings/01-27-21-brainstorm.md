@@ -1,7 +1,9 @@
 # Team #5 Meeting
 ### Attendance and Time
 Absent: none
+
 Held on zoom at 8:00PM PST
+
 END: 9:07 PM
 
 ## History:
