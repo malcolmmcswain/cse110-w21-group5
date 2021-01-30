@@ -1,0 +1,395 @@
+<mxfile host="65bd71144e" modified="2021-01-30T20:44:50.068Z" agent="5.0 (Macintosh; Intel Mac OS X 11_0_0) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.52.1 Chrome/83.0.4103.122 Electron/9.3.5 Safari/537.36" version="13.10.0" etag="YGiU1U_emkg-CcZKYrwc" type="embed">
+    <diagram id="ZJU_b-uY4DtWqO5kP8HN" name="Page-1">
+        <mxGraphModel dx="1591" dy="2035" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="412" value="" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;sketch=0;align=center;dashed=1;arcSize=5;" vertex="1" parent="1">
+                    <mxGeometry y="410" width="1030" height="580" as="geometry"/>
+                </mxCell>
+                <mxCell id="353" value="" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;rounded=1;rotation=-180;dashed=1;position2=0.35;base=74;size=20;position=0.38;" vertex="1" parent="1">
+                    <mxGeometry x="10" y="605" width="836.05" height="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="273" value="" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;dashed=1;sketch=0;arcSize=6;" vertex="1" parent="1">
+                    <mxGeometry y="20" width="740" height="330" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="Pomo Session: 25min" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="220" y="59.97000000000003" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="5" target="10">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="Pomo Session: 25min" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="450" y="59.97000000000003" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="7" target="11">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="Pomo Session: 25min" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="220" y="139.97000000000003" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="227" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="8" target="21">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="Pomo Session: 25min" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="450" y="139.97000000000003" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="9" target="5">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="Break: 5min" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="355" y="59.97000000000003" width="55" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.333;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="10" target="7">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="Break: 5min" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="585" y="59.97000000000003" width="55" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="11" target="8">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="Break: 5min" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="355" y="139.97000000000003" width="55" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="4" target="9">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="360" y="9.970000000000027" as="sourcePoint"/>
+                        <mxPoint x="410" y="-40.02999999999997" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="229" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="21" target="4">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="280" y="-0.029999999999972715" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="660" y="140"/>
+                            <mxPoint x="660" y="40"/>
+                            <mxPoint x="310" y="40"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="231" value="Repeat until reach set number of pomo's" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="229">
+                    <mxGeometry x="0.0906" y="2" relative="1" as="geometry">
+                        <mxPoint x="-21.74" y="-2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="21" value="Long Break: 25min" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="590" y="139.97000000000003" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="232" value="&lt;div style=&quot;text-align: left&quot;&gt;&lt;span&gt;Estimation:&lt;/span&gt;&lt;/div&gt;Task1: 2 pomo&lt;br&gt;Task2: 3 pomo&lt;br&gt;...&lt;br&gt;..." style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;" vertex="1" parent="1">
+                    <mxGeometry x="150" y="440" width="110" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="275" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="233" target="232">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="233" value="&lt;meta charset=&quot;utf-8&quot;&gt;&lt;span style=&quot;color: rgb(240, 240, 240); font-family: helvetica; font-size: 12px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: center; text-indent: 0px; text-transform: none; word-spacing: 0px; background-color: rgb(42, 42, 42); display: inline; float: none;&quot;&gt;Input list of tasks and estimate # pomos needed&lt;/span&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry y="455" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="236" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="234" target="235">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="234" value="Set # of pomos" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="20" y="44.97000000000003" width="80" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="237" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="235" target="4">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="235" value="START" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="130" y="54.97000000000003" width="50" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="242" value="NOTE: Like a physicla pomo clock, it's per user's &lt;br&gt;discretion to decide whether to terminate a session&lt;br&gt;(i.e. Allow falsely logged pomo sessions)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+                    <mxGeometry x="450" y="245.95999999999998" width="290" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="265" value="" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;rounded=1;rotation=-180;dashed=1;" vertex="1" parent="1">
+                    <mxGeometry x="20" y="180" width="420" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="238" value="START" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="20" y="222.54411764705878" width="49.12280701754385" height="39.15294117647058" as="geometry"/>
+                </mxCell>
+                <mxCell id="240" value="25min countdown start" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="88.77192982456143" y="227.4382352941177" width="88.42105263157893" height="29.364705882352936" as="geometry"/>
+                </mxCell>
+                <mxCell id="243" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="238" target="240">
+                    <mxGeometry x="20" y="217.64999999999998" as="geometry"/>
+                </mxCell>
+                <mxCell id="241" value="Interrupted?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="206.66666666666663" y="217.64999999999998" width="78.59649122807016" height="48.94117647058824" as="geometry"/>
+                </mxCell>
+                <mxCell id="244" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="240" target="241">
+                    <mxGeometry x="20" y="217.64999999999998" as="geometry"/>
+                </mxCell>
+                <mxCell id="249" value="25min countdown finish" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="334.38596491228066" y="227.4382352941177" width="93.33333333333333" height="29.364705882352936" as="geometry"/>
+                </mxCell>
+                <mxCell id="250" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="241" target="249">
+                    <mxGeometry x="20" y="217.64999999999998" as="geometry"/>
+                </mxCell>
+                <mxCell id="252" value="NO" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="250">
+                    <mxGeometry x="0.0446" y="2" relative="1" as="geometry">
+                        <mxPoint x="-6.29" y="2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="258" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="253" target="238">
+                    <mxGeometry x="20" y="217.64999999999998" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="44.56140350877192" y="310.63823529411764"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="259" value="YES" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="258">
+                    <mxGeometry x="0.0635" y="-1" relative="1" as="geometry">
+                        <mxPoint x="14" y="10.52" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="253" value="Done w/ interruption?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="78.94999999999999" y="281.27" width="91.05" height="58.73" as="geometry"/>
+                </mxCell>
+                <mxCell id="269" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="254" target="253">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="254" value="Stop 25min timer" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="196.84210526315786" y="295.9558823529411" width="98.2456140350877" height="29.364705882352936" as="geometry"/>
+                </mxCell>
+                <mxCell id="255" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="241" target="254">
+                    <mxGeometry x="20" y="217.64999999999998" as="geometry"/>
+                </mxCell>
+                <mxCell id="256" value="YES" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="255">
+                    <mxGeometry x="0.3147" y="2" relative="1" as="geometry">
+                        <mxPoint x="-2.07" y="-4.58" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="260" value="End and Log 1 session" style="ellipse;whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="322.1052631578948" y="293.50882352941176" width="117.89473684210526" height="34.258823529411764" as="geometry"/>
+                </mxCell>
+                <mxCell id="261" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="249" target="260">
+                    <mxGeometry x="20" y="217.64999999999998" as="geometry"/>
+                </mxCell>
+                <mxCell id="272" value="&lt;b&gt;A pomo session&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontStyle=2" vertex="1" parent="1">
+                    <mxGeometry x="86.84" y="190" width="110" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="274" value="A Basic Pomodoro Timer" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontStyle=1;fontSize=18;" vertex="1" parent="1">
+                    <mxGeometry y="-10" width="230" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="282" value="" style="endArrow=classic;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="373">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="260" y="494.65999999999997" as="sourcePoint"/>
+                        <mxPoint x="350" y="495" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="283" value="For each task" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="282">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="331" value="Pomo Session: 25min" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="503.95000000000005" y="479.94000000000005" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="332" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="333" target="341">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="333" value="Pomo Session: 25min" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="733.95" y="479.94000000000005" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="334" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="335" target="343">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="335" value="Pomo Session: 25min" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="503.95000000000005" y="559.94" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="336" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="337" target="347">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="337" value="Pomo Session: 25min" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="733.95" y="559.94" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="338" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="339" target="333">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="339" value="Break: 5min" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="638.95" y="479.94000000000005" width="55" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="340" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.333;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="341" target="335">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="341" value="Break: 5min" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="868.95" y="479.94000000000005" width="55" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="342" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="343" target="337">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="343" value="Break: 5min" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="638.95" y="559.94" width="55" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="344" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="331" target="339">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="643.95" y="429.94000000000005" as="sourcePoint"/>
+                        <mxPoint x="693.95" y="379.94000000000005" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="345" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="347" target="331">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="563.95" y="419.94000000000005" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="943.95" y="559.97"/>
+                            <mxPoint x="943.95" y="459.97"/>
+                            <mxPoint x="593.95" y="459.97"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="346" value="Repeat until all tasks are completed" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="345">
+                    <mxGeometry x="0.0906" y="2" relative="1" as="geometry">
+                        <mxPoint x="-21.74" y="-2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="347" value="Long Break: 25min" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="873.95" y="559.94" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="350" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="373" target="331">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="463.95000000000005" y="494.94000000000005" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="450.95" y="494.97"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="354" value="START" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="13.949999999999989" y="647.5441176470588" width="49.12280701754385" height="39.15294117647058" as="geometry"/>
+                </mxCell>
+                <mxCell id="355" value="25min countdown start" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="82.72192982456141" y="652.4382352941177" width="88.42105263157893" height="29.364705882352936" as="geometry"/>
+                </mxCell>
+                <mxCell id="356" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="354" target="355">
+                    <mxGeometry x="13.949999999999989" y="642.65" as="geometry"/>
+                </mxCell>
+                <mxCell id="357" value="Interrupted?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="200.61666666666656" y="642.65" width="78.59649122807016" height="48.94117647058824" as="geometry"/>
+                </mxCell>
+                <mxCell id="358" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="355" target="357">
+                    <mxGeometry x="13.949999999999989" y="642.65" as="geometry"/>
+                </mxCell>
+                <mxCell id="389" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="359" target="383">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="410" y="699"/>
+                            <mxPoint x="410" y="668"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="359" value="25min countdown finish" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="328.34" y="652.44" width="61.66" height="92.56" as="geometry"/>
+                </mxCell>
+                <mxCell id="360" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="357" target="359">
+                    <mxGeometry x="13.949999999999989" y="642.65" as="geometry"/>
+                </mxCell>
+                <mxCell id="361" value="NO" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="360">
+                    <mxGeometry x="0.0446" y="2" relative="1" as="geometry">
+                        <mxPoint x="-6.29" y="2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="362" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="364" target="354">
+                    <mxGeometry x="13.949999999999989" y="642.65" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="38.94999999999999" y="748"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="363" value="YES" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="362">
+                    <mxGeometry x="0.0635" y="-1" relative="1" as="geometry">
+                        <mxPoint x="14" y="10.52" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="364" value="Done w/ interruption?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="73.42999999999995" y="718.6" width="91.05" height="58.73" as="geometry"/>
+                </mxCell>
+                <mxCell id="365" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="366" target="364">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="366" value="Stop 25min timer" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="190.79210526315785" y="733.2858823529411" width="98.2456140350877" height="29.364705882352936" as="geometry"/>
+                </mxCell>
+                <mxCell id="367" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="357" target="366">
+                    <mxGeometry x="13.949999999999989" y="642.65" as="geometry"/>
+                </mxCell>
+                <mxCell id="368" value="YES" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="367">
+                    <mxGeometry x="0.3147" y="2" relative="1" as="geometry">
+                        <mxPoint x="-2.07" y="-4.58" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="371" value="&lt;b&gt;&lt;i&gt;A pomo session&lt;/i&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+                    <mxGeometry x="305" y="605" width="110" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="373" value="Start basic pomodoro timer" style="ellipse;whiteSpace=wrap;html=1;rounded=1;shadow=0;sketch=0;" vertex="1" parent="1">
+                    <mxGeometry x="353.95" y="466.1700000000001" width="96.84" height="57.55" as="geometry"/>
+                </mxCell>
+                <mxCell id="375" value="Current task finished?" style="rhombus;whiteSpace=wrap;html=1;rounded=0;shadow=0;sketch=0;" vertex="1" parent="1">
+                    <mxGeometry x="566.45" y="635" width="80" height="62.12" as="geometry"/>
+                </mxCell>
+                <mxCell id="390" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="383" target="375">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="383" value="&lt;span&gt;End and Log 1 session towards current task&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;sketch=0;" vertex="1" parent="1">
+                    <mxGeometry x="443.95000000000005" y="642.65" width="100" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="398" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="384" target="396">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="384" value="Mark current task done, move on to next task on the list" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;sketch=0;" vertex="1" parent="1">
+                    <mxGeometry x="463.95000000000005" y="735" width="165" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="385" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="375" target="399">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="453.95000000000005" y="725" as="sourcePoint"/>
+                        <mxPoint x="708.95" y="727.98" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="801" y="666"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="386" value="NO" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="385">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="-33.55" y="-0.18" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="387" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.859;entryY=0.008;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="375" target="384">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="453.95000000000005" y="725" as="sourcePoint"/>
+                        <mxPoint x="553.95" y="725" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="388" value="YES" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="387">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="0.39" y="-0.5" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="411" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="393" target="410">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="393" value="&lt;div&gt;&lt;span&gt;Actual sessions per task:&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center&quot;&gt;&lt;span&gt;Task1: 4 pomo&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center&quot;&gt;&lt;span&gt;Task2: 6 pomo&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center&quot;&gt;&lt;span&gt;...&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center&quot;&gt;&lt;span&gt;...&lt;/span&gt;&lt;/div&gt;" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;align=left;" vertex="1" parent="1">
+                    <mxGeometry x="626.98" y="855" width="146.05" height="122.35" as="geometry"/>
+                </mxCell>
+                <mxCell id="402" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="396" target="399">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="405" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="396" target="393">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="396" value="All task finished?" style="rhombus;whiteSpace=wrap;html=1;rounded=0;shadow=0;sketch=0;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="660" y="720" width="80" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="399" value="End session and move on to break" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;rounded=0;shadow=0;sketch=0;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="766.05" y="718.6" width="70" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="403" value="NO" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+                    <mxGeometry x="736.05" y="733.29" width="30" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="408" value="YES" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;shadow=0;sketch=0;" vertex="1" parent="1">
+                    <mxGeometry x="680" y="805" width="40" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="410" value="A day of working ended, output estimation vs. actual pomo's taken." style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;rounded=0;shadow=0;sketch=0;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="838.95" y="858.67" width="115" height="115" as="geometry"/>
+                </mxCell>
+                <mxCell id="413" value="A Task-Based Pomodoro Timer" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontStyle=1;fontSize=18;" vertex="1" parent="1">
+                    <mxGeometry y="380" width="280" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
