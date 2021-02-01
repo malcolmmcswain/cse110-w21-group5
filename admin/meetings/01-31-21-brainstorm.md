@@ -24,7 +24,7 @@ END: 8:30 PM
 ### Ideas
 - Only show the log history button during the long break maybe
 - Option to view log button during break time
-<img width="300" alt="Screen Shot 2021-01-31 at 9 11 04 PM" src="https://user-images.githubusercontent.com/50184924/106414033-d621fe00-6408-11eb-8bba-cc433d9cdc19.png">
+<img width="300" alt="Screen Shot 2021-01-31 at 9 22 49 PM" src="https://user-images.githubusercontent.com/50184924/106414704-847a7300-640a-11eb-9e5f-414ec6908aea.png">
 
 ## Timeline
 
