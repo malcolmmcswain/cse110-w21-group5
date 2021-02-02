@@ -58,6 +58,7 @@
 <br>
 
 ### __Week 5 - 6__
+__Setup and MVP Sprint__
 - Break prototype into small tasks to assign to each team member
 - Start coding the actual app
 - Finish basic functionalities of the Pomodoro App:
@@ -70,6 +71,7 @@
 <br>
 
 ### __Week 7 - 8__
+__Beta Sprint__
 - Wrap up the development of basic functions of the app
 - Come up with some more ideas to make our app follow the original idea of Pomodoro Timer
 - Add these ideas to UI design and system diagrams
@@ -79,6 +81,7 @@
 <br>
 
 ### __Week 9 - 10__
+__Beta and Finalizing Sprint__
 - Overall testing of our app / Maybe a meeting to have a Blitz together to find bugs?
 - Fix bugs
 - Wrap up any unfinished work
