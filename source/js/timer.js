@@ -13,7 +13,7 @@
 
 // Logical structure:
     // Create some sort of dynamic timer object using Date or Moment
-    // Add logic to consider 5 states: pomodoro, short break, long break, paused, reset
+    // Add logic to consider 5 states: work timer, short break timer, long break timer, stopped, reset
     // Bind DOM elements like buttons and signals from pomodoro.js to control the state of this object
 
 // UI structure:
