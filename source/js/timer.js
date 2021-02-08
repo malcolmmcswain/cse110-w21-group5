@@ -15,6 +15,14 @@
     // Create some sort of dynamic timer object using Date or Moment
     // Add logic to consider 5 states: work timer, short break timer, long break timer, stopped, reset
     // Bind DOM elements like buttons and signals from pomodoro.js to control the state of this object
+function time() {
+    console.log("Hello world");
+}
+
+currentTime = new Date();
+
+
+time();
 
 // UI structure:
     // Fetch timer from HTML using DOM
