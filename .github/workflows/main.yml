@@ -10,6 +10,6 @@ jobs:
     - name: Install ESLint
       run: npm install --save-dev eslint
     - name: Run ESLint
-      run: npx eslint ./source/js/timer.js --ext .js
+      run: npx eslint ./source/js/timer.js --ext .js -c ./.eslintrc.js
     - name: Run ESLint
-      run: npx eslint ./source/js/pomodoro.js --ext .js
+      run: npx eslint ./source/js/pomodoro.js --ext .js -c ./.eslintrc.js
