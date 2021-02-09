@@ -1,8 +1,7 @@
 # This is a basic workflow to help you get started with Actions
 
-name: ESLint
+name: Continuous Integration Pipeline
 on:
-  push:
   pull_request:
     branches:
       - main
@@ -11,7 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install ESLint
-      run: npm install --save-dev eslint
+    - name: Install dependencies
+      run: npm install
     - name: Run ESLint
       run: npx eslint ./source/js/ --ext .js -c ./.eslintrc.js
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: npm install
+    - name: Run Jest
+      run: npm run test
