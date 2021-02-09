@@ -16,8 +16,6 @@
     // Add logic to consider 5 states: work timer, short break timer, long break timer, stopped, reset
     // Bind DOM elements like buttons and signals from pomodoro.js to control the state of this object
 
-
-
 /* TODO: Here I'm using global variables to store necessary pointers, which means we cannot have two timers running parallel.
  *       Do we need to fix this?
  *
