@@ -16,3 +16,4 @@ Held on zoom at 9:30
 - Work on documentation of our progress
 - Not just about working on features, but focus on efficiency
 - Split up tasks 
+### Meeting with professor next tuesday
