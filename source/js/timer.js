@@ -99,11 +99,9 @@ timer.prototype.startLongBreak = function() {
     this.start(this.longBreakMins);
 }
 
-let time = new timer();
-time.startLongBreak();
-setTimeout(() => {time.stop()}, 5000);
-
 // UI structure:
     // Fetch timer from HTML using DOM
     // Manipulate its text content to match that of the timer object state
     // Style its "ring" conditionally (this part will be tricky, ask me if you need help!)
+
+module.exports = timer;
