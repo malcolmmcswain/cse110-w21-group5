@@ -1,0 +1,13 @@
+# This is a basic workflow to help you get started with Actions
+
+name: ESLint
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install ESLint
+      run: npm install --save-dev eslint
+    - name: Run ESLint
+      run: npx eslint ./source/js/ --ext .js -c ./.eslintrc.js
