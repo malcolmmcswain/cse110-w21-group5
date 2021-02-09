@@ -62,7 +62,7 @@ timer.prototype.start = function(countDownMins) {
     this.countDownDate = new Date(now.getTime() + countDownMins * 60 * 1000 + 1000);
     this.countDownTimeout = setInterval(this.countDown.bind(this), 1000);
     this.terminateTimeout = setTimeout(function() {
-        clearInterval(countDownTimeout);
+        clearInterval(this.countDownTimeout);
     }, countDownMins * 60 * 1000);
 }
 
