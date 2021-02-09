@@ -20,3 +20,14 @@
     // Fetch timer from HTML using DOM
     // Manipulate its text content to match that of the timer object state
     // Style its "ring" conditionally (this part will be tricky, ask me if you need help!)
+
+function foo() {}
+foo = bar;
+
+function foo() {
+    foo = bar;
+}
+
+var a = function hello() {
+    hello = 123;
+};
