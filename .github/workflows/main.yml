@@ -2,6 +2,9 @@
 
 name: Continuous Integration Pipeline
 on:
+  push:
+    branches: 
+      - main
   pull_request:
     branches:
       - main
@@ -22,3 +25,11 @@ jobs:
       run: npm install
     - name: Run Jest
       run: npm run test
+  documentation:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: npm install
+    - name: Run JSDoc
+      run: npx jsdoc ./source/js/ -d ./docs
