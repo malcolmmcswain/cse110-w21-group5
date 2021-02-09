@@ -23,83 +23,87 @@
  *
  * TODO: Due to run time lagging, setInterval has around a 5ms lag each time, which means we lose a whole second every 200 seconds.
 */
-var countDownDate; // Holds a Date() obj representing the time when count down should end
-var countDownTimeout; // Timeout returned by setInterval(this.countDown, 1000)
-var terminateTimeout; // Timeout returned by setTimeout that terminates count down
-var timeLeft; // Time left in miliseconds
-var shortBreakMins = 5;
-var longBreakMins = 15;
-var workMins = 25;
 
-class timer {
-    /**
-     * Start countDown based on passed in param countDownMins
-     * @param {*} countDownMins count down time in minutes
-     */
-    start(countDownMins) {
-        this.pause();
-        let now = new Date();
-        countDownDate = new Date(now.getTime() + countDownMins * 60 * 1000);
-        this.countDown();
-        countDownTimeout = setInterval(this.countDown, 1000)
-        terminateTimeout = setTimeout(function() {
-            clearInterval(countDownTimeout);
-        }, countDownMins * 60 * 1000);
-    }
+function timer(workMins = 25, shortBreakMins = 5, longBreakMins = 15) {
+    this.state = 'reset';
+    this.countDownDate = null;
+    this.countDownTimeout = null;
+    this.terminateTimeout = null;
+    this.minutesLeft = 0;
+    this.secondsLeft = 0;
+    this.workMins = workMins;
+    this.shortBreakMins = shortBreakMins;
+    this.longBreakMins = longBreakMins;
+}
 
-    /**
-     * update timeLeft based on current time and countDownDate
-     */
-    countDown() {
-        let now = new Date();
-        timeLeft = countDownDate.getTime() - now.getTime();
-        console.log("Seconds left: " + timeLeft / (1000)); 
-    }
+timer.prototype.reset = function() {
+    this.state = 'reset';
+    this.countDownDate = null;
+    this.countDownTimeout = null;
+    this.terminateTimeout = null;
+    this.minutesLeft = 0;
+    this.secondsLeft = 0;
+}
 
-    /**
-     * pause the count down timer
-     */
-    pause() {
-        if (countDownTimeout) {
-            clearInterval(countDownTimeout);
-        }
-        if (terminateTimeout) {
-            clearTimeout(terminateTimeout);
-        }
-    }
+/**
+ * Stop the count down timer
+ */
+timer.prototype.stop = function() {
+    this.state = 'stopped';
+    if (this.countDownTimeout) clearInterval(this.countDownTimeout);
+    if (this.terminateTimeout) clearTimeout(this.terminateTimeout);
+}
 
-    /**
-     * resume the count down timer
-     */
-    resume() {
-        this.start((timeLeft) / (60 * 1000));
-    }
+/**
+ * Start countDown based on passed in param countDownMins
+ * @param {*} countDownMins count down time in minutes
+ */
+timer.prototype.start = function(countDownMins) {
+    this.stop();
+    let now = new Date();
+    this.countDownDate = new Date(now.getTime() + countDownMins * 60 * 1000 + 1000);
+    this.countDownTimeout = setInterval(this.countDown.bind(this), 1000);
+    this.terminateTimeout = setTimeout(function() {
+        clearInterval(countDownTimeout);
+    }, countDownMins * 60 * 1000);
+}
 
-    startWorking() {
-        this.start(workMins);
-    }
+/**
+ * Update timeLeft based on current time and countDownDate
+ */
+timer.prototype.countDown = function() {
+    let now = new Date();
+    let timeLeft = this.countDownDate.getTime() - now.getTime();
+    this.minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    this.secondsLeft = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    console.log(`${this.minutesLeft.toString().padStart(2,'0')}:${this.secondsLeft.toString().padStart(2,'0')}`);
+}
 
-    startShortBreak() {
-        this.start(shortBreakMins);
-    }
+/**
+ * Resume the count down timer
+ *
+timer.prototype.resume = () => {
+    this.start((timeLeft) / (60 * 1000));
+} */
 
-    startLongBreak() {
-        this.start(longBreakMins);
-    }
+timer.prototype.startWorking = function() {
+    this.state = 'work';
+    this.start(this.workMins);
+}
+
+timer.prototype.startShortBreak = function() {
+    this.state = 'short_break';
+    this.start(this.shortBreakMins);
+}
+
+timer.prototype.startLongBreak = function() {
+    this.state = 'long_break';
+    this.start(this.longBreakMins);
 }
 
 let time = new timer();
-time.start(0.5);
-
-setTimeout(function() {
-    time.pause();
-    console.log(timeLeft / 1000);
-}, 10000);
-
-setTimeout(function() {
-    time.resume();
-}, 15000);
-
+time.startLongBreak();
+setTimeout(() => {time.stop()}, 5000);
 
 // UI structure:
     // Fetch timer from HTML using DOM
