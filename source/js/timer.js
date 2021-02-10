@@ -1,3 +1,5 @@
+// TODO: Timer still has lag each second due to the lag of setInterval. Need to fix this. 
+
 /**
  * Represents a timer object
  * @constructor
@@ -49,7 +51,7 @@ timer.prototype.start = function(countDownMins) {
     this.countDownTimeout = setInterval(this.countDown.bind(this), 1000);
     this.terminateTimeout = setTimeout(function() {
         clearInterval(this.countDownTimeout);
-    }, countDownMins * 60 * 1000);
+    }.bind(this), countDownMins * 60 * 1000 + 1000); // + 1s so we get 00:00 print
 }
 
 /**
@@ -59,7 +61,7 @@ timer.prototype.countDown = function() {
     let now = new Date();
     let timeLeft = this.countDownDate.getTime() - now.getTime();
     this.minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-    this.secondsLeft = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    this.secondsLeft = (timeLeft % (1000 * 60)) / 1000;
     console.log(`${this.minutesLeft.toString().padStart(2,'0')}:${this.secondsLeft.toString().padStart(2,'0')}`);
 }
 
@@ -98,5 +100,4 @@ timer.prototype.resume = () => {
     // Fetch timer from HTML using DOM
     // Manipulate its text content to match that of the timer object state
     // Style its "ring" conditionally (this part will be tricky, ask me if you need help!)
-
 module.exports = timer;
