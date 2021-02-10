@@ -7,3 +7,91 @@
  * Make sure that this page will always take up the full height and width of the viewport (i.e. the device you are viewing the page on) - you may need to do some research into something called "responsive web design".
 
 */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+header, footer {
+    flex: 1;
+    background-color: #bbb;
+}
+
+h1 {
+    margin: 0;
+    padding: 8px;
+}
+
+@media only screen and (max-width: 600px) {
+    #timer-control {
+        width: 100%;
+    }
+}
+
+main {
+    width: 60%;
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 18;
+}
+
+#timer-display, #timer-control {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+#start, #stop, #reset {
+    font-family: inherit;
+    font-size: 1em;
+    padding: 1em;
+    margin: 1em;
+
+    color: #222c;
+
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+
+    justify-content: center;
+}
+
+#start {
+    display: inline-flex;
+    background-color: #17bf81;
+    flex: 1;
+}
+
+#stop {
+    display: none;
+    background-color: hsl(0, 76%, 60%);
+    flex: 1;
+}
+
+#reset {
+    display: none;
+    background-color: #d2cf50;
+    flex: 1;
+}
+
+footer > p {
+    padding: 4px;
+    text-align: center;
+}
