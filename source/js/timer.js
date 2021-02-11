@@ -60,13 +60,13 @@ timer.prototype.stop = function() {
 timer.prototype.start = function(countDownMins) {
     this.stop();
     let now = new Date();
-    let countDownOffset = countDownMins * multipliers.MINUTE + 1000;  // + 1s so we get 00:00 print
+    let countDownOffset = countDownMins * multipliers.MINUTE; 
     this.countDownDate = new Date(now.getTime() + countDownOffset);
 
     /* Neat hack to prevent lag of the first second */
     setTimeout(this.countDown.bind(this, 0));
     this.countDownTimeout = setInterval(this.countDown.bind(this), 1000);
-    this.terminateTimeout = setTimeout(this.stop.bind(this), countDownOffset);
+    this.terminateTimeout = setTimeout(this.stop.bind(this), countDownOffset + 1000);  // + 1s so we get 00:00 print
 }
 
 /**
