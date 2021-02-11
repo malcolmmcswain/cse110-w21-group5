@@ -44,6 +44,13 @@ timer.prototype.reset = function() {
 timer.prototype.stop = function() {
     this.state = 'stopped';
     if (this.countDownTimeout) clearInterval(this.countDownTimeout);
+
+    /* 
+     * Terminate automatic stop. Needed when user terminates timer
+     * early to prevent an incorrect automatic stop when a new timer
+     * is started.
+     */
+    if (this.terminateTimeout) clearTimeout(this.terminateTimeout);
 }
 
 /**
@@ -53,12 +60,13 @@ timer.prototype.stop = function() {
 timer.prototype.start = function(countDownMins) {
     this.stop();
     let now = new Date();
-    let countDownOffset = countDownMins * multipliers.MINUTE;
+    let countDownOffset = countDownMins * multipliers.MINUTE + 1000;  // + 1s so we get 00:00 print
     this.countDownDate = new Date(now.getTime() + countDownOffset);
-    // Neat hack to prevent lag of first second.
+
+    /* Neat hack to prevent lag of the first second */
     setTimeout(this.countDown.bind(this, 0));
     this.countDownTimeout = setInterval(this.countDown.bind(this), 1000);
-    this.terminateTimeout = setTimeout(this.stop.bind(this), countDownOffset); // + 1s so we get 00:00 print
+    this.terminateTimeout = setTimeout(this.stop.bind(this), countDownOffset);
 }
 
 /**
