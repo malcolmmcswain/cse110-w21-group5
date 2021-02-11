@@ -2,6 +2,8 @@ const { test, expect } = require('@jest/globals');
 const { time } = require('console');
 const timer = require('../source/js/timer.js');
 
+jest.useFakeTimers('modern');
+
 test('Timer resets properly', () => {
     let time = new timer();
     time.reset();
@@ -11,18 +13,25 @@ test('Timer resets properly', () => {
 test('Timer starts working properly', () => {
     let time = new timer();
     time.startWorking();
-    setTimeout(() => {expect(time.minutesLeft).toBe(24)}, 1000);
+    jest.advanceTimersByTime(1000);
+    expect(time.minutesLeft).toBe(24);
+    expect(time.secondsLeft).toBe(59);
 });
 
 test('Timer counts down properly', () => {
     let time = new timer();
     time.startWorking();
-    setTimeout(() => {expect(time.minutesLeft).toBe(23)}, 61000);
+    jest.advanceTimersByTime(61000);
+    expect(time.minutesLeft).toBe(23);
+    expect(time.secondsLeft).toBe(59);
 });
 
 test('Timer stops properly', () => {
     let time = new timer();
     time.startWorking();
-    setTimeout(() => {time.stop()}, 1000)
-    setTimeout(() => {expect(time.minutesLeft).toBe(24)}, 61000);
+    jest.advanceTimersByTime(1000);
+    time.stop();
+    jest.advanceTimersByTime(61000);
+    expect(time.minutesLeft).toBe(24);
+    expect(time.secondsLeft).toBe(59);
 });

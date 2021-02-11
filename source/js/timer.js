@@ -1,5 +1,10 @@
 // TODO: Timer still has lag each second due to the lag of setInterval. Need to fix this. 
 
+const multipliers = {
+    SECOND: 1000,
+    MINUTE: 60000
+}
+
 /**
  * Represents a timer object
  * @constructor
@@ -12,11 +17,13 @@ function timer(workMins = 25, shortBreakMins = 5, longBreakMins = 15) {
     this.countDownDate = null;
     this.countDownTimeout = null;
     this.terminateTimeout = null;
-    this.minutesLeft = 0;
-    this.secondsLeft = 0;
     this.workMins = workMins;
     this.shortBreakMins = shortBreakMins;
     this.longBreakMins = longBreakMins;
+
+    // Used for internal testing
+    this.minutesLeft = 0;
+    this.secondsLeft = 0;
 }
 
 /**
@@ -37,7 +44,6 @@ timer.prototype.reset = function() {
 timer.prototype.stop = function() {
     this.state = 'stopped';
     if (this.countDownTimeout) clearInterval(this.countDownTimeout);
-    if (this.terminateTimeout) clearTimeout(this.terminateTimeout);
 }
 
 /**
@@ -47,22 +53,27 @@ timer.prototype.stop = function() {
 timer.prototype.start = function(countDownMins) {
     this.stop();
     let now = new Date();
-    this.countDownDate = new Date(now.getTime() + countDownMins * 60 * 1000 + 1000);
+    let countDownOffset = countDownMins * multipliers.MINUTE;
+    this.countDownDate = new Date(now.getTime() + countDownOffset);
+    // Neat hack to prevent lag of first second.
+    setTimeout(this.countDown.bind(this, 0));
     this.countDownTimeout = setInterval(this.countDown.bind(this), 1000);
-    this.terminateTimeout = setTimeout(function() {
-        clearInterval(this.countDownTimeout);
-    }.bind(this), countDownMins * 60 * 1000 + 1000); // + 1s so we get 00:00 print
+    this.terminateTimeout = setTimeout(this.stop.bind(this), countDownOffset); // + 1s so we get 00:00 print
 }
 
 /**
  * Update timeLeft based on current time and countDownDate
  */
 timer.prototype.countDown = function() {
+    function timerPad(timerField) {
+        return timerField.toString().padStart(2, '0');
+    }
+
     let now = new Date();
-    let timeLeft = this.countDownDate.getTime() - now.getTime();
-    this.minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-    this.secondsLeft = (timeLeft % (1000 * 60)) / 1000;
-    console.log(`${this.minutesLeft.toString().padStart(2,'0')}:${this.secondsLeft.toString().padStart(2,'0')}`);
+    let timeLeft = this.countDownDate - now;
+    this.minutesLeft = Math.floor((timeLeft / multipliers.MINUTE));
+    this.secondsLeft = Math.floor((timeLeft / multipliers.SECOND) % 60);
+    console.log(`${timerPad(this.minutesLeft)}:${timerPad(this.secondsLeft)}`);
 }
 
 /**
