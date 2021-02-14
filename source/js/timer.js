@@ -44,6 +44,7 @@ timer.prototype.reset = function() {
 timer.prototype.stop = function() {
     this.state = 'stopped';
     if (this.countDownTimeout) clearInterval(this.countDownTimeout);
+    if (this.animation) clearInterval(this.animation);
 
     /* 
      * Terminate automatic stop. Needed when user terminates timer
@@ -81,7 +82,7 @@ timer.prototype.countDown = function() {
     let timeLeft = this.countDownDate - now;
     this.minutesLeft = Math.floor((timeLeft / multipliers.MINUTE));
     this.secondsLeft = Math.floor((timeLeft / multipliers.SECOND) % 60);
-    console.log(`${timerPad(this.minutesLeft)}:${timerPad(this.secondsLeft)}`);
+    document.getElementById('time').innerHTML = `${timerPad(this.minutesLeft)}:${timerPad(this.secondsLeft)}`;
 }
 
 /**
@@ -90,6 +91,7 @@ timer.prototype.countDown = function() {
 timer.prototype.startWorking = function() {
     this.state = 'work';
     this.start(this.workMins);
+    this.animate(this.workMins);
 }
 
 /**
@@ -115,8 +117,37 @@ timer.prototype.resume = () => {
     this.start((timeLeft) / (60 * 1000));
 } */
 
-// UI structure:
-    // Fetch timer from HTML using DOM
-    // Manipulate its text content to match that of the timer object state
-    // Style its "ring" conditionally (this part will be tricky, ask me if you need help!)
+timer.prototype.animate = function(minutes) {
+    let dark = document.getElementById('dark'),
+    percentage = 100,
+    theta = 0,
+    maxTheta = (180 * percentage) / 50,
+    radius = document.getElementById('svg').getBBox().width / 2;
+    dark.setAttribute('transform', 'translate(' + radius + ',' + radius + ')');
+
+    this.animation = setInterval(function() {
+        theta += 0.5;
+        let d = 'M0,0 v' + -radius + 'A' + radius + ' ' + radius + ' 1 ' + ((theta > 180) ? 1 : 0) + ' 1 ' + Math.sin(theta * Math.PI / 180) * radius + ' ' + Math.cos(theta * Math.PI / 180) * -radius + 'z';
+        dark.setAttribute('d', d);
+        if (theta > maxTheta) {
+            clearInterval(this.animation);
+        }
+    }, minutes * 60);
+}
+
+document.getElementById('start').addEventListener('click', () => {
+    let time = new timer(1,1,1);
+    time.startWorking();
+    document.getElementById('start').style.display = 'none';
+    document.getElementById('stop').style.display = 'block';
+    document.getElementById('stop').addEventListener('click', () => {
+        time.stop();
+    });
+    document.getElementById('reset').style.display = 'block';
+    document.getElementById('reset').addEventListener('click', () => {
+        time.reset();
+    });
+})
+
+
 module.exports = timer;
