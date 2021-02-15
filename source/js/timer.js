@@ -51,7 +51,7 @@ timer.prototype.stop = function() {
      * early to prevent an incorrect automatic stop when a new timer
      * is started.
      */
-    if (this.terminateTimeout) clearTimeout(this.terminateTimeout);
+    // if (this.terminateTimeout) clearTimeout(this.terminateTimeout);
 }
 
 /**
@@ -65,11 +65,10 @@ timer.prototype.start = function(countDownMins) {
     this.countDownDate = new Date(now.getTime() + countDownOffset);
 
     /* Neat hack to prevent lag of the first second */
-    setTimeout(this.countDown.bind(this, 0));
-    this.countDownTimeout = setInterval(this.countDown.bind(this), 1000);
-    this.terminateTimeout = setTimeout(this.stop.bind(this), countDownOffset + 1000);  // + 1s so we get 00:00 print
+    this.countDown.bind(this)();
+    this.countDownTimeout = setInterval(this.countDown.bind(this), 500);
 }
-
+    
 /**
  * Update timeLeft based on current time and countDownDate
  */
@@ -79,10 +78,16 @@ timer.prototype.countDown = function() {
     }
 
     let now = new Date();
-    let timeLeft = this.countDownDate - now;
-    this.minutesLeft = Math.floor((timeLeft / multipliers.MINUTE));
-    this.secondsLeft = Math.floor((timeLeft / multipliers.SECOND) % 60);
+    // Use seconds that have passed as the single source of truth.
+    let timeLeft = Math.ceil((this.countDownDate - now) / multipliers.SECOND);
+    this.minutesLeft = Math.floor(timeLeft / 60);
+    this.secondsLeft = timeLeft % 60;
+
     document.getElementById('time').innerHTML = `${timerPad(this.minutesLeft)}:${timerPad(this.secondsLeft)}`;
+    if (!this.minutesLeft && !this.secondsLeft) {
+        clearInterval(this.countDownTimeout);
+        this.stop();
+    }
 }
 
 /**
@@ -147,7 +152,7 @@ document.getElementById('start').addEventListener('click', () => {
     document.getElementById('reset').addEventListener('click', () => {
         time.reset();
     });
-})
+});
 
 
 module.exports = timer;
