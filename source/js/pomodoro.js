@@ -4,6 +4,8 @@
  * attempting to work on this file.
  ************************************************************************************/
 
+const timer = require("./timer");
+
 // IDEAS/SUGGESTED STRUCTURE BELOW:
     // This is to give you a starting point, not an explicit map of what your code should look like
 

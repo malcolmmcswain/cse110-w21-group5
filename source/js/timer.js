@@ -12,14 +12,19 @@ const multipliers = {
  * @param {number} shortBreakMins - Length of short break timer
  * @param {number} longBreakMins - Length of long break timer
  */
-function timer(workMins = 25, shortBreakMins = 5, longBreakMins = 15) {
+function timer(workMins = 25, shortBreakMins = 5, longBreakMins = 15, longBreakInterval = 3) {
     this.state = 'reset';
+    this.counter = 0;
+
     this.countDownDate = null;
     this.countDownTimeout = null;
     this.terminateTimeout = null;
     this.workMins = workMins;
     this.shortBreakMins = shortBreakMins;
     this.longBreakMins = longBreakMins;
+
+    this.countDownMins = 0;
+    this.theta = 0;
 
     // Used for internal testing
     this.minutesLeft = 0;
@@ -30,21 +35,43 @@ function timer(workMins = 25, shortBreakMins = 5, longBreakMins = 15) {
  * Resets the count down timer
  */
 timer.prototype.reset = function() {
+    this.stop(true);
+
+    this.counter = 0;
     this.state = 'reset';
+
     this.countDownDate = null;
     this.countDownTimeout = null;
     this.terminateTimeout = null;
     this.minutesLeft = 0;
     this.secondsLeft = 0;
+    this.countDownMins = 0;
+    this.theta = 0;
+
+    document.getElementById('time').innerHTML = '00:00';
+    document.getElementById('dark').setAttribute('d', 'M60,60 v-60 a60,60 0 0,1 0,0');
 }
 
 /**
  * Stops the count down timer
  */
-timer.prototype.stop = function() {
-    this.state = 'stopped';
+timer.prototype.stop = function(force = false) {
     if (this.countDownTimeout) clearInterval(this.countDownTimeout);
-    if (this.animation) clearInterval(this.animation);
+
+    console.log('stopped in state '+this.state);
+
+    if (force) {
+        this.state = 'stopped';
+    } else if (this.state == 'work' && this.counter % this.longBreakInterval == 0) {
+        this.reset();
+        this.startLongBreak();
+    } else if (this.state == 'work') {
+        this.reset();
+        this.startShortBreak();
+    } else if (this.state == 'short_break') {
+        this.reset();
+        this.startWorking();
+    }
 
     /* 
      * Terminate automatic stop. Needed when user terminates timer
@@ -59,10 +86,10 @@ timer.prototype.stop = function() {
  * @param {number} countDownMins count down time in minutes
  */
 timer.prototype.start = function(countDownMins) {
-    this.stop();
     let now = new Date();
     let countDownOffset = countDownMins * multipliers.MINUTE; 
     this.countDownDate = new Date(now.getTime() + countDownOffset);
+    this.countDownMins = countDownMins;
 
     /* Neat hack to prevent lag of the first second */
     this.countDown.bind(this)();
@@ -83,6 +110,15 @@ timer.prototype.countDown = function() {
     this.minutesLeft = Math.floor(timeLeft / 60);
     this.secondsLeft = timeLeft % 60;
 
+    let dark = document.getElementById('dark'),
+    radius = document.getElementById('svg').getBBox().width / 2;
+    dark.setAttribute('transform', 'translate(' + radius + ',' + radius + ')');
+
+    let increment = 360 / (this.countDownMins * 60) / 2;
+    this.theta += increment;
+    let d = 'M0,0 v' + -radius + 'A' + radius + ' ' + radius + ' 1 ' + ((this.theta > 180) ? 1 : 0) + ' 1 ' + Math.sin(this.theta * Math.PI / 180) * radius + ' ' + Math.cos(this.theta * Math.PI / 180) * -radius + 'z';
+    dark.setAttribute('d', d);
+
     document.getElementById('time').innerHTML = `${timerPad(this.minutesLeft)}:${timerPad(this.secondsLeft)}`;
     if (!this.minutesLeft && !this.secondsLeft) {
         clearInterval(this.countDownTimeout);
@@ -94,15 +130,19 @@ timer.prototype.countDown = function() {
  * Start work timer
  */
 timer.prototype.startWorking = function() {
+    this.counter++;
+    document.getElementById('light').setAttribute('fill', '#E46E6E');
+    document.getElementById('time').setAttribute('fill', '#E46E6E');
     this.state = 'work';
     this.start(this.workMins);
-    this.animate(this.workMins);
 }
 
 /**
  * Start short break timer
  */
 timer.prototype.startShortBreak = function() {
+    document.getElementById('light').setAttribute('fill', '#6FEA9A');
+    document.getElementById('time').setAttribute('fill', '#6FEA9A');
     this.state = 'short_break';
     this.start(this.shortBreakMins);
 }
@@ -111,6 +151,8 @@ timer.prototype.startShortBreak = function() {
  * Start long break timer
  */
 timer.prototype.startLongBreak = function() {
+    document.getElementById('light').setAttribute('fill', '#6FEA9A');
+    document.getElementById('time').setAttribute('fill', '#6FEA9A');
     this.state = 'long_break';
     this.start(this.longBreakMins);
 }
@@ -122,35 +164,20 @@ timer.prototype.resume = () => {
     this.start((timeLeft) / (60 * 1000));
 } */
 
-timer.prototype.animate = function(minutes) {
-    let dark = document.getElementById('dark'),
-    percentage = 100,
-    theta = 0,
-    maxTheta = (180 * percentage) / 50,
-    radius = document.getElementById('svg').getBBox().width / 2;
-    dark.setAttribute('transform', 'translate(' + radius + ',' + radius + ')');
-
-    this.animation = setInterval(function() {
-        theta += 0.5;
-        let d = 'M0,0 v' + -radius + 'A' + radius + ' ' + radius + ' 1 ' + ((theta > 180) ? 1 : 0) + ' 1 ' + Math.sin(theta * Math.PI / 180) * radius + ' ' + Math.cos(theta * Math.PI / 180) * -radius + 'z';
-        dark.setAttribute('d', d);
-        if (theta > maxTheta) {
-            clearInterval(this.animation);
-        }
-    }, minutes * 60);
-}
-
 document.getElementById('start').addEventListener('click', () => {
     let time = new timer(1,1,1);
     time.startWorking();
     document.getElementById('start').style.display = 'none';
     document.getElementById('stop').style.display = 'block';
     document.getElementById('stop').addEventListener('click', () => {
-        time.stop();
+        time.stop(true);
     });
     document.getElementById('reset').style.display = 'block';
     document.getElementById('reset').addEventListener('click', () => {
         time.reset();
+        document.getElementById('start').style.display = 'block';
+        document.getElementById('stop').style.display = 'none';
+        document.getElementById('reset').style.display = 'none';
     });
 });
 
