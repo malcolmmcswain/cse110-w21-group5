@@ -34,10 +34,13 @@ function timer(workMins = 25, shortBreakMins = 5, longBreakMins = 15, longBreakI
 /**
  * Resets the count down timer
  */
-timer.prototype.reset = function() {
+timer.prototype.reset = function(force = false) {
     this.stop(true);
 
-    this.counter = 0;
+    if (force) {
+        this.counter = 0;
+    }
+    
     this.state = 'reset';
 
     this.countDownDate = null;
@@ -50,6 +53,7 @@ timer.prototype.reset = function() {
 
     document.getElementById('time').innerHTML = '00:00';
     document.getElementById('dark').setAttribute('d', 'M60,60 v-60 a60,60 0 0,1 0,0');
+    document.getElementById('pomodoro-state-text').innerHTML = `Pomodoro ${this.counter} | ${this.state}`;
 }
 
 /**
@@ -62,6 +66,7 @@ timer.prototype.stop = function(force = false) {
 
     if (force) {
         this.state = 'stopped';
+        document.getElementById('pomodoro-state-text').innerHTML = `Pomodoro ${this.counter} | ${this.state}`;
     } else if (this.state == 'work' && this.counter % this.longBreakInterval == 0) {
         this.reset();
         this.startLongBreak();
@@ -94,6 +99,8 @@ timer.prototype.start = function(countDownMins) {
     /* Neat hack to prevent lag of the first second */
     this.countDown.bind(this)();
     this.countDownTimeout = setInterval(this.countDown.bind(this), 500);
+
+    document.getElementById('pomodoro-state-text').innerHTML = `Pomodoro ${this.counter} | ${this.state}`;
 }
     
 /**
@@ -165,7 +172,7 @@ timer.prototype.resume = () => {
 } */
 
 document.getElementById('start').addEventListener('click', () => {
-    let time = new timer(1,1,1);
+    let time = new timer(1,0.2,0.5);
     time.startWorking();
     document.getElementById('start').style.display = 'none';
     document.getElementById('stop').style.display = 'block';
@@ -174,12 +181,10 @@ document.getElementById('start').addEventListener('click', () => {
     });
     document.getElementById('reset').style.display = 'block';
     document.getElementById('reset').addEventListener('click', () => {
-        time.reset();
+        time.reset(true);
         document.getElementById('start').style.display = 'block';
         document.getElementById('stop').style.display = 'none';
         document.getElementById('reset').style.display = 'none';
     });
 });
-
-
 module.exports = timer;
