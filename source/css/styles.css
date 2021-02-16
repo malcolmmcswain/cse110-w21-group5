@@ -59,8 +59,17 @@ main {
     align-items: stretch;
 }
 
+#pomodoro-state {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+
+    margin-top: -100px;
+}
+
+
 #timer-control {
-    margin-top: -75px;
+    margin-top: 0px;
 }
 
 #start, #stop, #reset {
