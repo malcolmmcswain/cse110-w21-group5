@@ -135,6 +135,8 @@ timer.prototype.startWorking = function() {
     document.getElementById('time').setAttribute('fill', '#E46E6E');
     this.state = 'work';
     this.start(this.workMins);
+    document.getElementById('session-counter').textContent='Session '+this.counter;
+    console.log(this.counter);  // Print counter for debugging purposes
 }
 
 /**

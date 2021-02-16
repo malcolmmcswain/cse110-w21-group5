@@ -60,10 +60,10 @@ main {
 }
 
 #timer-control {
-    margin-top: -75px;
+    margin-top: 40px;
 }
 
-#start, #stop, #reset {
+#start, #stop, #reset{
     font-family: inherit;
     font-size: 1em;
     padding: 1em;
@@ -113,4 +113,20 @@ footer > p {
     color: #636363;
     padding: 4px;
     text-align: center;
+}
+
+#task_menu{
+    position:relative;
+    margin-left:95%;
+    width: 30px;
+    height: 30px;
+}
+
+#session-counter{
+    margin-top: 10px;
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #767571;
 }

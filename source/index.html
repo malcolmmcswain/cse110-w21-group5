@@ -12,6 +12,9 @@
       <h1>Pomodoro Timer</h1>
       <nav>
         <!--navigation links (v2 projects?)-->
+        <!-- Template for task menu, drop-down menu not yet inplemented -->
+        <input type="image" src="./media/menu_icon.png" id="task_menu"/>
+
       </nav>
     </header>
     <main>
@@ -23,6 +26,10 @@
             <text id="time" x="60" y="68" font-size="20px" text-anchor="middle" fill="#E46E6E">00:00</text>
           </svg>
         </div>
+
+        <!-- The text for session counter would be replaced once user starts working -->
+        <text id="session-counter">Start your working session now</text>  
+        
         <div id="timer-control">
           <button id="start">Start</button>
           <button id="stop">Stop</button>
@@ -36,5 +43,6 @@
     <!--DO NOT REMOVE: These tags link the javascript source files to the document-->
     <script src="js/timer.js"></script>
     <script src="js/pomodoro.js"></script>
+
 </body>
 </html>
