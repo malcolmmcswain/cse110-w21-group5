@@ -38,7 +38,7 @@ timer.prototype.reset = function(force = false) {
     this.stop(true);
 
     if (force) {
-        this.counter = 0;
+        this.counter--; // Reset this particular pomo session
     }
     
     this.state = 'reset';
@@ -53,7 +53,7 @@ timer.prototype.reset = function(force = false) {
 
     document.getElementById('time').innerHTML = '00:00';
     document.getElementById('dark').setAttribute('d', 'M60,60 v-60 a60,60 0 0,1 0,0');
-    document.getElementById('pomodoro-state-text').innerHTML = `Pomodoro ${this.counter} | ${this.state}`;
+    this.updateStatusText();
 }
 
 /**
@@ -66,7 +66,7 @@ timer.prototype.stop = function(force = false) {
 
     if (force) {
         this.state = 'stopped';
-        document.getElementById('pomodoro-state-text').innerHTML = `Pomodoro ${this.counter} | ${this.state}`;
+        this.updateStatusText();
     } else if (this.state == 'work' && this.counter % this.longBreakInterval == 0) {
         this.reset();
         this.startLongBreak();
@@ -99,8 +99,7 @@ timer.prototype.start = function(countDownMins) {
     /* Neat hack to prevent lag of the first second */
     this.countDown.bind(this)();
     this.countDownTimeout = setInterval(this.countDown.bind(this), 500);
-
-    document.getElementById('pomodoro-state-text').innerHTML = `Pomodoro ${this.counter} | ${this.state}`;
+    this.updateStatusText();
 }
     
 /**
@@ -171,8 +170,34 @@ timer.prototype.resume = () => {
     this.start((timeLeft) / (60 * 1000));
 } */
 
+
+/* update the text for pomodoro status
+ */
+timer.prototype.updateStatusText = function() {
+    let stateText;
+    switch (this.state) {
+        case 'work':
+            stateText = 'Work';
+            break;
+        case 'short_break':
+            stateText = 'Short Break';
+            break;
+        case 'long_break':
+            stateText = 'Long Break';
+            break;
+        case 'stopped':
+            stateText = 'Stopped';
+            break;
+        case 'reset':
+            stateText = 'Reset';
+        default:
+            stateText = 'Stopped';
+    }
+    document.getElementById('pomodoro-state-text').innerHTML = `Pomodoro ${this.counter} | ${stateText}`;
+}
+
 document.getElementById('start').addEventListener('click', () => {
-    let time = new timer(1,0.2,0.5);
+    let time = new timer(0.2,0.2,0.3);
     time.startWorking();
     document.getElementById('start').style.display = 'none';
     document.getElementById('stop').style.display = 'block';
