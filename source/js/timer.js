@@ -12,7 +12,7 @@ const multipliers = {
  * @param {number} shortBreakMins - Length of short break timer
  * @param {number} longBreakMins - Length of long break timer
  */
-function timer(workMins = 25, shortBreakMins = 5, longBreakMins = 15, longBreakInterval = 3) {
+function timer(workMins = 25, shortBreakMins = 5, longBreakMins = 15, longBreakInterval = 4) {
     this.state = 'reset';
     this.counter = 0;
 
@@ -21,6 +21,7 @@ function timer(workMins = 25, shortBreakMins = 5, longBreakMins = 15, longBreakI
     this.workMins = workMins;
     this.shortBreakMins = shortBreakMins;
     this.longBreakMins = longBreakMins;
+    this.longBreakInterval = longBreakInterval;
 
     this.countDownMins = 0;
     this.theta = 0;
@@ -152,7 +153,7 @@ timer.prototype.resume = () => {
 } */
 
 document.getElementById('start').addEventListener('click', () => {
-    let time = new timer(0.1,0.1,0.1);
+    let time = new timer(0.1,0.1,0.2);
     time.startWorking();
     document.getElementById('start').style.display = 'none';
     document.getElementById('stop').style.display = 'block';
