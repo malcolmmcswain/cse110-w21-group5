@@ -34,8 +34,6 @@ function timer(workMins = 25, shortBreakMins = 5, longBreakMins = 15, longBreakI
  * Resets the count down timer
  */
 timer.prototype.reset = function(force = false) {
-    this.stop(true);
-
     this.state = 'reset';
 
     this.countDownDate = null;
@@ -59,15 +57,14 @@ timer.prototype.stop = function(force = false) {
     if (force) {
         this.state = 'stopped';
         document.getElementById('burndown-ring').style.animationPlayState = 'paused';
-        this.counter = 0;
     } else if (this.state == 'work' && this.counter % this.longBreakInterval == 0) {
-        this.reset(force);
+        this.reset();
         this.startLongBreak();
     } else if (this.state == 'work') {
-        this.reset(force);
+        this.reset();
         this.startShortBreak();
     } else if (this.state == 'short_break') {
-        this.reset(force);
+        this.reset();
         this.startWorking();
     }
 }
