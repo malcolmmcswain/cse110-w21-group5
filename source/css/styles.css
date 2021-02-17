@@ -25,22 +25,27 @@ body {
 }
 
 header, footer {
-    padding: 10px 0 10px 0;
+    padding: 0.5em;
     flex: 1;
     background-color: #D8D8D8;
 }
 
-h1 {
-    margin: 0;
-    padding: 8px;
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1, nav {
+    margin: 0.5em;
     color: #636363;
     font-weight: 400;
 }
 
-@media only screen and (max-width: 600px) {
-    #timer-control {
-        width: 100%;
-    }
+#task_menu {
+    padding: 0.5em;
+    width: 30px;
+    height: 30px;
 }
 
 main {
@@ -59,8 +64,20 @@ main {
     align-items: stretch;
 }
 
-#timer-control {
-    margin-top: 40px;
+#timer-display {
+    align-self: center;
+    width: 100%;
+    max-width: 60vh;
+    max-height: 60vw;
+}
+
+#session-counter {
+    margin-top: 10px;
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #767571;
 }
 
 #start, #stop, #reset{
@@ -111,22 +128,6 @@ main {
 
 footer > p {
     color: #636363;
-    padding: 4px;
+    padding: 0.25em;
     text-align: center;
-}
-
-#task_menu{
-    position:relative;
-    margin-left:95%;
-    width: 30px;
-    height: 30px;
-}
-
-#session-counter{
-    margin-top: 10px;
-    font-family: inherit;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    color: #767571;
 }

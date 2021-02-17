@@ -18,7 +18,6 @@ function timer(workMins = 25, shortBreakMins = 5, longBreakMins = 15, longBreakI
 
     this.countDownDate = null;
     this.countDownTimeout = null;
-    this.terminateTimeout = null;
     this.workMins = workMins;
     this.shortBreakMins = shortBreakMins;
     this.longBreakMins = longBreakMins;
@@ -42,7 +41,6 @@ timer.prototype.reset = function() {
 
     this.countDownDate = null;
     this.countDownTimeout = null;
-    this.terminateTimeout = null;
     this.minutesLeft = 0;
     this.secondsLeft = 0;
     this.countDownMins = 0;
@@ -72,13 +70,6 @@ timer.prototype.stop = function(force = false) {
         this.reset();
         this.startWorking();
     }
-
-    /* 
-     * Terminate automatic stop. Needed when user terminates timer
-     * early to prevent an incorrect automatic stop when a new timer
-     * is started.
-     */
-    // if (this.terminateTimeout) clearTimeout(this.terminateTimeout);
 }
 
 /**
@@ -111,7 +102,7 @@ timer.prototype.countDown = function() {
     this.secondsLeft = timeLeft % 60;
 
     let dark = document.getElementById('dark'),
-    radius = document.getElementById('svg').getBBox().width / 2;
+    radius = document.getElementById('timer-display').getBBox().width / 2;
     dark.setAttribute('transform', 'translate(' + radius + ',' + radius + ')');
 
     let increment = 360 / (this.countDownMins * 60) / 2;
