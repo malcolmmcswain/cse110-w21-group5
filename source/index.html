@@ -18,12 +18,13 @@
       </nav>
     </header>
     <main>
-        <svg id="timer-display" width="70%" height="70%" viewBox="0 0 121 121">
-          <path id="light" d="M60,60 v-60 a60,60 0 0,1 0,120 a60,60 0 1,1 0,-120" fill="#E46E6E" />
-          <path id="dark" d="M60,60 v-60 a60,60 0 0,1 0,0" fill="#D8D8D8" />
-          <path d="M10,60 a50,50 0 0,1 100,0 a50,50 0 0,1 -100,0" fill="white" />
-          <text id="time" x="60" y="68" font-size="20px" text-anchor="middle" fill="#E46E6E">00:00</text>
-        </svg>
+      <svg id="timer-display" viewBox="0 0 80 80">
+        <g id="rings">
+          <circle cx="40" cy="40" r="36" pathLength="1" fill="none" id="background-ring"/>
+          <circle cx="40" cy="40" r="36" pathLength="1" fill="none" id="burndown-ring"/>
+        </g>
+        <text id="time" x="40" y="48" font-size="20px" text-anchor="middle" fill="#E46E6E">00:00</text>
+      </svg>
 
         <!-- The text for session counter would be replaced once user starts working -->
         <text id="session-counter">Start your working session now</text>  

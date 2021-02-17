@@ -33,10 +33,9 @@ function timer(workMins = 25, shortBreakMins = 5, longBreakMins = 15, longBreakI
 /**
  * Resets the count down timer
  */
-timer.prototype.reset = function() {
+timer.prototype.reset = function(force = false) {
     this.stop(true);
 
-    this.counter = 0;
     this.state = 'reset';
 
     this.countDownDate = null;
@@ -47,7 +46,7 @@ timer.prototype.reset = function() {
     this.theta = 0;
 
     document.getElementById('time').innerHTML = '00:00';
-    document.getElementById('dark').setAttribute('d', 'M60,60 v-60 a60,60 0 0,1 0,0');
+    document.getElementById('burndown-ring').style.animation = 'none';
 }
 
 /**
@@ -55,19 +54,20 @@ timer.prototype.reset = function() {
  */
 timer.prototype.stop = function(force = false) {
     if (this.countDownTimeout) clearInterval(this.countDownTimeout);
-
     console.log('stopped in state '+this.state);
 
     if (force) {
         this.state = 'stopped';
+        document.getElementById('burndown-ring').style.animationPlayState = 'paused';
+        this.counter = 0;
     } else if (this.state == 'work' && this.counter % this.longBreakInterval == 0) {
-        this.reset();
+        this.reset(force);
         this.startLongBreak();
     } else if (this.state == 'work') {
-        this.reset();
+        this.reset(force);
         this.startShortBreak();
     } else if (this.state == 'short_break') {
-        this.reset();
+        this.reset(force);
         this.startWorking();
     }
 }
@@ -77,10 +77,13 @@ timer.prototype.stop = function(force = false) {
  * @param {number} countDownMins count down time in minutes
  */
 timer.prototype.start = function(countDownMins) {
-    let now = new Date();
-    let countDownOffset = countDownMins * multipliers.MINUTE; 
+    const now = new Date();
+    const countDownOffset = countDownMins * multipliers.MINUTE;
     this.countDownDate = new Date(now.getTime() + countDownOffset);
     this.countDownMins = countDownMins;
+
+    // Refresh animations
+    setTimeout(_ => document.getElementById('burndown-ring').style.animation = `dash ${countDownMins*60}s linear`, 0);
 
     /* Neat hack to prevent lag of the first second */
     this.countDown.bind(this)();
@@ -101,15 +104,6 @@ timer.prototype.countDown = function() {
     this.minutesLeft = Math.floor(timeLeft / 60);
     this.secondsLeft = timeLeft % 60;
 
-    let dark = document.getElementById('dark'),
-    radius = document.getElementById('timer-display').getBBox().width / 2;
-    dark.setAttribute('transform', 'translate(' + radius + ',' + radius + ')');
-
-    let increment = 360 / (this.countDownMins * 60) / 2;
-    this.theta += increment;
-    let d = 'M0,0 v' + -radius + 'A' + radius + ' ' + radius + ' 1 ' + ((this.theta > 180) ? 1 : 0) + ' 1 ' + Math.sin(this.theta * Math.PI / 180) * radius + ' ' + Math.cos(this.theta * Math.PI / 180) * -radius + 'z';
-    dark.setAttribute('d', d);
-
     document.getElementById('time').innerHTML = `${timerPad(this.minutesLeft)}:${timerPad(this.secondsLeft)}`;
     if (!this.minutesLeft && !this.secondsLeft) {
         clearInterval(this.countDownTimeout);
@@ -122,7 +116,8 @@ timer.prototype.countDown = function() {
  */
 timer.prototype.startWorking = function() {
     this.counter++;
-    document.getElementById('light').setAttribute('fill', '#E46E6E');
+    document.getElementById('background-ring').style.stroke = '#E46E6E';
+    document.getElementById('burndown-ring').style.strokeDashoffset = 0;
     document.getElementById('time').setAttribute('fill', '#E46E6E');
     this.state = 'work';
     this.start(this.workMins);
@@ -134,7 +129,8 @@ timer.prototype.startWorking = function() {
  * Start short break timer
  */
 timer.prototype.startShortBreak = function() {
-    document.getElementById('light').setAttribute('fill', '#6FEA9A');
+    document.getElementById('background-ring').style.stroke = '#6FEA9A';
+    document.getElementById('burndown-ring').style.strokeDashoffset = 0;
     document.getElementById('time').setAttribute('fill', '#6FEA9A');
     this.state = 'short_break';
     this.start(this.shortBreakMins);
@@ -144,7 +140,8 @@ timer.prototype.startShortBreak = function() {
  * Start long break timer
  */
 timer.prototype.startLongBreak = function() {
-    document.getElementById('light').setAttribute('fill', '#6FEA9A');
+    document.getElementById('background-ring').style.stroke = '#6FEA9A';
+    document.getElementById('burndown-ring').style.strokeDashoffset = 0;
     document.getElementById('time').setAttribute('fill', '#6FEA9A');
     this.state = 'long_break';
     this.start(this.longBreakMins);
@@ -158,7 +155,7 @@ timer.prototype.resume = () => {
 } */
 
 document.getElementById('start').addEventListener('click', () => {
-    let time = new timer(1,1,1);
+    let time = new timer(0.1,0.1,0.1);
     time.startWorking();
     document.getElementById('start').style.display = 'none';
     document.getElementById('stop').style.display = 'block';
