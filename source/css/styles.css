@@ -63,8 +63,15 @@ main {
     display: flex;
     justify-content: center;
     align-items: stretch;
-
+    color:  #a09a9a;
     margin-top: -100px;
+    font-size: 20px;
+}
+
+#pomodoro-state-text, #pomodoro-count-text{
+    font-size:20px;
+    color: rgb(46, 44, 44);
+    font-weight: bold;
 }
 
 
@@ -72,7 +79,7 @@ main {
     margin-top: 0px;
 }
 
-#start, #stop, #reset {
+#start, #stop, #reset{
     font-family: inherit;
     font-size: 1em;
     padding: 1em;

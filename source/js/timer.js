@@ -193,7 +193,8 @@ timer.prototype.updateStatusText = function() {
         default:
             stateText = 'Stopped';
     }
-    document.getElementById('pomodoro-state-text').innerHTML = `Pomodoro ${this.counter} | ${stateText}`;
+    document.getElementById('pomodoro-count-text').textContent = this.counter;
+    document.getElementById('pomodoro-state-text').textContent = stateText;
 }
 
 document.getElementById('start').addEventListener('click', () => {
