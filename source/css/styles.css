@@ -24,7 +24,12 @@ body {
     flex-direction: column;
 }
 
-header, footer {
+header {
+    flex: 1;
+    background-color: #bbb;
+}
+
+footer {
     flex: 1;
     background-color: #bbb;
 }
@@ -71,6 +76,7 @@ main {
     -o-border-radius: 20px;
 
     justify-content: center;
+    cursor: pointer;
 }
 
 #start {
@@ -94,4 +100,122 @@ main {
 footer > p {
     padding: 4px;
     text-align: center;
+}
+
+/* 
+
+v2 styling
+
+*/
+
+nav {
+    display: grid;
+    grid-template-columns: 60% 1fr 1fr 10%;
+    min-height: 8vh;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    width: 100px;
+    position: absolute;
+    align-items: center;
+    text-align: center;
+    top: 55px;
+    right: 4%;
+    border-radius: 10px;
+    border: 1px solid bbb;
+    padding-inline-start: 30px;
+    padding-inline-end: 30px;
+    background: #bbb;
+
+    /* change in js to (block)*/
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in;
+}
+
+nav ul li {
+    padding-top: 0.7em;
+    padding-bottom: 0.7em;
+    border-bottom: 1px solid black;
+}
+
+nav ul li:last-child {
+    border-bottom: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+nav .icon {
+    cursor: pointer;
+    font-size: 2.4em;
+    grid-column-start: 4;
+}
+
+.modal {
+    background: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal .project-prompt {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 30px;
+    background-color: white;
+    height: 200px;
+    width: 400px;
+    text-align: center;
+    align-items: center;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal .project-prompt .icon {
+    cursor: pointer;
+    font-size: 2.4em;
+    padding-left: 80%;
+}
+
+.modal .project-prompt input {
+    border: none;
+    border-bottom: 1px solid #bbb;
+    width: 80%;
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+    margin-bottom: 20px;
+}
+
+.modal .project-prompt button {
+    color: #222c;
+    background-color: #17bf81;
+
+    font-size: 1em;
+    padding: 0.5em;
+    margin: 0.5em;
+
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+
+    cursor: pointer;
 }

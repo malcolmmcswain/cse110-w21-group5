@@ -1,3 +1,4 @@
+  
 <!doctype html>
 
 <html lang="en">
@@ -9,27 +10,51 @@
 </head>
 <body>
     <header>
-      <h1>Pomodoro Timer</h1>
       <nav>
+        <h1>Pomodoro Timer</h1>
         <!--navigation links (v2 projects?)-->
+
+        <ion-icon id="hamburger" class="icon" name="list-outline"></ion-icon>
+        <ul id="project-list">
+          <!-- need to dynamically add elements from js file *before last-child -->
+          <li><a>Project 1</a></li>
+          <li><a>Project 2</a></li>
+          <li><a>Project 3</a></li>
+          <li><ion-icon id="add-project" name="add-circle-outline"></ion-icon></li>
+        </ul>
       </nav>
     </header>
     <main>
         <div id="timer-display">
-          <p id="time">00:00</p>
+          <svg id="svg" width="70%" height="70%" viewBox="0 0 121 121">
+            <path id="light" d="M60,60 v-60 a60,60 0 0,1 0,120 a60,60 0 1,1 0,-120" fill="#E46E6E" />
+            <path id="dark" d="M60,60 v-60 a60,60 0 0,1 0,0" fill="#D8D8D8" />
+            <path d="M10,60 a50,50 0 0,1 100,0 a50,50 0 0,1 -100,0" fill="white" />
+            <text id="time" x="60" y="68" font-size="20px" text-anchor="middle" fill="#E46E6E">00:00</text>
+          </svg>
         </div>
         <div id="timer-control">
           <button id="start">Start</button>
           <button id="stop">Stop</button>
           <button id="reset">Reset</button>
         </div>
+
+        <div id="modal" class="modal">
+          <div class="project-prompt">
+            <ion-icon id="close-add-project" class="icon" name="close-circle-outline"></ion-icon>
+            <h2>What are you working on?</h2>
+            <input placeholder="Enter the name of your project..."></input>
+            <button>Create New Project</button>
+          </div>
+      </div>
     </main>
     <footer>
       <p>CSE 110 Group 5</p>
     </footer>
   
     <!--DO NOT REMOVE: These tags link the javascript source files to the document-->
-    <script src="js/pomodoro.js"></script>
     <script src="js/timer.js"></script>
+    <script src="js/pomodoro.js"></script>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 </body>
 </html>
