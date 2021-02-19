@@ -12,10 +12,13 @@ const multipliers = {
  * @param {number} shortBreakMins - Length of short break timer
  * @param {number} longBreakMins - Length of long break timer
  */
-function timer(workMins = 25, shortBreakMins = 5, longBreakMins = 15, longBreakInterval = 4) {
+function timer(timeDisplay, backgroundRing, burndownRing, burndownAnim, sessionCounter,
+               workMins = 25, shortBreakMins = 5, longBreakMins = 15, longBreakInterval = 4) {
+    // State management
     this.state = 'reset';
     this.counter = 0;
 
+    // Properties
     this.countDownDate = null;
     this.countDownTimeout = null;
     this.workMins = workMins;
@@ -23,16 +26,22 @@ function timer(workMins = 25, shortBreakMins = 5, longBreakMins = 15, longBreakI
     this.longBreakMins = longBreakMins;
     this.longBreakInterval = longBreakInterval;
 
-    this.countDownMins = 0;
-    this.theta = 0;
+    // DOM Elements
+    this.timeDisplay = timeDisplay;
+    this.backgroundRing = backgroundRing;
+    this.burndownRing = burndownRing;
+    this.burndownAnim = burndownAnim;
+    this.sessionCounter = sessionCounter;
 
     // Used for internal testing
+    this.countDownMins = 0;
     this.minutesLeft = 0;
     this.secondsLeft = 0;
 }
 
 /**
  * Resets the count down timer
+ * @param {boolean} force If timer is forcibly reset
  */
 timer.prototype.reset = function(force = false) {
     this.state = 'reset';
@@ -42,29 +51,39 @@ timer.prototype.reset = function(force = false) {
     this.minutesLeft = 0;
     this.secondsLeft = 0;
     this.countDownMins = 0;
-    this.theta = 0;
 
-    document.getElementById('time').innerHTML = '00:00';
-    document.getElementById('burndown-ring').style.animation = 'none';
+    this.timeDisplay.innerHTML = '00:00';
+
+    // If forcibly reset, prepare for next start
+    if (force) {
+        this.backgroundRing.style.stroke = '#E46E6E';
+        this.timeDisplay.setAttribute('fill', '#E46E6E');
+        this.sessionCounter.textContent = 'Start your working session now';
+        this.burndownAnim.endElement();
+        this.burndownAnim.ownerSVGElement.unpauseAnimations();
+    };
 }
 
 /**
  * Stops the count down timer
+ * @param {boolean} force If timer is forcibly stopped
  */
 timer.prototype.stop = function(force = false) {
     if (this.countDownTimeout) clearInterval(this.countDownTimeout);
     console.log('stopped in state '+this.state);
 
+    // If forcibly stopped, wait for reset
     if (force) {
+        this.counter = 0;
         this.state = 'stopped';
-        document.getElementById('burndown-ring').style.animationPlayState = 'paused';
+        this.burndownAnim.ownerSVGElement.pauseAnimations();
     } else if (this.state == 'work' && this.counter % this.longBreakInterval == 0) {
         this.reset();
         this.startLongBreak();
     } else if (this.state == 'work') {
         this.reset();
         this.startShortBreak();
-    } else if (this.state == 'short_break') {
+    } else if (this.state == 'short_break' || this.state == 'long_break') {
         this.reset();
         this.startWorking();
     }
@@ -80,11 +99,11 @@ timer.prototype.start = function(countDownMins) {
     this.countDownDate = new Date(now.getTime() + countDownOffset);
     this.countDownMins = countDownMins;
 
-    // Refresh animations
-    setTimeout(_ => document.getElementById('burndown-ring').style.animation = `dash ${countDownMins*60}s linear`, 0);
+    // Begin svg element
+    this.burndownAnim.beginElement();
 
-    /* Neat hack to prevent lag of the first second */
-    this.countDown.bind(this)();
+    // Begin countdown
+    this.countDown();
     this.countDownTimeout = setInterval(this.countDown.bind(this), 500);
 }
     
@@ -102,8 +121,8 @@ timer.prototype.countDown = function() {
     this.minutesLeft = Math.floor(timeLeft / 60);
     this.secondsLeft = timeLeft % 60;
 
-    document.getElementById('time').innerHTML = `${timerPad(this.minutesLeft)}:${timerPad(this.secondsLeft)}`;
-    if (!this.minutesLeft && !this.secondsLeft) {
+    this.timeDisplay.innerHTML = `${timerPad(this.minutesLeft)}:${timerPad(this.secondsLeft)}`;
+    if (!this.minutesLeft && !this.secondsLeft) { // If there is no time left, clear interval
         clearInterval(this.countDownTimeout);
         this.stop();
     }
@@ -113,23 +132,27 @@ timer.prototype.countDown = function() {
  * Start work timer
  */
 timer.prototype.startWorking = function() {
+    // Set ring and display colors
+    this.backgroundRing.style.stroke = '#E46E6E';
+    this.timeDisplay.setAttribute('fill', '#E46E6E');
+    
+    // Increment session counter
     this.counter++;
-    document.getElementById('background-ring').style.stroke = '#E46E6E';
-    document.getElementById('burndown-ring').style.strokeDashoffset = 0;
-    document.getElementById('time').setAttribute('fill', '#E46E6E');
+    this.sessionCounter.textContent = 'Session ' + this.counter;
+    console.log(this.counter);  // Print counter for debugging purposes
+
     this.state = 'work';
     this.start(this.workMins);
-    document.getElementById('session-counter').textContent='Session '+this.counter;
-    console.log(this.counter);  // Print counter for debugging purposes
 }
 
 /**
  * Start short break timer
  */
 timer.prototype.startShortBreak = function() {
-    document.getElementById('background-ring').style.stroke = '#6FEA9A';
-    document.getElementById('burndown-ring').style.strokeDashoffset = 0;
-    document.getElementById('time').setAttribute('fill', '#6FEA9A');
+    // Set ring and display colors
+    this.backgroundRing.style.stroke = '#6FEA9A';
+    this.timeDisplay.setAttribute('fill', '#6FEA9A');
+
     this.state = 'short_break';
     this.start(this.shortBreakMins);
 }
@@ -138,9 +161,10 @@ timer.prototype.startShortBreak = function() {
  * Start long break timer
  */
 timer.prototype.startLongBreak = function() {
-    document.getElementById('background-ring').style.stroke = '#6FEA9A';
-    document.getElementById('burndown-ring').style.strokeDashoffset = 0;
-    document.getElementById('time').setAttribute('fill', '#6FEA9A');
+    // Set ring and display colors
+    this.backgroundRing.style.stroke = '#6FEA9A';
+    this.timeDisplay.setAttribute('fill', '#6FEA9A');
+    
     this.state = 'long_break';
     this.start(this.longBreakMins);
 }
@@ -152,22 +176,7 @@ timer.prototype.resume = () => {
     this.start((timeLeft) / (60 * 1000));
 } */
 
-document.getElementById('start').addEventListener('click', () => {
-    let time = new timer(0.1,0.1,0.2);
-    time.startWorking();
-    document.getElementById('start').style.display = 'none';
-    document.getElementById('stop').style.display = 'block';
-    document.getElementById('stop').addEventListener('click', () => {
-        time.stop(true);
-    });
-    document.getElementById('reset').style.display = 'block';
-    document.getElementById('reset').addEventListener('click', () => {
-        time.reset();
-        document.getElementById('start').style.display = 'block';
-        document.getElementById('stop').style.display = 'none';
-        document.getElementById('reset').style.display = 'none';
-    });
-});
+// module.exports = timer;
 
-
+// Check if running in nodejs
 module.exports = timer;
