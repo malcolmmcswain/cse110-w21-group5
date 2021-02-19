@@ -2,7 +2,9 @@
 
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pomodoro Timer</title>
   <!--DO NOT REMOVE: This tag links the css source file to the document-->
   <link rel="stylesheet" href="css/styles.css">
@@ -19,6 +21,7 @@
     </header>
     <main>
       <svg id="timer-display" viewBox="0 0 80 80">
+        <!-- Used to transform the rings to begin animation at correct position -->
         <g id="rings">
           <circle cx="40" cy="40" r="36" fill="none" id="background-ring"/>
           <circle cx="40" cy="40" r="36" fill="none" id="burndown-ring" stroke-dasharray="0 226">
