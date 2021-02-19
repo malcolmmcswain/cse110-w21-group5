@@ -20,28 +20,32 @@
     <main>
       <svg id="timer-display" viewBox="0 0 80 80">
         <g id="rings">
-          <circle cx="40" cy="40" r="36" pathLength="1" fill="none" id="background-ring"/>
-          <circle cx="40" cy="40" r="36" pathLength="1" fill="none" id="burndown-ring"/>
+          <circle cx="40" cy="40" r="36" fill="none" id="background-ring"/>
+          <circle cx="40" cy="40" r="36" fill="none" id="burndown-ring" stroke-dasharray="0 226">
+            <!-- SVG to animate the stroke of the circle. Started and duration edited by timer.js -->
+            <animate id="burndown-anim" attributeType="XML" attributeName="stroke-dasharray" from="0 226" to="226.08 226" begin="indefinite"/>
+          </circle>
         </g>
         <text id="time" x="40" y="48" font-size="20px" text-anchor="middle" fill="#E46E6E">00:00</text>
       </svg>
 
         <!-- The text for session counter would be replaced once user starts working -->
-        <text id="session-counter">Start your working session now</text>  
-        
-        <div id="timer-control">
-          <button id="start">Start</button>
-          <button id="stop">Stop</button>
-          <button id="reset">Reset</button>
-        </div>
+      <text id="session-counter">Start your working session now</text>  
+      
+      <div id="timer-control">
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        <button id="reset">Reset</button>
+      </div>
     </main>
     <footer>
       <p>CSE 110 Group 5</p>
     </footer>
   
     <!--DO NOT REMOVE: These tags link the javascript source files to the document-->
+
+    <!-- Set to modules so that pomodoro.js can import timer.js -->
     <script src="js/timer.js"></script>
     <script src="js/pomodoro.js"></script>
-
 </body>
 </html>

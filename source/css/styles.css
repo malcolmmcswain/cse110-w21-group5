@@ -74,29 +74,17 @@ main {
 #rings {
     stroke-width: 4;
     fill: none;
-    stroke-dasharray: 1;
     transform: rotate(-90deg);
     transform-origin: 40px 40px;
 }
 
 #background-ring {
     stroke: #E46E6E;
-    stroke-dashoffset: 0;
 }
 
 #burndown-ring {
     stroke: #D8D8D8;
-    stroke-dashoffset: 1;
 }
-
-@keyframes dash {
-    from {
-        stroke-dashoffset: 1;
-    }
-    to {
-        stroke-dashoffset: 0;
-        }
-    }
 
 #session-counter {
     margin-top: 10px;
@@ -127,7 +115,7 @@ main {
 }
 
 #start {
-    display: inline-flex;
+    display: block;
     background-color: #6FEA9A;
     color: #337B3B;
     font-weight: 700;
