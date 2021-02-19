@@ -12,45 +12,81 @@ const multipliers = {
  * @param {number} shortBreakMins - Length of short break timer
  * @param {number} longBreakMins - Length of long break timer
  */
-function timer(workMins = 25, shortBreakMins = 5, longBreakMins = 15) {
+function timer(timeDisplay, backgroundRing, burndownRing, burndownAnim, sessionCounter,
+               workMins = 25, shortBreakMins = 5, longBreakMins = 15, longBreakInterval = 4) {
+    // State management
     this.state = 'reset';
+    this.counter = 0;
+
+    // Properties
     this.countDownDate = null;
     this.countDownTimeout = null;
-    this.terminateTimeout = null;
     this.workMins = workMins;
     this.shortBreakMins = shortBreakMins;
     this.longBreakMins = longBreakMins;
+    this.longBreakInterval = longBreakInterval;
+
+    // DOM Elements
+    this.timeDisplay = timeDisplay;
+    this.backgroundRing = backgroundRing;
+    this.burndownRing = burndownRing;
+    this.burndownAnim = burndownAnim;
+    this.sessionCounter = sessionCounter;
 
     // Used for internal testing
+    this.countDownMins = 0;
     this.minutesLeft = 0;
     this.secondsLeft = 0;
 }
 
 /**
  * Resets the count down timer
+ * @param {boolean} force If timer is forcibly reset
  */
-timer.prototype.reset = function() {
+timer.prototype.reset = function(force = false) {
     this.state = 'reset';
+
     this.countDownDate = null;
     this.countDownTimeout = null;
-    this.terminateTimeout = null;
     this.minutesLeft = 0;
     this.secondsLeft = 0;
+    this.countDownMins = 0;
+
+    this.timeDisplay.innerHTML = '00:00';
+
+    // If forcibly reset, prepare for next start
+    if (force) {
+        this.backgroundRing.style.stroke = '#E46E6E';
+        this.timeDisplay.setAttribute('fill', '#E46E6E');
+        this.sessionCounter.textContent = 'Start your working session now';
+        this.burndownAnim.endElement();
+        this.burndownAnim.ownerSVGElement.unpauseAnimations();
+    };
 }
 
 /**
  * Stops the count down timer
+ * @param {boolean} force If timer is forcibly stopped
  */
-timer.prototype.stop = function() {
-    this.state = 'stopped';
+timer.prototype.stop = function(force = false) {
     if (this.countDownTimeout) clearInterval(this.countDownTimeout);
+    console.log('stopped in state '+this.state);
 
-    /* 
-     * Terminate automatic stop. Needed when user terminates timer
-     * early to prevent an incorrect automatic stop when a new timer
-     * is started.
-     */
-    if (this.terminateTimeout) clearTimeout(this.terminateTimeout);
+    // If forcibly stopped, wait for reset
+    if (force) {
+        this.counter = 0;
+        this.state = 'stopped';
+        this.burndownAnim.ownerSVGElement.pauseAnimations();
+    } else if (this.state == 'work' && this.counter % this.longBreakInterval == 0) {
+        this.reset();
+        this.startLongBreak();
+    } else if (this.state == 'work') {
+        this.reset();
+        this.startShortBreak();
+    } else if (this.state == 'short_break' || this.state == 'long_break') {
+        this.reset();
+        this.startWorking();
+    }
 }
 
 /**
@@ -58,17 +94,19 @@ timer.prototype.stop = function() {
  * @param {number} countDownMins count down time in minutes
  */
 timer.prototype.start = function(countDownMins) {
-    this.stop();
-    let now = new Date();
-    let countDownOffset = countDownMins * multipliers.MINUTE; 
+    const now = new Date();
+    const countDownOffset = countDownMins * multipliers.MINUTE;
     this.countDownDate = new Date(now.getTime() + countDownOffset);
+    this.countDownMins = countDownMins;
 
-    /* Neat hack to prevent lag of the first second */
-    setTimeout(this.countDown.bind(this, 0));
-    this.countDownTimeout = setInterval(this.countDown.bind(this), 1000);
-    this.terminateTimeout = setTimeout(this.stop.bind(this), countDownOffset + 1000);  // + 1s so we get 00:00 print
+    // Begin svg element
+    this.burndownAnim.beginElement();
+
+    // Begin countdown
+    this.countDown();
+    this.countDownTimeout = setInterval(this.countDown.bind(this), 500);
 }
-
+    
 /**
  * Update timeLeft based on current time and countDownDate
  */
@@ -78,16 +116,31 @@ timer.prototype.countDown = function() {
     }
 
     let now = new Date();
-    let timeLeft = this.countDownDate - now;
-    this.minutesLeft = Math.floor((timeLeft / multipliers.MINUTE));
-    this.secondsLeft = Math.floor((timeLeft / multipliers.SECOND) % 60);
-    console.log(`${timerPad(this.minutesLeft)}:${timerPad(this.secondsLeft)}`);
+    // Use seconds that have passed as the single source of truth.
+    let timeLeft = Math.ceil((this.countDownDate - now) / multipliers.SECOND);
+    this.minutesLeft = Math.floor(timeLeft / 60);
+    this.secondsLeft = timeLeft % 60;
+
+    this.timeDisplay.innerHTML = `${timerPad(this.minutesLeft)}:${timerPad(this.secondsLeft)}`;
+    if (!this.minutesLeft && !this.secondsLeft) { // If there is no time left, clear interval
+        clearInterval(this.countDownTimeout);
+        this.stop();
+    }
 }
 
 /**
  * Start work timer
  */
 timer.prototype.startWorking = function() {
+    // Set ring and display colors
+    this.backgroundRing.style.stroke = '#E46E6E';
+    this.timeDisplay.setAttribute('fill', '#E46E6E');
+    
+    // Increment session counter
+    this.counter++;
+    this.sessionCounter.textContent = 'Session ' + this.counter;
+    console.log(this.counter);  // Print counter for debugging purposes
+
     this.state = 'work';
     this.start(this.workMins);
 }
@@ -96,6 +149,10 @@ timer.prototype.startWorking = function() {
  * Start short break timer
  */
 timer.prototype.startShortBreak = function() {
+    // Set ring and display colors
+    this.backgroundRing.style.stroke = '#6FEA9A';
+    this.timeDisplay.setAttribute('fill', '#6FEA9A');
+
     this.state = 'short_break';
     this.start(this.shortBreakMins);
 }
@@ -104,6 +161,10 @@ timer.prototype.startShortBreak = function() {
  * Start long break timer
  */
 timer.prototype.startLongBreak = function() {
+    // Set ring and display colors
+    this.backgroundRing.style.stroke = '#6FEA9A';
+    this.timeDisplay.setAttribute('fill', '#6FEA9A');
+    
     this.state = 'long_break';
     this.start(this.longBreakMins);
 }
@@ -115,8 +176,7 @@ timer.prototype.resume = () => {
     this.start((timeLeft) / (60 * 1000));
 } */
 
-// UI structure:
-    // Fetch timer from HTML using DOM
-    // Manipulate its text content to match that of the timer object state
-    // Style its "ring" conditionally (this part will be tricky, ask me if you need help!)
+// module.exports = timer;
+
+// Check if running in nodejs
 module.exports = timer;
