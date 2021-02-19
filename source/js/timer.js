@@ -100,6 +100,7 @@ timer.prototype.start = function(countDownMins) {
     this.countDownMins = countDownMins;
 
     // Begin svg element
+    this.burndownAnim.setAttribute('dur', `${countDownMins * 60}`);
     this.burndownAnim.beginElement();
 
     // Begin countdown
