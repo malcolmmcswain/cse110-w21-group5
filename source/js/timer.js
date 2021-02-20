@@ -12,7 +12,7 @@ const multipliers = {
  * @param {number} shortBreakMins - Length of short break timer
  * @param {number} longBreakMins - Length of long break timer
  */
-function timer(timeDisplay, backgroundRing, burndownRing, burndownAnim, sessionCounter,
+function timer(timeDisplay, backgroundRing, burndownRing, burndownAnim, counterText, counterState,
                workMins = 25, shortBreakMins = 5, longBreakMins = 15, longBreakInterval = 4) {
     // State management
     this.state = 'reset';
@@ -31,7 +31,8 @@ function timer(timeDisplay, backgroundRing, burndownRing, burndownAnim, sessionC
     this.backgroundRing = backgroundRing;
     this.burndownRing = burndownRing;
     this.burndownAnim = burndownAnim;
-    this.sessionCounter = sessionCounter;
+    this.counterText = counterText;
+    this.counterState = counterState;
 
     // Used for internal testing
     this.countDownMins = 0;
@@ -56,9 +57,9 @@ timer.prototype.reset = function(force = false) {
 
     // If forcibly reset, prepare for next start
     if (force) {
+        this.counter--;
         this.backgroundRing.style.stroke = '#E46E6E';
         this.timeDisplay.setAttribute('fill', '#E46E6E');
-        this.sessionCounter.textContent = 'Start your working session now';
         this.burndownAnim.endElement();
         this.burndownAnim.ownerSVGElement.unpauseAnimations();
     };
@@ -76,6 +77,7 @@ timer.prototype.stop = function(force = false) {
     if (force) {
         this.counter = 0;
         this.state = 'stopped';
+        this.updateStatusText();
         this.burndownAnim.ownerSVGElement.pauseAnimations();
     } else if (this.state == 'work' && this.counter % this.longBreakInterval == 0) {
         this.reset();
@@ -106,6 +108,7 @@ timer.prototype.start = function(countDownMins) {
     // Begin countdown
     this.countDown();
     this.countDownTimeout = setInterval(this.countDown.bind(this), 500);
+    this.updateStatusText();
 }
     
 /**
@@ -139,7 +142,6 @@ timer.prototype.startWorking = function() {
     
     // Increment session counter
     this.counter++;
-    this.sessionCounter.textContent = 'Session ' + this.counter;
     console.log(this.counter);  // Print counter for debugging purposes
 
     this.state = 'work';
@@ -176,6 +178,33 @@ timer.prototype.startLongBreak = function() {
 timer.prototype.resume = () => {
     this.start((timeLeft) / (60 * 1000));
 } */
+
+/* 
+ * Update the text for pomodoro status
+ */
+timer.prototype.updateStatusText = function() {
+    let stateText;
+    switch (this.state) {
+        case 'work':
+            stateText = 'Work';
+            break;
+        case 'short_break':
+            stateText = 'Short Break';
+            break;
+        case 'long_break':
+            stateText = 'Long Break';
+            break;
+        case 'stopped':
+            stateText = 'Stopped';
+            break;
+        case 'reset':
+            stateText = 'Reset';
+        default:
+            stateText = 'Stopped';
+    }
+    document.getElementById('pomodoro-count-text').textContent = this.counter;
+    document.getElementById('pomodoro-state-text').textContent = stateText;
+}
 
 // module.exports = timer;
 

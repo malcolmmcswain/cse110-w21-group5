@@ -25,11 +25,12 @@ function initializePage() {
     let backgroundRing = document.getElementById('background-ring');
     let burndownRing   = document.getElementById('burndown-ring');
     let burndownAnim   = document.getElementById('burndown-anim');
-    let sessionCounter = document.getElementById('session-counter');
+    let counterText    = document.getElementById('pomodoro-count-text');
+    let counterState   = document.getElementById('pomodoro-state-text');
 
     // Initialize timer to be used by all events
     let time = new timer(timeDisplay, backgroundRing, burndownRing,
-                            burndownAnim, sessionCounter, 1, 1, 2);
+                        burndownAnim,  counterText, counterState, 1, 1, 2);
 
     startBtn.addEventListener('click', e => {
         // To be replaced with grabbing from settings menu

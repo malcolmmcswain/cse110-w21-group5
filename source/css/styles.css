@@ -64,6 +64,24 @@ main {
     align-items: stretch;
 }
 
+#pomodoro-state {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    color:  #a09a9a;
+    font-size: 20px;
+}
+
+#pomodoro-state-text, #pomodoro-count-text {
+    font-size:20px;
+    color: rgb(46, 44, 44);
+    font-weight: bold;
+}
+
+#timer-control {
+    margin-top: 0px;
+}
+  
 #timer-display {
     align-self: center;
     width: 100%;
@@ -86,6 +104,7 @@ main {
     stroke: #D8D8D8;
 }
 
+/* Removed by Malcolm - Not currently in use
 #session-counter {
     margin-top: 10px;
     font-family: inherit;
@@ -93,9 +112,9 @@ main {
     font-weight: bold;
     text-align: center;
     color: #767571;
-}
+}*/
 
-#start, #stop, #reset{
+#start, #stop, #reset {
     font-family: inherit;
     font-size: 1em;
     padding: 1em;
