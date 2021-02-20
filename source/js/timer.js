@@ -12,7 +12,7 @@ const multipliers = {
  * @param {number} shortBreakMins - Length of short break timer
  * @param {number} longBreakMins - Length of long break timer
  */
-function timer(timeDisplay, backgroundRing, burndownRing, burndownAnim, sessionCounter,
+function timer(timeDisplay, backgroundRing, burndownRing, burndownAnim, counterText, counterState,
                workMins = 25, shortBreakMins = 5, longBreakMins = 15, longBreakInterval = 4) {
     // State management
     this.state = 'reset';
@@ -31,7 +31,8 @@ function timer(timeDisplay, backgroundRing, burndownRing, burndownAnim, sessionC
     this.backgroundRing = backgroundRing;
     this.burndownRing = burndownRing;
     this.burndownAnim = burndownAnim;
-    this.sessionCounter = sessionCounter;
+    this.counterText = counterText;
+    this.counterState = counterState;
 
     // Used for internal testing
     this.countDownMins = 0;
@@ -59,7 +60,6 @@ timer.prototype.reset = function(force = false) {
         this.counter--;
         this.backgroundRing.style.stroke = '#E46E6E';
         this.timeDisplay.setAttribute('fill', '#E46E6E');
-        this.sessionCounter.textContent = 'Start your working session now';
         this.burndownAnim.endElement();
         this.burndownAnim.ownerSVGElement.unpauseAnimations();
     };
@@ -142,7 +142,6 @@ timer.prototype.startWorking = function() {
     
     // Increment session counter
     this.counter++;
-    this.sessionCounter.textContent = 'Session ' + this.counter;
     console.log(this.counter);  // Print counter for debugging purposes
 
     this.state = 'work';
