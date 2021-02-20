@@ -27,7 +27,12 @@ beforeEach(() => {
     </svg>
 
     <!-- The text for session counter would be replaced once user starts working -->
-    <text id="session-counter">Start your working session now</text>  
+    <div id="pomodoro-state">
+        <text> Pomodoro&nbsp; </text> 
+        <text id="pomodoro-count-text"> 0 </text>
+        <text> &nbsp;&nbsp;|&nbsp;&nbsp; </text>
+        <text id="pomodoro-state-text"> Stopped </text>
+    </div>  
   
     <div id="timer-control">
         <button id="start">Start</button>
@@ -40,7 +45,8 @@ beforeEach(() => {
     let backgroundRing = document.getElementById('background-ring');
     let burndownRing = document.getElementById('burndown-ring');
     let burndownAnim = document.getElementById('burndown-anim');
-    let sessionCounter = document.getElementById('session-counter');
+    let counterText  = document.getElementById('pomodoro-count-text');
+    let counterState = document.getElementById('pomodoro-state-text');
 
     // Mock SVGElement functions as JSDOM does not support SVGElement functions.
     const mockFn = jest.fn(() => undefined);
@@ -49,7 +55,7 @@ beforeEach(() => {
     burndownAnim.ownerSVGElement.unpauseAnimations = mockFn;
     burndownAnim.ownerSVGElement.pauseAnimations = mockFn;
 
-    pomo = new timer(timeDisplay, backgroundRing, burndownRing, burndownAnim, sessionCounter);
+    pomo = new timer(timeDisplay, backgroundRing, burndownRing, burndownAnim, counterText, counterState);
 });
 
 test('Timer resets properly', () => {

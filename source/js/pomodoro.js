@@ -30,7 +30,7 @@ function initializePage() {
 
     // Initialize timer to be used by all events
     let time = new timer(timeDisplay, backgroundRing, burndownRing,
-                        burndownAnim,  counterText, counterState, 1, 1, 2);
+                        burndownAnim, counterText, counterState, 1, 1, 2);
 
     startBtn.addEventListener('click', e => {
         // To be replaced with grabbing from settings menu

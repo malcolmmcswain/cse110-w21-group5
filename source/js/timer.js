@@ -45,6 +45,7 @@ function timer(timeDisplay, backgroundRing, burndownRing, burndownAnim, counterT
  * @param {boolean} force If timer is forcibly reset
  */
 timer.prototype.reset = function(force = false) {
+    this.stop(true);
     this.state = 'reset';
 
     this.countDownDate = null;
@@ -202,8 +203,8 @@ timer.prototype.updateStatusText = function() {
         default:
             stateText = 'Stopped';
     }
-    document.getElementById('pomodoro-count-text').textContent = this.counter;
-    document.getElementById('pomodoro-state-text').textContent = stateText;
+    this.counterText.textContent = this.counter;
+    this.counterState.textContent = stateText;
 }
 
 // module.exports = timer;
