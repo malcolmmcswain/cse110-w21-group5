@@ -76,7 +76,6 @@ timer.prototype.stop = function(force = false) {
 
     // If forcibly stopped, wait for reset
     if (force) {
-        this.counter = 0;
         this.state = 'stopped';
         this.updateStatusText();
         this.burndownAnim.ownerSVGElement.pauseAnimations();
