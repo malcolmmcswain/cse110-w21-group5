@@ -28,15 +28,39 @@ function initializePage() {
     let counterText    = document.getElementById('pomodoro-count-text');
     let counterState   = document.getElementById('pomodoro-state-text');
 
+    let pomLength       = document.getElementById('pom-length');
+    let shortLength     = document.getElementById('short-length');
+    let longLength      = document.getElementById('long-length');
+
+
+    // Load in previous options (default without loading is 25/5/30)
+    if(localStorage.getItem('pomLength') != null)
+        pomLength.value = localStorage.getItem('pomLength');
+    if(localStorage.getItem('shortLength') != null)
+        shortLength.value = localStorage.getItem('shortLength');
+    if(localStorage.getItem('longLength') != null)
+        longLength.value = localStorage.getItem('longLength');
+
+    // Update storage on options edit
+    pomLength.addEventListener('input', e=> {
+        localStorage.setItem('pomLength', pomLength.value);
+    });
+    shortLength.addEventListener('input', e=> {
+        localStorage.setItem('shortLength', shortLength.value);
+    });
+    longLength.addEventListener('input', e=> {
+        localStorage.setItem('longLength', longLength.value);
+    });
+    
     // Initialize timer to be used by all events
     let time = new timer(timeDisplay, backgroundRing, burndownRing,
-                        burndownAnim, counterText, counterState, 1, 1, 2);
+                        burndownAnim, counterText, counterState);
 
     startBtn.addEventListener('click', e => {
-        // To be replaced with grabbing from settings menu
-        time.workMins = 1;
-        time.shortBreakMins = 1;
-        time.longBreakMins = 2;
+        // Set times to options values
+        time.workMins = parseInt(pomLength.value);
+        time.shortBreakMins = parseInt(shortLength.value);
+        time.longBreakMins = parseInt(longLength.value);
 
         // Begin working and display stop/reset buttons
         time.startWorking();
