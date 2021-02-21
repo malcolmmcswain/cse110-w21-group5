@@ -56,13 +56,14 @@ timer.prototype.reset = function(force = false) {
 
     this.timeDisplay.innerHTML = '00:00';
 
+    this.burndownAnim.endElement();
+    this.burndownAnim.ownerSVGElement.unpauseAnimations();
+    
     // If forcibly reset, prepare for next start
     if (force) {
         this.counter--;
         this.backgroundRing.style.stroke = '#E46E6E';
         this.timeDisplay.setAttribute('fill', '#E46E6E');
-        this.burndownAnim.endElement();
-        this.burndownAnim.ownerSVGElement.unpauseAnimations();
     };
 }
 
@@ -73,12 +74,12 @@ timer.prototype.reset = function(force = false) {
 timer.prototype.stop = function(force = false) {
     if (this.countDownTimeout) clearInterval(this.countDownTimeout);
     console.log('stopped in state '+this.state);
+    this.burndownAnim.ownerSVGElement.pauseAnimations();  
 
     // If forcibly stopped, wait for reset
     if (force) {
         this.state = 'stopped';
-        this.updateStatusText();
-        this.burndownAnim.ownerSVGElement.pauseAnimations();
+        this.updateStatusText(); 
     } else if (this.state == 'work' && this.counter % this.longBreakInterval == 0) {
         this.reset();
         this.startLongBreak();
