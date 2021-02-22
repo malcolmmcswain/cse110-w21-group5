@@ -150,6 +150,26 @@ main {
     font-size: 20px;
     flex: 1;
 }
+#options-btn{
+   background-color: grey;
+   height:60px;
+   width:60px;
+   margin-top : 50px;
+   margin-left : 25px;
+}
+
+#options-panel {
+    width: 17%;
+    padding-left: 15px;
+    margin-left: 15px;
+    float: right;
+    font-family: inherit;
+    border-radius: 20px;
+    background-color: rgba(211, 211, 211, 0.995);
+    
+    
+
+}
 
 #reset {
     display: none;
