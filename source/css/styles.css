@@ -156,7 +156,6 @@ main {
 
 #options-panel {
     width: 17%;
-    padding-left: 15px;
     margin-left: 15px;
     float: right;
     font-family: inherit;
@@ -221,4 +220,3 @@ footer > p {
     
 
 }
-
