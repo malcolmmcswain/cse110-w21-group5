@@ -27,6 +27,9 @@ function initializePage() {
     let burndownAnim   = document.getElementById('burndown-anim');
     let counterText    = document.getElementById('pomodoro-count-text');
     let counterState   = document.getElementById('pomodoro-state-text');
+    let options        = document.getElementById('options-btn');
+    let opt_panel      = document.getElementById('options-panel');
+
 
     // Initialize timer to be used by all events
     let time = new timer(timeDisplay, backgroundRing, burndownRing,
@@ -43,6 +46,14 @@ function initializePage() {
         startBtn.style.display = 'none';
         stopBtn.style.display = 'block';
         resetBtn.style.display = 'block';
+    });
+    options.addEventListener('click', e => {
+    // toggle options panel        
+            if(opt_panel.style.display == 'block')
+               opt_panel.style.display = 'none';
+            else
+               opt_panel.style.display = 'block';
+        
     });
 
     stopBtn.addEventListener('click', e => {

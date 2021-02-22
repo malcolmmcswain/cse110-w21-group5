@@ -1,11 +1,7 @@
 /* Some things to consider while working on this document:
-
  * Header and footer's styling will be very similar, almost identical in v1
-
  * The "timer ring" styling will mostly be controlled by timer.js - don't worry about it too much here
-
  * Make sure that this page will always take up the full height and width of the viewport (i.e. the device you are viewing the page on) - you may need to do some research into something called "responsive web design".
-
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
@@ -164,4 +160,44 @@ footer > p {
     color: #636363;
     padding: 0.25em;
     text-align: center;
+}
+#options-btn{
+   background-color: grey;
+   height:60px;
+   width:60px;
+   margin-top : 50px;
+   margin-left : 25px;
+}
+.overlay {
+    position: absolute; 
+    bottom: 3.8em;
+    align-content: center 
+
+  }
+  
+
+#pom-length, #short-length, #long-length{
+    font-family: inherit;
+    font-size: 1em;
+    text-align: center;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.927);
+    font-size: 16px;
+    width: 50%;
+    height: 30px;
+    resize: none;
+  }
+  
+#options-panel {
+    display: none;
+    width: 17%;
+    margin-left: 15px;
+    float: right;
+    font-family: inherit;
+    border-radius: 20px;
+    background-color: rgba(211, 211, 211, 0.995);
+    text-align: center;
+    
+    
+
 }
