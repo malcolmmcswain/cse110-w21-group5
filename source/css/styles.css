@@ -30,16 +30,22 @@ header, footer {
     background-color: #D8D8D8;
 }
 
-header {
+nav {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: row;
 }
 
-h1, nav {
+nav > h1 {
     margin: 0.5em;
     color: #636363;
     font-weight: 400;
+    flex: 1;
+}
+
+#hamburger {
+    margin-top: 2.5px;
+    color: #636363;
+    flex: 1;
 }
 
 #task_menu {
@@ -176,23 +182,24 @@ v2 styling
 nav {
     display: grid;
     grid-template-columns: 60% 1fr 1fr 10%;
-    min-height: 8vh;
+    height: 8vh;
     align-items: center;
 }
 
 nav ul {
     list-style: none;
-    width: 100px;
+    width: 20vw;
     position: absolute;
     align-items: center;
     text-align: center;
-    top: 55px;
-    right: 4%;
-    border-radius: 10px;
-    border: 1px solid bbb;
+    right: 0;
+    top: 8vh;
+    border-radius: 0px 0px 10px 10px;
+    padding-top: 20px;
+    padding-bottom: 10px;
     padding-inline-start: 30px;
     padding-inline-end: 30px;
-    background: #bbb;
+    background: #e0e0e0;
 
     /* change in js to (block)*/
     opacity: 0;
@@ -201,9 +208,10 @@ nav ul {
 }
 
 nav ul li {
+    color: #636363;
     padding-top: 0.7em;
     padding-bottom: 0.7em;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #bbb;
 }
 
 nav ul li:last-child {
@@ -213,6 +221,8 @@ nav ul li:last-child {
 }
 
 nav .icon {
+    justify-self: right;
+    margin-right: 0.5em;
     cursor: pointer;
     font-size: 2.4em;
     grid-column-start: 4;
@@ -242,7 +252,7 @@ nav .icon {
     left: 50%;
     transform: translate(-50%, -50%);
 
-    padding: 30px;
+    padding: 30px 30px 60px 30px;
     background-color: white;
     height: 200px;
     width: 400px;
@@ -253,10 +263,19 @@ nav .icon {
     flex-direction: column;
 }
 
-.modal .project-prompt .icon {
-    cursor: pointer;
-    font-size: 2.4em;
+.modal h2 {
+    font-weight: normal;
+    color: #636363;
+}
+
+.modal .project-prompt .close-container {
     padding-left: 80%;
+}
+
+.modal .project-prompt .icon {
+    color: #636363;
+    font-size: 24px;
+    cursor: pointer;
 }
 
 .modal .project-prompt input {
@@ -269,18 +288,20 @@ nav .icon {
 }
 
 .modal .project-prompt button {
-    color: #222c;
-    background-color: #17bf81;
-
-    font-size: 1em;
-    padding: 0.5em;
+    background-color: #6FEA9A;
+    color: #337B3B;
+    font-weight: 700;
+    font-size: 20px;
+    padding: 0.5em 1.5em 0.5em 1.5em;
     margin: 0.5em;
 
-    border-radius: 20px;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    -ms-border-radius: 20px;
-    -o-border-radius: 20px;
+    border-width: 0;
+
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
 
     cursor: pointer;
 }

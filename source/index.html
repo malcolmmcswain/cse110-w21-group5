@@ -1,4 +1,3 @@
-  
 <!doctype html>
 
 <html lang="en">
@@ -9,6 +8,8 @@
   <title>Pomodoro Timer</title>
   <!--DO NOT REMOVE: This tag links the css source file to the document-->
   <link rel="stylesheet" href="css/styles.css">
+  <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule="" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
     <header>
@@ -16,8 +17,15 @@
         <h1>Pomodoro Timer</h1>
         <!--navigation links (v2 projects?)-->
         <!-- Template for task menu, drop-down menu not yet inplemented -->
-        <input type="image" src="./media/menu_icon.png" id="task_menu"/>
+        <ion-icon id="hamburger" class="icon" name="list-outline"></ion-icon>
 
+        <ul id="project-list">
+          <!-- need to dynamically add elements from js file *before last-child -->
+          <li><a>Project 1</a></li>
+          <li><a>Project 2</a></li>
+          <li><a>Project 3</a></li>
+          <li><ion-icon id="add-project" name="add-circle-outline"></ion-icon></li>
+        </ul>
       </nav>
     </header>
     <main>
@@ -33,18 +41,29 @@
         <text id="time" x="40" y="48" font-size="20px" text-anchor="middle" fill="#E46E6E">00:00</text>
       </svg>
 
-        <!-- The text for session counter would be replaced once user starts working -->
-        <div id="pomodoro-state">
-          <text> Pomodoro&nbsp; </text> 
-          <text id="pomodoro-count-text"> 0 </text>
-          <text> &nbsp;&nbsp;|&nbsp;&nbsp; </text>
-          <text id="pomodoro-state-text"> Stopped </text>
-        </div>
+      <!-- The text for session counter would be replaced once user starts working -->
+      <div id="pomodoro-state">
+        <text> Pomodoro&nbsp; </text> 
+        <text id="pomodoro-count-text"> 0 </text>
+        <text> &nbsp;&nbsp;|&nbsp;&nbsp; </text>
+        <text id="pomodoro-state-text"> Stopped </text>
+      </div>
       
       <div id="timer-control">
         <button id="start">Start</button>
         <button id="stop">Stop</button>
         <button id="reset">Reset</button>
+      </div>
+
+      <div id="modal" class="modal">
+        <div class="project-prompt">
+          <div class="close-container">
+            <ion-icon id="close-add-project" class="icon" name="close-circle-outline"></ion-icon>
+          </div>
+          <h2>What are you working on?</h2>
+          <input placeholder="Enter the name of your project..."></input>
+          <button>Create New Project</button>
+        </div>
       </div>
     </main>
     <footer>
