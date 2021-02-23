@@ -72,13 +72,13 @@ timer.prototype.reset = function(force = false) {
  */
 timer.prototype.stop = function(force = false) {
     if (this.countDownTimeout) clearInterval(this.countDownTimeout);
-    console.log('stopped in state '+this.state); 
+    console.log('stopped in state '+this.state);
 
     // If forcibly stopped, wait for reset
     if (force) {
         this.state = 'stopped';
         this.updateStatusText();
-        this.burndownAnim.ownerSVGElement.pauseAnimations(); 
+        this.burndownAnim.ownerSVGElement.pauseAnimations();
     } else if (this.state == 'work' && this.counter % this.longBreakInterval == 0) {
         this.reset();
         this.startLongBreak();
