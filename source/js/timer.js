@@ -45,7 +45,7 @@ function timer(timeDisplay, backgroundRing, burndownRing, burndownAnim, counterT
  * @param {boolean} force If timer is forcibly reset
  */
 timer.prototype.reset = function(force = false) {
-    this.stop(true);
+    if (force && this.state !== 'stopped') this.stop(true);
     this.state = 'reset';
 
     this.countDownDate = null;
@@ -55,10 +55,10 @@ timer.prototype.reset = function(force = false) {
     this.countDownMins = 0;
 
     this.timeDisplay.innerHTML = '00:00';
-
+    
     // If forcibly reset, prepare for next start
     if (force) {
-        this.counter--;
+        --this.counter;
         this.backgroundRing.style.stroke = '#E46E6E';
         this.timeDisplay.setAttribute('fill', '#E46E6E');
         this.burndownAnim.endElement();
@@ -76,7 +76,6 @@ timer.prototype.stop = function(force = false) {
 
     // If forcibly stopped, wait for reset
     if (force) {
-        this.counter = 0;
         this.state = 'stopped';
         this.updateStatusText();
         this.burndownAnim.ownerSVGElement.pauseAnimations();

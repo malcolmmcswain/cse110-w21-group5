@@ -30,16 +30,22 @@ header, footer {
     background-color: #D8D8D8;
 }
 
-header {
+nav {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: row;
 }
 
-h1, nav {
+nav > h1 {
     margin: 0.5em;
     color: #636363;
     font-weight: 400;
+    flex: 1;
+}
+
+#hamburger {
+    margin-top: 2.5px;
+    color: #636363;
+    flex: 1;
 }
 
 #task_menu {
@@ -131,6 +137,7 @@ main {
     -o-border-radius: 20px;
 
     justify-content: center;
+    cursor: pointer;
 }
 
 #start {
@@ -164,4 +171,137 @@ footer > p {
     color: #636363;
     padding: 0.25em;
     text-align: center;
+}
+
+/* 
+
+v2 styling
+
+*/
+
+nav {
+    display: grid;
+    grid-template-columns: 60% 1fr 1fr 10%;
+    height: 8vh;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    width: 20vw;
+    position: absolute;
+    align-items: center;
+    text-align: center;
+    right: 0;
+    top: 8vh;
+    border-radius: 0px 0px 10px 10px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    padding-inline-start: 30px;
+    padding-inline-end: 30px;
+    background: #e0e0e0;
+
+    /* change in js to (block)*/
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in;
+}
+
+nav ul li {
+    color: #636363;
+    padding-top: 0.7em;
+    padding-bottom: 0.7em;
+    border-bottom: 1px solid #bbb;
+}
+
+nav ul li:last-child {
+    border-bottom: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+nav .icon {
+    justify-self: right;
+    margin-right: 0.5em;
+    cursor: pointer;
+    font-size: 2.4em;
+    grid-column-start: 4;
+}
+
+.modal {
+    background: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal .project-prompt {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 30px 30px 60px 30px;
+    background-color: white;
+    height: 200px;
+    width: 400px;
+    text-align: center;
+    align-items: center;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal h2 {
+    font-weight: normal;
+    color: #636363;
+}
+
+.modal .project-prompt .close-container {
+    padding-left: 80%;
+}
+
+.modal .project-prompt .icon {
+    color: #636363;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal .project-prompt input {
+    border: none;
+    border-bottom: 1px solid #bbb;
+    width: 80%;
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+    margin-bottom: 20px;
+}
+
+.modal .project-prompt button {
+    background-color: #6FEA9A;
+    color: #337B3B;
+    font-weight: 700;
+    font-size: 20px;
+    padding: 0.5em 1.5em 0.5em 1.5em;
+    margin: 0.5em;
+
+    border-width: 0;
+
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+
+    cursor: pointer;
 }

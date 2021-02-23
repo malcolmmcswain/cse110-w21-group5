@@ -5,28 +5,37 @@
  ************************************************************************************/
 
 // IDEAS/SUGGESTED STRUCTURE BELOW:
-    // This is to give you a starting point, not an explicit map of what your code should look like
+// This is to give you a starting point, not an explicit map of what your code should look like
 
 // Logical structure:
-    // Create a counter object to keep track of how many pomodoro's we've used
-    // Increment it based on some sort of signal of pomodoro completion from timer.js
-    // On each 3rd or 4th pomodoro, send some sort of signal to timer.js to switch to the "long break" state
+// Create a counter object to keep track of how many pomodoro's we've used
+// Increment it based on some sort of signal of pomodoro completion from timer.js
+// On each 3rd or 4th pomodoro, send some sort of signal to timer.js to switch to the "long break" state
 
 window.onload = function() {
     initializePage();
 }
 
 function initializePage() {
-    let startBtn       = document.getElementById('start');
-    let stopBtn        = document.getElementById('stop');
-    let resetBtn       = document.getElementById('reset');
+    // Timer Controls
+    let startBtn        = document.getElementById('start');
+    let stopBtn         = document.getElementById('stop');
+    let resetBtn        = document.getElementById('reset');
 
-    let timeDisplay    = document.getElementById('time');
-    let backgroundRing = document.getElementById('background-ring');
-    let burndownRing   = document.getElementById('burndown-ring');
-    let burndownAnim   = document.getElementById('burndown-anim');
-    let counterText    = document.getElementById('pomodoro-count-text');
-    let counterState   = document.getElementById('pomodoro-state-text');
+    // Timer Graphics
+    let timeDisplay     = document.getElementById('time');
+    let backgroundRing  = document.getElementById('background-ring');
+    let burndownRing    = document.getElementById('burndown-ring');
+    let burndownAnim    = document.getElementById('burndown-anim');
+    let counterText     = document.getElementById('pomodoro-count-text');
+    let counterState    = document.getElementById('pomodoro-state-text');
+
+    // Projects List Controls
+    let hamburger       = document.getElementById('hamburger');
+    let projectList     = document.getElementById('project-list');
+    let modal           = document.getElementById('modal');
+    let addProject      = document.getElementById('add-project');
+    let closeAddProject = document.getElementById('close-add-project');
 
     // Initialize timer to be used by all events
     let time = new timer(timeDisplay, backgroundRing, burndownRing,
@@ -34,9 +43,9 @@ function initializePage() {
 
     startBtn.addEventListener('click', e => {
         // To be replaced with grabbing from settings menu
-        time.workMins = 1;
-        time.shortBreakMins = 1;
-        time.longBreakMins = 2;
+        time.workMins = 6/60;
+        time.shortBreakMins = 6/60;
+        time.longBreakMins = 6/60;
 
         // Begin working and display stop/reset buttons
         time.startWorking();
@@ -56,6 +65,24 @@ function initializePage() {
         startBtn.style.display = 'block';
         stopBtn.style.display = 'none';
         resetBtn.style.display = 'none';
+    });
+
+    hamburger.addEventListener('click', () => {
+        if (projectList.style.opacity === '0' || projectList.style.opacity === '') {
+            projectList.style.opacity = '1';
+            projectList.style.pointerEvents = 'all';
+        } else {
+            projectList.style.opacity = '0';
+            projectList.style.pointerEvents = 'none';
+        }
+    });
+    
+    addProject.addEventListener('click', () => {
+        modal.classList.add('open');
+    });
+    
+    closeAddProject.addEventListener('click', () => {
+        modal.classList.remove('open');
     });
 }
 
