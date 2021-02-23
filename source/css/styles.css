@@ -181,11 +181,12 @@ footer > p {
     text-align: center;
 }
 #options-btn{
+   position: absolute; 
    background-color: grey;
    height:60px;
    width:60px;
-   margin-top : 50px;
-   margin-left : 25px;
+   bottom : -0.5em;
+   left : 25px;
 }
 .overlay {
     position: absolute; 
