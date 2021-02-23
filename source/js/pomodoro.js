@@ -34,9 +34,9 @@ function initializePage() {
 
     startBtn.addEventListener('click', e => {
         // To be replaced with grabbing from settings menu
-        time.workMins = 1;
-        time.shortBreakMins = 1;
-        time.longBreakMins = 2;
+        time.workMins = 0.1;
+        time.shortBreakMins = 0.1;
+        time.longBreakMins = 0.1;
 
         // Begin working and display stop/reset buttons
         time.startWorking();
