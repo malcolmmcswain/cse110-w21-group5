@@ -1,0 +1,79 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pomodoro Timer</title>
+  <!--DO NOT REMOVE: This tag links the css source file to the document-->
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule="" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+    <header>
+      <nav>
+        <h1>Pomodoro Timer</h1>
+        <!--navigation links (v2 projects?)-->
+        <!-- Template for task menu, drop-down menu not yet inplemented -->
+        <ion-icon id="hamburger" class="icon" name="list-outline"></ion-icon>
+
+        <ul id="project-list">
+          <!-- need to dynamically add elements from js file *before last-child -->
+          <li><a>Project 1</a></li>
+          <li><a>Project 2</a></li>
+          <li><a>Project 3</a></li>
+          <li><ion-icon id="add-project" name="add-circle-outline"></ion-icon></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <svg id="timer-display" viewBox="0 0 80 80">
+        <!-- Used to transform the rings to begin animation at correct position -->
+        <g id="rings">
+          <circle cx="40" cy="40" r="36" fill="none" id="background-ring"/>
+          <circle cx="40" cy="40" r="36" fill="none" id="burndown-ring" stroke-dasharray="0 226">
+            <!-- SVG to animate the stroke of the circle. Started and duration edited by timer.js -->
+            <animate id="burndown-anim" attributeType="XML" attributeName="stroke-dasharray" from="0 226" to="226.08 226" begin="indefinite"/>
+          </circle>
+        </g>
+        <text id="time" x="40" y="48" font-size="20px" text-anchor="middle" fill="#E46E6E">00:00</text>
+      </svg>
+
+      <!-- The text for session counter would be replaced once user starts working -->
+      <div id="pomodoro-state">
+        <text> Pomodoro&nbsp; </text> 
+        <text id="pomodoro-count-text"> 0 </text>
+        <text> &nbsp;&nbsp;|&nbsp;&nbsp; </text>
+        <text id="pomodoro-state-text"> Stopped </text>
+      </div>
+      
+      <div id="timer-control">
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        <button id="reset">Reset</button>
+      </div>
+
+      <div id="modal" class="modal">
+        <div class="project-prompt">
+          <div class="close-container">
+            <ion-icon id="close-add-project" class="icon" name="close-circle-outline"></ion-icon>
+          </div>
+          <h2>What are you working on?</h2>
+          <input placeholder="Enter the name of your project..."></input>
+          <button>Create New Project</button>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <p>CSE 110 Group 5</p>
+    </footer>
+  
+    <!--DO NOT REMOVE: These tags link the javascript source files to the document-->
+
+    <!-- Set to modules so that pomodoro.js can import timer.js -->
+    <script src="js/timer.js"></script>
+    <script src="js/pomodoro.js"></script>
+</body>
+</html>
