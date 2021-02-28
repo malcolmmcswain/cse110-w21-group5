@@ -114,7 +114,7 @@ main {
     color: #767571;
 }*/
 
-#start, #stop, #reset {
+#start, #stop, #reset, #log, #log-text,.log-content{
     font-family: inherit;
     font-size: 1em;
     padding: 1em;
@@ -142,7 +142,7 @@ main {
     flex: 1;
 }
 
-#stop {
+#stop{
     display: none;
     background-color: #E46E6E;
     color: #8E4545;
@@ -164,4 +164,91 @@ footer > p {
     color: #636363;
     padding: 0.25em;
     text-align: center;
+}
+
+/* Following is CSS for log functionalities*/
+#pop-window{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 30% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 20px;
+    width: 50%;
+    text-align: center;
+  }
+#log{
+    background-color: #E46E6E;
+    color: #8E4545;
+    font-weight: 700;
+    font-size: 1.5em;
+}
+#distraction{
+    border: none;
+    border-color: transparent;
+}
+#log-text, #title{
+    font-family: inherit;
+    font-size: 2em;
+    padding: 1em;
+    color: #222c;
+}
+input[type="text"], #log-content{
+    font-size:24px;
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#log-record{
+    left: 0;
+    top: 0;
+    width: 30%; 
+    height: 100%; 
+    background-color: rgba(231, 225, 225, 0.899); /* Black w/ opacity */
+    border-radius: 20px;
+}
+
+.flex-container{
+    padding:0;
+    display: flex;
+    justify-content:center;
+    list-style: none;
+}
+.flex-item{
+    flex: 3 2 auto;
+}
+.log-list{
+    list-style: none;
+}
+li{
+    text-align:center;
+    margin: 0.5em 0;
+    margin-bottom:1em;
+    color: rgb(87, 85, 85);
+}
+
+hr{
+    width: 70%;
+    height: 3px;
+    background-color: rgb(186, 183, 183);
 }

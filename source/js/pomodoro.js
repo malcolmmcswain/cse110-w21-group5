@@ -31,18 +31,18 @@ function initializePage() {
     // Initialize timer to be used by all events
     let time = new timer(timeDisplay, backgroundRing, burndownRing,
                         burndownAnim, counterText, counterState, 1, 1, 2);
-
+    managePopWindow(stopBtn);
     startBtn.addEventListener('click', e => {
         // To be replaced with grabbing from settings menu
-        time.workMins = 1/20;
-        time.shortBreakMins = 1/20;
-        time.longBreakMins = 2/20;
+        time.workMins = 0.1/2;
+        time.shortBreakMins = 0.1/2;
+        time.longBreakMins = 0.1/2;
+
 
         // Begin working and display stop/reset buttons
         time.startWorking();
         startBtn.style.display = 'none';
         stopBtn.style.display = 'block';
-        stopBtn.textContent = 'Stop (Log)';
         resetBtn.style.display = 'block';
     });
 
@@ -59,6 +59,30 @@ function initializePage() {
         resetBtn.style.display = 'none';
     });
 }
+
+/* 
+ *This function handles when to display/hide the popWindow for logging distraction
+ */
+function managePopWindow(btn){
+    let popWindow = document.getElementById('pop-window');
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal 
+    btn.onclick = function() {
+        popWindow.style.display = "block";
+    }
+    
+    window.onclick = function(event) {
+        if (event.target == popWindow) {
+          popWindow.style.display = "none";
+        }
+    }
+    span.onclick = function() {
+        popWindow.style.display = "none";
+    }
+}
+
 
 // UI structure:
     // Fetch "pomodoro #" region from HTML using DOM
