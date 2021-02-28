@@ -34,14 +34,15 @@ function initializePage() {
 
     startBtn.addEventListener('click', e => {
         // To be replaced with grabbing from settings menu
-        time.workMins = 1;
-        time.shortBreakMins = 1;
-        time.longBreakMins = 2;
+        time.workMins = 1/20;
+        time.shortBreakMins = 1/20;
+        time.longBreakMins = 2/20;
 
         // Begin working and display stop/reset buttons
         time.startWorking();
         startBtn.style.display = 'none';
         stopBtn.style.display = 'block';
+        stopBtn.textContent = 'Stop (Log)';
         resetBtn.style.display = 'block';
     });
 
