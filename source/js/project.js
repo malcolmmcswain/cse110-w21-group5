@@ -27,31 +27,19 @@ function getProject(name) {
  * Add a single project (as a JSON object) in localStorage
  * @param {object} project is the project to add
  */
-function addProject(project) {
+function createProject(project) {
     if (localStorage.getItem("projectList") == null) initializeLocalStorage();
     let projectList = JSON.parse(localStorage.getItem("projectList"));
-    if (projectList.find(p => p.name === project.name) != undefined) {
-        alert('Project already exists!');
+    if (projectList.find(p => p.name === project.name)) {
+        alert(project.name + 'Project already exists!');
         return false;
     } else {
         projectList.push(project);
         localStorage.setItem("projectList", JSON.stringify(projectList));
+        refreshProjectList();
         return true;
     }
 }
-
-/** 
- * Update local storage to store projects
- * @param {string} state needs to be either "complete" or "incomplete" 
-
-function updateProject(name, newState){
-    if (localStorage.getItem("projectList") == null) initializeLocalStorage();
-    let 
-    // Otherwise create a new project and add it to localStorage
-    projectList.push({"projectName":projectName, "state":state});
-    localStorage.setItem("projectList", JSON.stringify(projectList));
-}
- */
 
 /** delete specified project from the list
  * @param {string} name of the project to be deleted
@@ -63,4 +51,44 @@ function deleteProject(name) {
     }
     let projectList = JSON.parse(localStorage.getItem("projectList"));
     localStorage.setItem("projectList", JSON.stringify(projectList.filter(project => project.name !== name)));
+    refreshProjectList();
+    return true;
+}
+
+/** 
+ * Update local storage to store projects
+ * @param {string} state needs to be either "complete" or "incomplete" 
+ */
+function updateProject(name, newState) {
+    deleteProject(name);
+    createProject(newState);
+}
+
+function editProject(name) {
+    document.getElementById('edit-modal').classList.add('open');
+    document.getElementById('edit-project-name').setAttribute('placeholder', name);
+    document.getElementById('edit-project-name').value = name;
+}
+
+function refreshProjectList() {
+    if (localStorage.getItem("projectList") == null) initializeLocalStorage();
+
+    let projectListView = document.getElementById('project-list');
+    let addButton = document.getElementById('add-project-wrapper');
+
+    while (projectListView.childNodes.length > 2) {
+        projectListView.removeChild(projectListView.firstChild);
+    }
+
+    let projectList = JSON.parse(localStorage.getItem("projectList"));
+    projectList.forEach((project) => {
+        let projectItem = document.createElement('li');
+        projectItem.innerHTML = `
+        <a>${project.name}</a>
+        <div class="project-action-container">
+            <ion-icon name="create-outline" onclick="editProject('${project.name}')"></ion-icon>
+            <ion-icon name="trash-outline" onclick="deleteProject('${project.name}')"></ion-icon>
+        </div>`;
+        projectListView.insertBefore(projectItem, addButton);
+    });
 }

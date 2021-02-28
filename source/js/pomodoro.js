@@ -5,6 +5,8 @@
  ************************************************************************************/
 
 window.onload = function() {
+    
+    refreshProjectList();
     initializePage();
 }
 
@@ -25,9 +27,15 @@ function initializePage() {
     // Projects List Controls
     let hamburger       = document.getElementById('hamburger');
     let projectList     = document.getElementById('project-list');
-    let modal           = document.getElementById('modal');
+    let createModal     = document.getElementById('create-modal');
     let addProject      = document.getElementById('add-project');
+    let projectName     = document.getElementById('project-name');
+    let addNewProject   = document.getElementById('add-new-project');
     let closeAddProject = document.getElementById('close-add-project');
+    let editModal       = document.getElementById('edit-modal');
+    let closeEditModal  = document.getElementById('close-edit-project');
+    let editProjectName = document.getElementById('edit-project-name');
+    let editProject     = document.getElementById('edit-project');
 
     // Initialize timer to be used by all events
     let time = new timer(timeDisplay, backgroundRing, burndownRing,
@@ -70,10 +78,42 @@ function initializePage() {
     });
     
     addProject.addEventListener('click', () => {
-        modal.classList.add('open');
+        createModal.classList.add('open');
+    });
+
+    addNewProject.addEventListener('click', () => {
+        if (projectName.value !== '') {
+            createProject({
+                name: document.getElementById('project-name').value,
+                pomodoro: 0,
+                state: 'reset'
+            });
+            createModal.classList.remove('open');
+        } else {
+            alert('Please enter a project name!');
+        }
     });
     
     closeAddProject.addEventListener('click', () => {
-        modal.classList.remove('open');
+        createModal.classList.remove('open');
+    });
+
+    closeEditModal.addEventListener('click', () => {
+        editModal.classList.remove('open');
+    });
+
+    editProject.addEventListener('click', () => {
+        let originalState = getProject(editProjectName.placeholder);
+
+        if (editProjectName.value !== '') {
+            updateProject(editProjectName.placeholder, {
+                name: editProjectName.value,
+                pomodoro: originalState.pomodoro,
+                state: originalState.state
+            });
+            editModal.classList.remove('open');
+        } else {
+            alert('Please enter a project name!');
+        }
     });
 }

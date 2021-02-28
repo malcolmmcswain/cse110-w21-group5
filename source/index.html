@@ -20,11 +20,9 @@
         <ion-icon id="hamburger" class="icon" name="list-outline"></ion-icon>
 
         <ul id="project-list">
-          <!-- need to dynamically add elements from js file *before last-child -->
-          <li><a>Project 1</a></li>
-          <li><a>Project 2</a></li>
-          <li><a>Project 3</a></li>
-          <li><ion-icon id="add-project" name="add-circle-outline"></ion-icon></li>
+          <li id="add-project-wrapper">
+            <ion-icon id="add-project" name="add-circle-outline"></ion-icon>
+          </li>
         </ul>
       </nav>
     </header>
@@ -55,14 +53,24 @@
         <button id="reset">Reset</button>
       </div>
 
-      <div id="modal" class="modal">
+      <div id="create-modal" class="modal">
         <div class="project-prompt">
           <div class="close-container">
             <ion-icon id="close-add-project" class="icon" name="close-circle-outline"></ion-icon>
           </div>
           <h2>What are you working on?</h2>
-          <input placeholder="Enter the name of your project..."></input>
-          <button>Create New Project</button>
+          <input id="project-name" placeholder="Enter the name of your project..."></input>
+          <button id="add-new-project">Create New Project</button>
+        </div>
+      </div>
+      <div id="edit-modal" class="modal">
+        <div class="project-prompt">
+          <div class="close-container">
+            <ion-icon id="close-edit-project" class="icon" name="close-circle-outline"></ion-icon>
+          </div>
+          <h2>Working on something else?</h2>
+          <input id="edit-project-name" placeholder="Enter a new name for your project..."></input>
+          <button id="edit-project">Save Project</button>
         </div>
       </div>
     </main>
