@@ -190,8 +190,6 @@ nav ul {
     list-style: none;
     width: 20vw;
     position: absolute;
-    align-items: center;
-    text-align: center;
     right: 0;
     top: 8vh;
     border-radius: 0px 0px 10px 10px;
@@ -212,9 +210,24 @@ nav ul li {
     padding-top: 0.7em;
     padding-bottom: 0.7em;
     border-bottom: 1px solid #bbb;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav ul li a {
+    flex: 1;
+}
+
+ul li .project-action-container, #project {
+    cursor: pointer;
 }
 
 nav ul li:last-child {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     border-bottom: none;
     font-size: 20px;
     cursor: pointer;
