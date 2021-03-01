@@ -1,5 +1,5 @@
 /**
- * Initializing projectlist in localStorage
+ * Initialize projectlist and currentProject in localStorage
  */
 function initializeLocalStorage() {
     let emtptyJSON = `[{"name": "My Project", "pomodoro": 0, "state": "reset"}]`;
@@ -42,7 +42,8 @@ function createProject(project) {
     }
 }
 
-/** delete specified project from the list
+/**
+ * Delete specified project from the list
  * @param {string} name of the project to be deleted
   */
 function deleteProject(name) {
@@ -58,19 +59,27 @@ function deleteProject(name) {
 
 /** 
  * Update local storage to store projects
- * @param {string} state needs to be either "complete" or "incomplete" 
+ * @param {string} name name of project to update
+ * @param {object} newState new project object
  */
 function updateProject(name, newState) {
     deleteProject(name);
     createProject(newState);
 }
 
+/**
+ * Initiate project editing by displaying modal
+ * @param {string} name name of project
+ */
 function editProject(name) {
     document.getElementById('edit-modal').classList.add('open');
     document.getElementById('edit-project-name').setAttribute('placeholder', name);
     document.getElementById('edit-project-name').value = name;
 }
 
+/**
+ * Update DOM to reflect changes in projectList
+ */
 function refreshProjectList() {
     if (localStorage.getItem("projectList") == null) initializeLocalStorage();
 

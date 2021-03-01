@@ -48,9 +48,6 @@ function initializePage() {
     let editProjectName = document.getElementById('edit-project-name');
     let editProject     = document.getElementById('edit-project');
 
-    if (localStorage.getItem("currentProject") == null) initializeLocalStorage();
-    let currentProject = localStorage.getItem("currentProject");
-
     // Initialize timer to be used by all events
     window.time = new timer(timeDisplay, backgroundRing, burndownRing,
                         burndownAnim, counterText, counterState, 1, 1, 2);
@@ -132,6 +129,10 @@ function initializePage() {
     });
 }
 
+/**
+ * Hook method to switch project context
+ * @param {string} name name of project 
+ */
 function changeProject(name) {
     currentProject = localStorage.getItem("currentProject");
     updateProject(currentProject, {

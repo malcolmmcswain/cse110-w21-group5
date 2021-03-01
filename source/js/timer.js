@@ -206,6 +206,9 @@ timer.prototype.updateStatusText = function() {
     this.counterState.textContent = stateText;
 }
 
+/* 
+ * Switch timer's state to a different project context
+ */
 timer.prototype.switchState = function(newState) {
     this.counter = newState.pomodoro;
     this.state = newState.state;
