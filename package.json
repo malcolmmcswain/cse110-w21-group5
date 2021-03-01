@@ -8,6 +8,7 @@
     "jest": "^26.6.3"
   },
   "devDependencies": {
+    "jest-localstorage-mock": "^2.4.7",
     "jsdoc": "^3.6.6"
   },
   "scripts": {
@@ -22,5 +23,9 @@
   "bugs": {
     "url": "https://github.com/malcolmmcswain/cse110-w21-group5/issues"
   },
-  "homepage": "https://github.com/malcolmmcswain/cse110-w21-group5#readme"
+  "homepage": "https://github.com/malcolmmcswain/cse110-w21-group5#readme",
+  "jest": {
+    "resetMocks": false,
+    "setupFiles": ["jest-localstorage-mock"]
+  }
 }
