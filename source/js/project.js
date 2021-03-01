@@ -2,8 +2,9 @@
  * Initializing projectlist in localStorage
  */
 function initializeLocalStorage() {
-    let emtptyJSON = "[]";
+    let emtptyJSON = `[{"name": "My Project", "pomodoro": 0, "state": "reset"}]`;
     localStorage.setItem("projectList", emtptyJSON);
+    localStorage.setItem("currentProject", "My Project");
 }
 
 /**
@@ -84,7 +85,7 @@ function refreshProjectList() {
     projectList.forEach((project) => {
         let projectItem = document.createElement('li');
         projectItem.innerHTML = `
-        <a>${project.name}</a>
+        <a onclick="changeProject('${project.name}')">${project.name}</a>
         <div class="project-action-container">
             <ion-icon name="create-outline" onclick="editProject('${project.name}')"></ion-icon>
             <ion-icon name="trash-outline" onclick="deleteProject('${project.name}')"></ion-icon>

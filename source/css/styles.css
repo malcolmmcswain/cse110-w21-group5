@@ -220,7 +220,7 @@ nav ul li a {
     flex: 1;
 }
 
-ul li .project-action-container {
+ul li .project-action-container, #project {
     cursor: pointer;
 }
 

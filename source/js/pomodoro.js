@@ -4,6 +4,17 @@
  * attempting to work on this file.
  ************************************************************************************/
 
+function convertStatusTextToState(statusText) {
+    switch (statusText) {
+        case 'Work': return 'work';
+        case 'Short Break': return 'short_break';
+        case 'Long Break': return 'long_break';
+        case 'Stopped': return 'stopped';
+        case 'Reset': return 'reset';
+        default: return 'stopped';
+    }
+}
+
 window.onload = function() {
     
     refreshProjectList();
@@ -37,29 +48,32 @@ function initializePage() {
     let editProjectName = document.getElementById('edit-project-name');
     let editProject     = document.getElementById('edit-project');
 
+    if (localStorage.getItem("currentProject") == null) initializeLocalStorage();
+    let currentProject = localStorage.getItem("currentProject");
+
     // Initialize timer to be used by all events
-    let time = new timer(timeDisplay, backgroundRing, burndownRing,
+    window.time = new timer(timeDisplay, backgroundRing, burndownRing,
                         burndownAnim, counterText, counterState, 1, 1, 2);
 
     startBtn.addEventListener('click', e => {
         // To be replaced with grabbing from settings menu
-        time.workMins = 6/60;
-        time.shortBreakMins = 6/60;
-        time.longBreakMins = 6/60;
+        window.time.workMins = 6/60;
+        window.time.shortBreakMins = 6/60;
+        window.time.longBreakMins = 6/60;
 
         // Begin working and display stop/reset buttons
-        time.startWorking();
+        window.time.startWorking();
         startBtn.style.display = 'none';
         stopBtn.style.display = 'block';
         resetBtn.style.display = 'block';
     });
 
     stopBtn.addEventListener('click', e => {
-        time.stop(true);
+        window.time.stop(true);
     });
 
     resetBtn.addEventListener('click', e => {
-        time.reset(true);
+        window.time.reset(true);
 
         // Stop displaying stop/reset buttons
         startBtn.style.display = 'block';
@@ -115,5 +129,20 @@ function initializePage() {
         } else {
             alert('Please enter a project name!');
         }
+    });
+}
+
+function changeProject(name) {
+    currentProject = localStorage.getItem("currentProject");
+    updateProject(currentProject, {
+        name: currentProject,
+        pomodoro: Number(document.getElementById('pomodoro-count-text').innerHTML),
+        state: convertStatusTextToState(document.getElementById('pomodoro-state-text').innerHTML)
+    });
+    let newProject = getProject(name);
+    localStorage.setItem("currentProject", newProject.name);
+    window.time.switchState({
+        pomodoro: newProject.pomodoro,
+        state: newProject.state
     });
 }

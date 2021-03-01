@@ -206,6 +206,12 @@ timer.prototype.updateStatusText = function() {
     this.counterState.textContent = stateText;
 }
 
+timer.prototype.switchState = function(newState) {
+    this.counter = newState.pomodoro;
+    this.state = newState.state;
+    this.updateStatusText();
+}
+
 // module.exports = timer;
 
 // Check if running in nodejs
