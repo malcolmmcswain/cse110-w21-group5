@@ -51,6 +51,37 @@ function initializePage() {
     // Initialize timer to be used by all events
     window.time = new timer(timeDisplay, backgroundRing, burndownRing,
                         burndownAnim, counterText, counterState, 1, 1, 2);
+    window.addEventListener("keypress", e => {
+        if (e.key  === "Enter" ) {
+            if (startBtn.style.display != 'none' ) {
+                e.preventDefault();
+                startBtn.click()
+            }
+        }
+    }); 
+    window.addEventListener("keypress", e => {
+        if (e.key  === "s") {
+            if (stopBtn.style.display == 'block' ) {
+                e.preventDefault();
+                stopBtn.click()                  
+            }          
+        }
+    });
+    window.addEventListener("keypress", e => {
+        if (e.key  === "r") {
+            if (resetBtn.style.display == 'block' ) {
+                e.preventDefault();
+                resetBtn.click()                  
+            }
+        }
+    }); 
+
+    window.addEventListener("keypress", e => {
+        if (e.key  === "l") {
+            e.preventDefault();
+            hamburger.click();
+        }
+    });
 
     startBtn.addEventListener('click', e => {
         // To be replaced with grabbing from settings menu
