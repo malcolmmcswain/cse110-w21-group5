@@ -218,4 +218,4 @@ timer.prototype.switchState = function(newState) {
 // module.exports = timer;
 
 // Check if running in nodejs
-module.exports = timer;
+// module.exports = timer;
