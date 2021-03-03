@@ -11,7 +11,8 @@
     "jsdoc": "^3.6.6"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "deploy": "gh-pages -d source"
   },
   "repository": {
     "type": "git",
