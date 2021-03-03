@@ -10,7 +10,5 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install dependencies
       run: npm install gh-pages --save-dev
-    - name: set /soruce as source dir for GitHub Pages
-      run: gh-pages -d source
     - name: push to gh-pages branch
       run: npm run deploy
