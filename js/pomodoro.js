@@ -4,15 +4,20 @@
  * attempting to work on this file.
  ************************************************************************************/
 
-// IDEAS/SUGGESTED STRUCTURE BELOW:
-// This is to give you a starting point, not an explicit map of what your code should look like
-
-// Logical structure:
-// Create a counter object to keep track of how many pomodoro's we've used
-// Increment it based on some sort of signal of pomodoro completion from timer.js
-// On each 3rd or 4th pomodoro, send some sort of signal to timer.js to switch to the "long break" state
+function convertStatusTextToState(statusText) {
+    switch (statusText) {
+        case 'Work': return 'work';
+        case 'Short Break': return 'short_break';
+        case 'Long Break': return 'long_break';
+        case 'Stopped': return 'stopped';
+        case 'Reset': return 'reset';
+        default: return 'stopped';
+    }
+}
 
 window.onload = function() {
+    
+    refreshProjectList();
     initializePage();
 }
 
@@ -33,33 +38,39 @@ function initializePage() {
     // Projects List Controls
     let hamburger       = document.getElementById('hamburger');
     let projectList     = document.getElementById('project-list');
-    let modal           = document.getElementById('modal');
+    let createModal     = document.getElementById('create-modal');
     let addProject      = document.getElementById('add-project');
+    let projectName     = document.getElementById('project-name');
+    let addNewProject   = document.getElementById('add-new-project');
     let closeAddProject = document.getElementById('close-add-project');
+    let editModal       = document.getElementById('edit-modal');
+    let closeEditModal  = document.getElementById('close-edit-project');
+    let editProjectName = document.getElementById('edit-project-name');
+    let editProject     = document.getElementById('edit-project');
 
     // Initialize timer to be used by all events
-    let time = new timer(timeDisplay, backgroundRing, burndownRing,
+    window.time = new timer(timeDisplay, backgroundRing, burndownRing,
                         burndownAnim, counterText, counterState, 1, 1, 2);
 
     startBtn.addEventListener('click', e => {
         // To be replaced with grabbing from settings menu
-        time.workMins = 6/60;
-        time.shortBreakMins = 6/60;
-        time.longBreakMins = 6/60;
+        window.time.workMins = 6/60;
+        window.time.shortBreakMins = 6/60;
+        window.time.longBreakMins = 6/60;
 
         // Begin working and display stop/reset buttons
-        time.startWorking();
+        window.time.startWorking();
         startBtn.style.display = 'none';
         stopBtn.style.display = 'block';
         resetBtn.style.display = 'block';
     });
 
     stopBtn.addEventListener('click', e => {
-        time.stop(true);
+        window.time.stop(true);
     });
 
     resetBtn.addEventListener('click', e => {
-        time.reset(true);
+        window.time.reset(true);
 
         // Stop displaying stop/reset buttons
         startBtn.style.display = 'block';
@@ -78,16 +89,61 @@ function initializePage() {
     });
     
     addProject.addEventListener('click', () => {
-        modal.classList.add('open');
+        createModal.classList.add('open');
+    });
+
+    addNewProject.addEventListener('click', () => {
+        if (projectName.value !== '') {
+            createProject({
+                name: document.getElementById('project-name').value,
+                pomodoro: 0,
+                state: 'reset'
+            });
+            createModal.classList.remove('open');
+        } else {
+            alert('Please enter a project name!');
+        }
     });
     
     closeAddProject.addEventListener('click', () => {
-        modal.classList.remove('open');
+        createModal.classList.remove('open');
+    });
+
+    closeEditModal.addEventListener('click', () => {
+        editModal.classList.remove('open');
+    });
+
+    editProject.addEventListener('click', () => {
+        let originalState = getProject(editProjectName.placeholder);
+
+        if (editProjectName.value !== '') {
+            updateProject(editProjectName.placeholder, {
+                name: editProjectName.value,
+                pomodoro: originalState.pomodoro,
+                state: originalState.state
+            });
+            editModal.classList.remove('open');
+        } else {
+            alert('Please enter a project name!');
+        }
     });
 }
 
-// UI structure:
-    // Fetch "pomodoro #" region from HTML using DOM
-    // Manipulate its text content to match that of the counter object state
-
-// const timer = require("./timer");
+/**
+ * Hook method to switch project context
+ * @param {string} name name of project 
+ */
+function changeProject(name) {
+    currentProject = localStorage.getItem("currentProject");
+    updateProject(currentProject, {
+        name: currentProject,
+        pomodoro: Number(document.getElementById('pomodoro-count-text').innerHTML),
+        state: convertStatusTextToState(document.getElementById('pomodoro-state-text').innerHTML)
+    });
+    let newProject = getProject(name);
+    localStorage.setItem("currentProject", newProject.name);
+    window.time.switchState({
+        pomodoro: newProject.pomodoro,
+        state: newProject.state
+    });
+}
