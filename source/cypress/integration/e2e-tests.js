@@ -1,4 +1,4 @@
-describe('Party Horn Tests', () => {
+describe('Tests for pomodoro', () => {
     beforeEach(() => {
       cy.visit('index.html');
     });
