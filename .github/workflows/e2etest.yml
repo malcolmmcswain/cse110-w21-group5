@@ -1,3 +1,5 @@
+# Resource: https://github.com/cypress-io/github-action
+
 name: Cypress tests
 on:
   push:
