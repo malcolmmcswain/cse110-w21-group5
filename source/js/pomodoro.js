@@ -6,57 +6,72 @@
 
 function convertStatusTextToState(statusText) {
     switch (statusText) {
-        case 'Work': return 'work';
-        case 'Short Break': return 'short_break';
-        case 'Long Break': return 'long_break';
-        case 'Stopped': return 'stopped';
-        case 'Reset': return 'reset';
-        default: return 'stopped';
+        case 'Work':
+            return 'work';
+        case 'Short Break':
+            return 'short_break';
+        case 'Long Break':
+            return 'long_break';
+        case 'Stopped':
+            return 'stopped';
+        case 'Reset':
+            return 'reset';
+        default:
+            return 'stopped';
     }
 }
 
-window.onload = function() {
-    
+window.onload = function () {
+
     refreshProjectList();
     initializePage();
 }
 
 function initializePage() {
     // Timer Controls
-    let startBtn        = document.getElementById('start');
-    let stopBtn         = document.getElementById('stop');
-    let resetBtn        = document.getElementById('reset');
+    let startBtn = document.getElementById('start');
+    let stopBtn = document.getElementById('stop');
+    let resetBtn = document.getElementById('reset');
 
     // Timer Graphics
-    let timeDisplay     = document.getElementById('time');
-    let backgroundRing  = document.getElementById('background-ring');
-    let burndownRing    = document.getElementById('burndown-ring');
-    let burndownAnim    = document.getElementById('burndown-anim');
-    let counterText     = document.getElementById('pomodoro-count-text');
-    let counterState    = document.getElementById('pomodoro-state-text');
+    let timeDisplay = document.getElementById('time');
+    let backgroundRing = document.getElementById('background-ring');
+    let burndownRing = document.getElementById('burndown-ring');
+    let burndownAnim = document.getElementById('burndown-anim');
+    let counterText = document.getElementById('pomodoro-count-text');
+    let counterState = document.getElementById('pomodoro-state-text');
 
     // Projects List Controls
-    let hamburger       = document.getElementById('hamburger');
-    let projectList     = document.getElementById('project-list');
-    let createModal     = document.getElementById('create-modal');
-    let addProject      = document.getElementById('add-project');
-    let projectName     = document.getElementById('project-name');
-    let addNewProject   = document.getElementById('add-new-project');
+    let hamburger = document.getElementById('hamburger');
+    let projectList = document.getElementById('project-list');
+    let createModal = document.getElementById('create-modal');
+    let addProject = document.getElementById('add-project');
+    let projectName = document.getElementById('project-name');
+    let addNewProject = document.getElementById('add-new-project');
     let closeAddProject = document.getElementById('close-add-project');
-    let editModal       = document.getElementById('edit-modal');
-    let closeEditModal  = document.getElementById('close-edit-project');
+    let editModal = document.getElementById('edit-modal');
+    let closeEditModal = document.getElementById('close-edit-project');
     let editProjectName = document.getElementById('edit-project-name');
-    let editProject     = document.getElementById('edit-project');
+    let editProject = document.getElementById('edit-project');
+
+    // Information Page Controls
+    let infoBtn = document.getElementById('info-btn');
+    let thematicModal = document.getElementById('thematic-modal');
+    let explicitModal = document.getElementById('explicit-modal');
+    let closeThematicModal = document.getElementById('close-thematic-modal');
+    let toExplicitModal = document.getElementById('to-explicit-modal');
+    let closeExplicitModal = document.getElementById('close-explicit-modal');
+    let finishInfo = document.getElementById('finish-info');
 
     // Initialize timer to be used by all events
     window.time = new timer(timeDisplay, backgroundRing, burndownRing,
-                        burndownAnim, counterText, counterState, 1, 1, 2);
+        burndownAnim, counterText, counterState, 1, 1, 2);
 
     startBtn.addEventListener('click', e => {
         // To be replaced with grabbing from settings menu
-        window.time.workMins = 6/60;
-        window.time.shortBreakMins = 6/60;
-        window.time.longBreakMins = 6/60;
+        window.time.workMins = 6 / 60;
+        window.time.shortBreakMins = 6 / 60;
+        window.time.longBreakMins = 6 / 60;
 
         // Begin working and display stop/reset buttons
         window.time.startWorking();
@@ -78,6 +93,15 @@ function initializePage() {
         resetBtn.style.display = 'none';
     });
 
+    infoBtn.addEventListener('click', () => {
+        thematicModal.classList.add('open');
+    });
+
+    toExplicitModal.addEventListener('click', () => {
+        thematicModal.classList.remove('open');
+        explicitModal.classList.add('open');
+    });
+
     hamburger.addEventListener('click', () => {
         if (projectList.style.opacity === '0' || projectList.style.opacity === '') {
             projectList.style.opacity = '1';
@@ -87,9 +111,10 @@ function initializePage() {
             projectList.style.pointerEvents = 'none';
         }
     });
-    
+
     addProject.addEventListener('click', () => {
         createModal.classList.add('open');
+        projectName.value = "";
     });
 
     addNewProject.addEventListener('click', () => {
@@ -104,13 +129,26 @@ function initializePage() {
             alert('Please enter a project name!');
         }
     });
-    
+
     closeAddProject.addEventListener('click', () => {
         createModal.classList.remove('open');
     });
 
     closeEditModal.addEventListener('click', () => {
         editModal.classList.remove('open');
+    });
+
+    closeThematicModal.addEventListener('click', () => {
+        thematicModal.classList.remove('open');
+    });
+
+    closeExplicitModal.addEventListener('click', () => {
+        explicitModal.classList.remove('open');
+        console.log('adfasdfsadf');
+    });
+
+    finishInfo.addEventListener('click', () => {
+        explicitModal.classList.remove('open');
     });
 
     editProject.addEventListener('click', () => {
