@@ -52,6 +52,27 @@ function initializePage() {
     window.time = new timer(timeDisplay, backgroundRing, burndownRing,
                         burndownAnim, counterText, counterState, 1, 1, 2);
 
+    window.addEventListener('keypress', e => {
+        let working = startBtn.style.display == 'none';
+        e.preventDefault();
+        switch (e.key) {
+            case 'Enter': // Start timer
+                if (!working) startBtn.click();
+                break;
+            case 's': // Stop timer
+                if (working) stopBtn.click();
+                break;
+            case 'r': // Reset timer
+                if (working) resetBtn.click();
+                break;
+            case 'l': // Open up todolist
+                hamburger.click();
+                break;
+            default:
+                break;
+        }
+    });
+
     startBtn.addEventListener('click', e => {
         // To be replaced with grabbing from settings menu
         window.time.workMins = 6/60;
