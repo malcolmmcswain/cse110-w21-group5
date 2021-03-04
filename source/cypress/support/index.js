@@ -16,6 +16,7 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 
+// Uncomment the next line to run code coverage report
 // import '@cypress/code-coverage/support'
 
 // Alternatively you can use CommonJS syntax:

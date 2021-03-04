@@ -20,6 +20,10 @@ module.exports = (on, config) => {
   // `config` is the resolved Cypress config
 }
 
+
+/**
+ * Uncomment the following code to run code coverage report for cypress
+ */
 // module.exports = (on, config) => {
 //   require('@cypress/code-coverage/task')(on, config)
 //   // include any other plugin code...
