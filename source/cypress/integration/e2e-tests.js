@@ -4,7 +4,7 @@ describe('Tests for pomodoro', () => {
     });
   
     it('Dummy Test', () => {
-      expect(true).to.equal(true);
+      expect(true).to.equal(false);
     });
 
     it('Clicking on hamburger button shows the task list', () => {
