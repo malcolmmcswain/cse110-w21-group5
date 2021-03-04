@@ -51,35 +51,25 @@ function initializePage() {
     // Initialize timer to be used by all events
     window.time = new timer(timeDisplay, backgroundRing, burndownRing,
                         burndownAnim, counterText, counterState, 1, 1, 2);
-    window.addEventListener("keypress", e => {
-        if (e.key  === "Enter" ) {
-            if (startBtn.style.display != 'none' ) {
-                e.preventDefault();
-                startBtn.click()
-            }
-        }
-    }); 
-    window.addEventListener("keypress", e => {
-        if (e.key  === "s") {
-            if (stopBtn.style.display == 'block' ) {
-                e.preventDefault();
-                stopBtn.click()                  
-            }          
-        }
-    });
-    window.addEventListener("keypress", e => {
-        if (e.key  === "r") {
-            if (resetBtn.style.display == 'block' ) {
-                e.preventDefault();
-                resetBtn.click()                  
-            }
-        }
-    }); 
 
-    window.addEventListener("keypress", e => {
-        if (e.key  === "l") {
-            e.preventDefault();
-            hamburger.click();
+    window.addEventListener('keypress', e => {
+        let working = startBtn.style.display == 'none';
+        e.preventDefault();
+        switch (e.key) {
+            case 'Enter': // Start timer
+                if (!working) startBtn.click();
+                break;
+            case 's': // Stop timer
+                if (working) stopBtn.click();
+                break;
+            case 'r': // Reset timer
+                if (working) resetBtn.click();
+                break;
+            case 'l': // Open up todolist
+                hamburger.click();
+                break;
+            default:
+                break;
         }
     });
 
