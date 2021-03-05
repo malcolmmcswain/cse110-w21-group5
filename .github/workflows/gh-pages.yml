@@ -1,16 +1,22 @@
-name: Publish to GitHub Pages
+# Source: https://github.com/marketplace/actions/deploy-to-github-pages
+      
+name: Deploy to GitHub Pages
 on:
   push:
     branches: 
       - main
 jobs:
-  publish:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: npm install gh-pages --save-dev
-    - name: set /soruce as source dir for GitHub Pages
-      run: gh-pages -d source
-    - name: push to gh-pages branch
-      run: npm run deploy
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
+
+      - name: Install
+        run: npm install
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.0.0
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: source
