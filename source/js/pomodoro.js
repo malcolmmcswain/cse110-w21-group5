@@ -50,6 +50,34 @@ function initializePage() {
     let editProjectName = document.getElementById('edit-project-name');
     let editProject     = document.getElementById('edit-project');
 
+    // Pomodoro Options
+    let pomLength       = document.getElementById('pom-length');
+    let shortLength     = document.getElementById('short-length');
+    let longLength      = document.getElementById('long-length');
+    let saveOptions     = document.getElementById('save-options');
+
+
+    // Load in previous options (default without loading is 25/5/30)
+    if (localStorage.getItem('pomLength') != null)
+        pomLength.value = localStorage.getItem('pomLength');
+    else pomLength.value = 25;
+    
+    if (localStorage.getItem('shortLength') != null)
+        shortLength.value = localStorage.getItem('shortLength');
+    else shortLength.value = 5;
+
+    if (localStorage.getItem('longLength') != null)
+        longLength.value = localStorage.getItem('longLength');
+    else longLength.value = 30;
+
+    // Update storage on options edit
+    saveOptions.addEventListener('click', e => {
+        e.preventDefault();
+        localStorage.setItem('pomLength', pomLength.value);
+        localStorage.setItem('shortLength', shortLength.value);
+        localStorage.setItem('longLength', longLength.value);
+    });
+    
     // Initialize timer to be used by all events
     window.time = new timer(timeDisplay, backgroundRing, burndownRing,
                         burndownAnim, counterText, counterState, 1, 1, 2);
@@ -77,9 +105,9 @@ function initializePage() {
 
     startBtn.addEventListener('click', e => {
         // To be replaced with grabbing from settings menu
-        window.time.workMins = 6/60;
-        window.time.shortBreakMins = 6/60;
-        window.time.longBreakMins = 6/60;
+        window.time.workMins = parseInt(pomLength.value);
+        window.time.shortBreakMins = parseInt(shortLength.value);
+        window.time.longBreakMins = parseInt(longLength.value);
 
         // Begin working and display stop/reset buttons
         window.time.startWorking();
