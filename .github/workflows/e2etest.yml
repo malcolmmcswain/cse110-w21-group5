@@ -1,3 +1,6 @@
+
+# Resource: https://github.com/cypress-io/github-action
+
 name: Cypress tests
 on:
   push:
@@ -14,3 +17,4 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           project: ./source
+
