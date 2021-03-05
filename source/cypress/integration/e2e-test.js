@@ -82,9 +82,10 @@ describe('Tests for pomodoro', () => {
 
 
     it('Clicking on start button starts the timer', () => {
+        cy.clock();
         cy.get("#start").click();
-        cy.wait(1000);
-        cy.get("#time").should("have.text", "00:05"); // Now work session is set for 00:06
+        cy.tick(1000 * 60);
+        cy.get("#time").should("have.text", "24:00"); // Now work session is set for 00:06
         // TODO: Change this to dynamically get time left from settings menu
     });
 
