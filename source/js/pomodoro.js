@@ -34,12 +34,14 @@ function initializePage() {
     let resetBtn = document.getElementById('reset');
 
     // Timer Graphics
-    let timeDisplay = document.getElementById('time');
-    let backgroundRing = document.getElementById('background-ring');
-    let burndownRing = document.getElementById('burndown-ring');
-    let burndownAnim = document.getElementById('burndown-anim');
-    let counterText = document.getElementById('pomodoro-count-text');
-    let counterState = document.getElementById('pomodoro-state-text');
+    let timeDisplay     = document.getElementById('time');
+    let backgroundRing  = document.getElementById('background-ring');
+    let burndownRing    = document.getElementById('burndown-ring');
+    let burndownAnim    = document.getElementById('burndown-anim');
+    let counterText     = document.getElementById('pomodoro-count-text');
+    let counterState    = document.getElementById('pomodoro-state-text');
+    let options        = document.getElementById('options-btn');
+    let opt_panel      = document.getElementById('options-panel');
 
     // Projects List Controls
     let hamburger = document.getElementById('hamburger');
@@ -63,21 +65,79 @@ function initializePage() {
     let closeExplicitModal = document.getElementById('close-explicit-modal');
     let finishInfo = document.getElementById('finish-info');
 
+    // Pomodoro Options
+    let pomLength       = document.getElementById('pom-length');
+    let shortLength     = document.getElementById('short-length');
+    let longLength      = document.getElementById('long-length');
+    let saveOptions     = document.getElementById('save-options');
+
+
+    // Load in previous options (default without loading is 25/5/30)
+    if (localStorage.getItem('pomLength') != null)
+        pomLength.value = localStorage.getItem('pomLength');
+    else pomLength.value = 25;
+    
+    if (localStorage.getItem('shortLength') != null)
+        shortLength.value = localStorage.getItem('shortLength');
+    else shortLength.value = 5;
+
+    if (localStorage.getItem('longLength') != null)
+        longLength.value = localStorage.getItem('longLength');
+    else longLength.value = 30;
+
+    // Update storage on options edit
+    saveOptions.addEventListener('click', e => {
+        e.preventDefault();
+        localStorage.setItem('pomLength', pomLength.value);
+        localStorage.setItem('shortLength', shortLength.value);
+        localStorage.setItem('longLength', longLength.value);
+    });
+    
     // Initialize timer to be used by all events
     window.time = new timer(timeDisplay, backgroundRing, burndownRing,
         burndownAnim, counterText, counterState, 1, 1, 2);
 
+    window.addEventListener('keypress', e => {
+        let working = startBtn.style.display == 'none';
+        e.preventDefault();
+        switch (e.key) {
+            case 'Enter': // Start timer
+                if (!working) startBtn.click();
+                break;
+            case 's': // Stop timer
+                if (working) stopBtn.click();
+                break;
+            case 'r': // Reset timer
+                if (working) resetBtn.click();
+                break;
+            case 'l': // Open up todolist
+                hamburger.click();
+                break;
+            default:
+                break;
+        }
+    });
+
     startBtn.addEventListener('click', e => {
         // To be replaced with grabbing from settings menu
-        window.time.workMins = 6 / 60;
-        window.time.shortBreakMins = 6 / 60;
-        window.time.longBreakMins = 6 / 60;
+        window.time.workMins = parseInt(pomLength.value);
+        window.time.shortBreakMins = parseInt(shortLength.value);
+        window.time.longBreakMins = parseInt(longLength.value);
 
         // Begin working and display stop/reset buttons
         window.time.startWorking();
         startBtn.style.display = 'none';
         stopBtn.style.display = 'block';
         resetBtn.style.display = 'block';
+    });
+    
+    options.addEventListener('click', e => {
+    // toggle options panel        
+            if(opt_panel.style.display == 'block')
+               opt_panel.style.display = 'none';
+            else
+               opt_panel.style.display = 'block';
+        
     });
 
     stopBtn.addEventListener('click', e => {
