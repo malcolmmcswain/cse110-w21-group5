@@ -34,6 +34,8 @@ function initializePage() {
     let burndownAnim    = document.getElementById('burndown-anim');
     let counterText     = document.getElementById('pomodoro-count-text');
     let counterState    = document.getElementById('pomodoro-state-text');
+    let options        = document.getElementById('options-btn');
+    let opt_panel      = document.getElementById('options-panel');
 
     // Projects List Controls
     let hamburger       = document.getElementById('hamburger');
@@ -85,6 +87,7 @@ function initializePage() {
         stopBtn.style.display = 'block';
         resetBtn.style.display = 'block';
     });
+    
     options.addEventListener('click', e => {
     // toggle options panel        
             if(opt_panel.style.display == 'block')
