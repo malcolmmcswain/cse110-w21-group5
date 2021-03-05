@@ -4,29 +4,51 @@
  * attempting to work on this file.
  ************************************************************************************/
 
-// IDEAS/SUGGESTED STRUCTURE BELOW:
-    // This is to give you a starting point, not an explicit map of what your code should look like
-
-// Logical structure:
-    // Create a counter object to keep track of how many pomodoro's we've used
-    // Increment it based on some sort of signal of pomodoro completion from timer.js
-    // On each 3rd or 4th pomodoro, send some sort of signal to timer.js to switch to the "long break" state
+function convertStatusTextToState(statusText) {
+    switch (statusText) {
+        case 'Work': return 'work';
+        case 'Short Break': return 'short_break';
+        case 'Long Break': return 'long_break';
+        case 'Stopped': return 'stopped';
+        case 'Reset': return 'reset';
+        default: return 'stopped';
+    }
+}
 
 window.onload = function() {
+    
+    refreshProjectList();
     initializePage();
 }
 
 function initializePage() {
-    let startBtn       = document.getElementById('start');
-    let stopBtn        = document.getElementById('stop');
-    let resetBtn       = document.getElementById('reset');
+    // Timer Controls
+    let startBtn        = document.getElementById('start');
+    let stopBtn         = document.getElementById('stop');
+    let resetBtn        = document.getElementById('reset');
 
-    let timeDisplay    = document.getElementById('time');
-    let backgroundRing = document.getElementById('background-ring');
-    let burndownRing   = document.getElementById('burndown-ring');
-    let burndownAnim   = document.getElementById('burndown-anim');
-    let counterText    = document.getElementById('pomodoro-count-text');
-    let counterState   = document.getElementById('pomodoro-state-text');
+    // Timer Graphics
+    let timeDisplay     = document.getElementById('time');
+    let backgroundRing  = document.getElementById('background-ring');
+    let burndownRing    = document.getElementById('burndown-ring');
+    let burndownAnim    = document.getElementById('burndown-anim');
+    let counterText     = document.getElementById('pomodoro-count-text');
+    let counterState    = document.getElementById('pomodoro-state-text');
+    let options        = document.getElementById('options-btn');
+    let opt_panel      = document.getElementById('options-panel');
+
+    // Projects List Controls
+    let hamburger       = document.getElementById('hamburger');
+    let projectList     = document.getElementById('project-list');
+    let createModal     = document.getElementById('create-modal');
+    let addProject      = document.getElementById('add-project');
+    let projectName     = document.getElementById('project-name');
+    let addNewProject   = document.getElementById('add-new-project');
+    let closeAddProject = document.getElementById('close-add-project');
+    let editModal       = document.getElementById('edit-modal');
+    let closeEditModal  = document.getElementById('close-edit-project');
+    let editProjectName = document.getElementById('edit-project-name');
+    let editProject     = document.getElementById('edit-project');
 
     let pomLength       = document.getElementById('pom-length');
     let shortLength     = document.getElementById('short-length');
@@ -53,38 +75,131 @@ function initializePage() {
     });
     
     // Initialize timer to be used by all events
-    let time = new timer(timeDisplay, backgroundRing, burndownRing,
-                        burndownAnim, counterText, counterState);
+    window.time = new timer(timeDisplay, backgroundRing, burndownRing,
+                        burndownAnim, counterText, counterState, 1, 1, 2);
+
+    window.addEventListener('keypress', e => {
+        let working = startBtn.style.display == 'none';
+        e.preventDefault();
+        switch (e.key) {
+            case 'Enter': // Start timer
+                if (!working) startBtn.click();
+                break;
+            case 's': // Stop timer
+                if (working) stopBtn.click();
+                break;
+            case 'r': // Reset timer
+                if (working) resetBtn.click();
+                break;
+            case 'l': // Open up todolist
+                hamburger.click();
+                break;
+            default:
+                break;
+        }
+    });
 
     startBtn.addEventListener('click', e => {
-        // Set times to options values
-        time.workMins = parseInt(pomLength.value);
-        time.shortBreakMins = parseInt(shortLength.value);
-        time.longBreakMins = parseInt(longLength.value);
+        // To be replaced with grabbing from settings menu
+        window.time.workMins = 6/60;
+        window.time.shortBreakMins = 6/60;
+        window.time.longBreakMins = 6/60;
 
         // Begin working and display stop/reset buttons
-        time.startWorking();
+        window.time.startWorking();
         startBtn.style.display = 'none';
         stopBtn.style.display = 'block';
         resetBtn.style.display = 'block';
     });
+    
+    options.addEventListener('click', e => {
+    // toggle options panel        
+            if(opt_panel.style.display == 'block')
+               opt_panel.style.display = 'none';
+            else
+               opt_panel.style.display = 'block';
+        
+    });
 
     stopBtn.addEventListener('click', e => {
-        time.stop(true);
+        window.time.stop(true);
     });
 
     resetBtn.addEventListener('click', e => {
-        time.reset(true);
+        window.time.reset(true);
 
         // Stop displaying stop/reset buttons
         startBtn.style.display = 'block';
         stopBtn.style.display = 'none';
         resetBtn.style.display = 'none';
     });
+
+    hamburger.addEventListener('click', () => {
+        if (projectList.style.opacity === '0' || projectList.style.opacity === '') {
+            projectList.style.opacity = '1';
+            projectList.style.pointerEvents = 'all';
+        } else {
+            projectList.style.opacity = '0';
+            projectList.style.pointerEvents = 'none';
+        }
+    });
+    
+    addProject.addEventListener('click', () => {
+        createModal.classList.add('open');
+    });
+
+    addNewProject.addEventListener('click', () => {
+        if (projectName.value !== '') {
+            createProject({
+                name: document.getElementById('project-name').value,
+                pomodoro: 0,
+                state: 'reset'
+            });
+            createModal.classList.remove('open');
+        } else {
+            alert('Please enter a project name!');
+        }
+    });
+    
+    closeAddProject.addEventListener('click', () => {
+        createModal.classList.remove('open');
+    });
+
+    closeEditModal.addEventListener('click', () => {
+        editModal.classList.remove('open');
+    });
+
+    editProject.addEventListener('click', () => {
+        let originalState = getProject(editProjectName.placeholder);
+
+        if (editProjectName.value !== '') {
+            updateProject(editProjectName.placeholder, {
+                name: editProjectName.value,
+                pomodoro: originalState.pomodoro,
+                state: originalState.state
+            });
+            editModal.classList.remove('open');
+        } else {
+            alert('Please enter a project name!');
+        }
+    });
 }
 
-// UI structure:
-    // Fetch "pomodoro #" region from HTML using DOM
-    // Manipulate its text content to match that of the counter object state
-
-// const timer = require("./timer");
+/**
+ * Hook method to switch project context
+ * @param {string} name name of project 
+ */
+function changeProject(name) {
+    currentProject = localStorage.getItem("currentProject");
+    updateProject(currentProject, {
+        name: currentProject,
+        pomodoro: Number(document.getElementById('pomodoro-count-text').innerHTML),
+        state: convertStatusTextToState(document.getElementById('pomodoro-state-text').innerHTML)
+    });
+    let newProject = getProject(name);
+    localStorage.setItem("currentProject", newProject.name);
+    window.time.switchState({
+        pomodoro: newProject.pomodoro,
+        state: newProject.state
+    });
+}

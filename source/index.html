@@ -8,15 +8,22 @@
   <title>Pomodoro Timer</title>
   <!--DO NOT REMOVE: This tag links the css source file to the document-->
   <link rel="stylesheet" href="css/styles.css">
+  <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule="" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
     <header>
-      <h1>Pomodoro Timer</h1>
       <nav>
+        <h1>Pomodoro Timer</h1>
         <!--navigation links (v2 projects?)-->
         <!-- Template for task menu, drop-down menu not yet inplemented -->
-        <input type="image" src="./media/menu_icon.png" id="task_menu"/>
+        <ion-icon id="hamburger" class="icon" name="list-outline"></ion-icon>
 
+        <ul id="project-list">
+          <li id="add-project-wrapper">
+            <ion-icon id="add-project" name="add-circle-outline"></ion-icon>
+          </li>
+        </ul>
       </nav>
     </header>
     <main>
@@ -32,34 +39,58 @@
         <text id="time" x="40" y="48" font-size="20px" text-anchor="middle" fill="#E46E6E">00:00</text>
       </svg>
 
-        <!-- The text for session counter would be replaced once user starts working -->
-        <div id="pomodoro-state">
-          <text> Pomodoro&nbsp; </text> 
-          <text id="pomodoro-count-text"> 0 </text>
-          <text> &nbsp;&nbsp;|&nbsp;&nbsp; </text>
-          <text id="pomodoro-state-text"> Stopped </text>
-        </div>
+      <!-- The text for session counter would be replaced once user starts working -->
+      <div id="pomodoro-state">
+        <text> Pomodoro&nbsp; </text> 
+        <text id="pomodoro-count-text"> 0 </text>
+        <text> &nbsp;&nbsp;|&nbsp;&nbsp; </text>
+        <text id="pomodoro-state-text"> Stopped </text>
+      </div>
       
       <div id="timer-control">
         <button id="start">Start</button>
         <button id="stop">Stop</button>
         <button id="reset">Reset</button>
       </div>
+
+      <div id="create-modal" class="modal">
+        <div class="project-prompt">
+          <div class="close-container">
+            <ion-icon id="close-add-project" class="icon" name="close-circle-outline"></ion-icon>
+          </div>
+          <h2>What are you working on?</h2>
+          <input id="project-name" placeholder="Enter the name of your project..."></input>
+          <button id="add-new-project">Create New Project</button>
+        </div>
+      </div>
+      <div id="edit-modal" class="modal">
+        <div class="project-prompt">
+          <div class="close-container">
+            <ion-icon id="close-edit-project" class="icon" name="close-circle-outline"></ion-icon>
+          </div>
+          <h2>Working on something else?</h2>
+          <input id="edit-project-name" placeholder="Enter a new name for your project..."></input>
+          <button id="edit-project">Save Project</button>
+        </div>
+      </div>
     </main>
 
-    <div id="options-panel">
+    <div class="overlay" id="options-panel">
       <form id="options-form">
-        <label for="pom-length">Pomodoro Length:</label>
-        <input type="number" id="pom-length" value=25/>
-        <label for="short-length">Short Break Length:</label>
-        <input type="number" id="short-length" value=5/>
-        <label for="long-length">Long Break Length:</label>
-        <input type="number" id="long-length" value=30/>
+        <text id="opt-text">Options</text><br>
+        <hr style="width:90%;text-align:center;">
+        <label for="pom-length" id="pom-length-label">Pomodoro Length</label>
+        <input type="number" id="pom-length"/><br>
+        <label for="short-length" id="short-length-label">Short Break Length</label>
+        <input type="number" id="short-length"/><br>
+        <label for="long-length" id="long-length-label">Long Break Length</label>
+        <input type="number" id="long-length"/>
+        <button id="save-options">Save</button>
       </form>
     </div>
 
     <footer>
-      <input type="image" alt="Options" id="options-btn"/>
+      <ion-icon id="options-btn" name="cog-outline"></ion-icon>
       <p>CSE 110 Group 5</p>
     </footer>
   
@@ -67,6 +98,7 @@
 
     <!-- Set to modules so that pomodoro.js can import timer.js -->
     <script src="js/timer.js"></script>
+    <script src="js/project.js"></script>
     <script src="js/pomodoro.js"></script>
 </body>
 </html>

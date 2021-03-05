@@ -1,11 +1,7 @@
 /* Some things to consider while working on this document:
-
  * Header and footer's styling will be very similar, almost identical in v1
-
  * The "timer ring" styling will mostly be controlled by timer.js - don't worry about it too much here
-
  * Make sure that this page will always take up the full height and width of the viewport (i.e. the device you are viewing the page on) - you may need to do some research into something called "responsive web design".
-
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
@@ -30,23 +26,35 @@ header, footer {
     background-color: #D8D8D8;
 }
 
-header {
+footer {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: row;
 }
 
-h1, nav {
+nav {
+    display: flex;
+    flex-direction: row;
+}
+
+nav > h1 {
     margin: 0.5em;
     color: #636363;
     font-weight: 400;
+    flex: 1;
 }
 
+#hamburger {
+    margin-top: 2.5px;
+    color: #636363;
+    flex: 1;
+}
+
+/* Removed by Malcolm - Not currently in use
 #task_menu {
     padding: 0.5em;
     width: 30px;
     height: 30px;
-}
+}*/
 
 main {
     width: 60%;
@@ -131,6 +139,7 @@ main {
     -o-border-radius: 20px;
 
     justify-content: center;
+    cursor: pointer;
 }
 
 #start {
@@ -161,7 +170,229 @@ main {
 }
 
 footer > p {
+    padding-top: 0.5em;
+    height: 1.5em;
+    flex: 1;
+    align-self: center;
     color: #636363;
-    padding: 0.25em;
     text-align: center;
+}
+
+#options-btn {
+    color: #636363;
+    margin-top: 12.5px;
+    margin-left: 15px;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+}
+
+#options-panel {
+    padding: 1em;
+    position: absolute;
+    bottom: 5em;
+    display: none;
+    width: 17%;
+    font-family: inherit;
+    border-radius: 10px 10px 0px 0px;
+    background-color: #e0e0e0;
+    text-align: center;
+}
+
+.overlay {
+    position: absolute; 
+    bottom: 3.8em;
+    align-content: center;
+}
+
+#pom-length-label, #short-length-label, #long-length-label {
+    color: #636363;
+}
+
+#pom-length-label {
+    margin-right: 6px;
+}
+
+#long-length-label {
+    margin-right: 4px;
+}
+
+#short-length, #long-length {
+    margin-top: 15px;
+}
+
+#pom-length, #short-length, #long-length {
+    color: #636363;
+    font-family: inherit;
+    font-size: 1em;
+    text-align: center;
+    border-radius: 20px;
+    border: none;
+    font-size: 16px;
+    width: 50%;
+    height: 30px;
+    resize: none;
+}
+
+#opt-text {
+    font-size: 20px;
+    color: #636363;
+}
+
+#save-options {
+    margin-top: 15px;
+    width: 50%;
+    background-color: #b3b3b3;
+    border-radius: 20px;
+    border: none;
+    padding: .5em;
+    color: #636363;
+    font-weight: bolder;
+    font-family: inherit;
+}
+
+/* 
+
+v2 styling
+
+*/
+
+nav {
+    display: grid;
+    grid-template-columns: 60% 1fr 1fr 10%;
+    height: 8vh;
+    align-items: center;
+}
+
+#project-list {
+    list-style: none;
+    width: 20vw;
+    position: absolute;
+    right: 0;
+    top: 8vh;
+    border-radius: 0px 0px 10px 10px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    padding-inline-start: 30px;
+    padding-inline-end: 30px;
+    background: #e0e0e0;
+
+    /* change in js to (block)*/
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in;
+}
+
+nav ul li {
+    color: #636363;
+    padding-top: 0.7em;
+    padding-bottom: 0.7em;
+    border-bottom: 1px solid #bbb;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav ul li a {
+    flex: 1;
+}
+
+ul li .project-action-container, #project {
+    cursor: pointer;
+}
+
+nav ul li:last-child {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-bottom: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+nav .icon {
+    justify-self: right;
+    margin-right: 0.5em;
+    cursor: pointer;
+    font-size: 2.4em;
+    grid-column-start: 4;
+}
+
+.modal {
+    background: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal .project-prompt {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 30px 30px 60px 30px;
+    background-color: white;
+    height: 200px;
+    width: 400px;
+    text-align: center;
+    align-items: center;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal h2 {
+    font-weight: normal;
+    color: #636363;
+}
+
+.modal .project-prompt .close-container {
+    padding-left: 80%;
+}
+
+.modal .project-prompt .icon {
+    color: #636363;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal .project-prompt input {
+    border: none;
+    border-bottom: 1px solid #bbb;
+    width: 80%;
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+    margin-bottom: 20px;
+}
+
+.modal .project-prompt button {
+    background-color: #6FEA9A;
+    color: #337B3B;
+    font-weight: 700;
+    font-size: 20px;
+    padding: 0.5em 1.5em 0.5em 1.5em;
+    margin: 0.5em;
+
+    border-width: 0;
+
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+
+    cursor: pointer;
 }
