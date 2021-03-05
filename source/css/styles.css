@@ -238,9 +238,10 @@ nav ul li:last-child {
 }
 
 nav .webpage-title .help {
+    margin-bottom: -6px;
     grid-column-start: 2;
-    color: #636363;
-    font-size: 24px;
+    color: #8b8b8b;
+    font-size: 30px;
     cursor: pointer;
 }
 
