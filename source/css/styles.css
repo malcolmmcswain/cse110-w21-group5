@@ -1,11 +1,7 @@
 /* Some things to consider while working on this document:
-
  * Header and footer's styling will be very similar, almost identical in v1
-
  * The "timer ring" styling will mostly be controlled by timer.js - don't worry about it too much here
-
  * Make sure that this page will always take up the full height and width of the viewport (i.e. the device you are viewing the page on) - you may need to do some research into something called "responsive web design".
-
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
@@ -30,16 +26,22 @@ header, footer {
     background-color: #D8D8D8;
 }
 
+footer {
+    display: flex;
+    flex-direction: row;
+}
+
 nav {
     display: flex;
     flex-direction: row;
 }
 
-nav > h1 {
+nav .webpage-title > h1 {
     margin: 0.5em;
     color: #636363;
     font-weight: 400;
     flex: 1;
+    display: inline-block;
 }
 
 #hamburger {
@@ -48,11 +50,12 @@ nav > h1 {
     flex: 1;
 }
 
+/* Removed by Malcolm - Not currently in use
 #task_menu {
     padding: 0.5em;
     width: 30px;
     height: 30px;
-}
+}*/
 
 main {
     width: 60%;
@@ -168,9 +171,85 @@ main {
 }
 
 footer > p {
+    padding-top: 0.5em;
+    height: 1.5em;
+    flex: 1;
+    align-self: center;
     color: #636363;
-    padding: 0.25em;
     text-align: center;
+}
+
+#options-btn {
+    color: #636363;
+    margin-top: 12.5px;
+    margin-left: 15px;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+}
+
+#options-panel {
+    padding: 1em;
+    position: absolute;
+    bottom: 5em;
+    display: none;
+    width: 17%;
+    font-family: inherit;
+    border-radius: 10px 10px 0px 0px;
+    background-color: #e0e0e0;
+    text-align: center;
+}
+
+.overlay {
+    position: absolute; 
+    bottom: 3.8em;
+    align-content: center;
+}
+
+#pom-length-label, #short-length-label, #long-length-label {
+    color: #636363;
+}
+
+#pom-length-label {
+    margin-right: 6px;
+}
+
+#long-length-label {
+    margin-right: 4px;
+}
+
+#short-length, #long-length {
+    margin-top: 15px;
+}
+
+#pom-length, #short-length, #long-length {
+    color: #636363;
+    font-family: inherit;
+    font-size: 1em;
+    text-align: center;
+    border-radius: 20px;
+    border: none;
+    font-size: 16px;
+    width: 50%;
+    height: 30px;
+    resize: none;
+}
+
+#opt-text {
+    font-size: 20px;
+    color: #636363;
+}
+
+#save-options {
+    margin-top: 15px;
+    width: 50%;
+    background-color: #b3b3b3;
+    border-radius: 20px;
+    border: none;
+    padding: .5em;
+    color: #636363;
+    font-weight: bolder;
+    font-family: inherit;
 }
 
 /* 
@@ -186,7 +265,7 @@ nav {
     align-items: center;
 }
 
-nav ul {
+#project-list {
     list-style: none;
     width: 20vw;
     position: absolute;
@@ -218,6 +297,9 @@ nav ul li {
 
 nav ul li a {
     flex: 1;
+    overflow: hidden;
+    margin-right: 10px;
+    cursor: pointer;
 }
 
 ul li .project-action-container, #project {
@@ -233,6 +315,14 @@ nav ul li:last-child {
     cursor: pointer;
 }
 
+nav .webpage-title .help {
+    margin-bottom: -6px;
+    grid-column-start: 2;
+    color: #8b8b8b;
+    font-size: 30px;
+    cursor: pointer;
+}
+
 nav .icon {
     justify-self: right;
     margin-right: 0.5em;
@@ -240,6 +330,8 @@ nav .icon {
     font-size: 2.4em;
     grid-column-start: 4;
 }
+
+/* modal for inputs (inputting to project list etc.) */
 
 .modal {
     background: rgba(0, 0, 0, 0.3);
@@ -317,4 +409,111 @@ nav .icon {
     -o-border-radius: 10px;
 
     cursor: pointer;
+}
+
+/* modal for info pages, no inputs */ 
+.explicit-modal,
+.thematic-modal {
+    background: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    
+    opacity: 0;
+    pointer-events: none;
+}
+
+.explicit-modal.open,
+.thematic-modal.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.explicit-modal .description,
+.thematic-modal .description {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 30px 30px 60px 30px;
+    background-color: white;
+    height: 530px;
+    width: 500px;
+    text-align: center;
+    align-items: center;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.explicit-modal h2,
+.thematic-modal h2 {
+    font-weight: normal;
+    color: #636363;
+}
+
+.explicit-modal .description .close-container,
+.thematic-modal .description .close-container {
+    padding-left: 80%;
+}
+
+.explicit-modal .description .icon,
+.thematic-modal .description .icon {
+    color: #636363;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.thematic-modal .description .state-descriptions {
+    display: flex;
+    justify-self: center;
+}
+
+.thematic-modal .description .state-descriptions .state-item {
+    margin: 5px;
+}
+
+.thematic-modal .description .state-descriptions .state-item img {
+    height: 100px;
+}
+
+.thematic-modal .description .state-descriptions h3,
+.thematic-modal .description .distraction-descriptions h3 {
+    color: #636363;
+}
+
+.thematic-modal .description .state-descriptions p,
+.thematic-modal .description .distraction-descriptions p{
+    color: #636363;
+    font-size: 80%;
+    line-height: 130%;
+}
+
+.explicit-modal .description button,
+.thematic-modal .description button {
+    background-color: #6FEA9A;
+    color: #337B3B;
+    font-weight: 700;
+    font-size: 20px;
+    padding: 0.5em 1.5em 0.5em 1.5em;
+    margin: 0.5em;
+
+    border-width: 0;
+
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+
+    cursor: pointer;
+}
+
+.explicit-modal .description img {
+    height: 370px;
+    margin-bottom: 20px;
 }

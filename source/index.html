@@ -14,7 +14,11 @@
 <body>
     <header>
       <nav>
-        <h1>Pomodoro Timer</h1>
+        <div class='webpage-title'>
+          <h1>Pomodoro Timer</h1>
+          <ion-icon id='info-btn' class='help' name="help-circle"></ion-icon>
+        </div>
+
         <!--navigation links (v2 projects?)-->
         <!-- Template for task menu, drop-down menu not yet inplemented -->
         <ion-icon id="hamburger" class="icon" name="list-outline"></ion-icon>
@@ -73,8 +77,67 @@
           <button id="edit-project">Save Project</button>
         </div>
       </div>
+      <div id="thematic-modal" class="thematic-modal">
+        <div class="description">
+          <div class="close-container">
+            <ion-icon id="close-thematic-modal" class="icon" name="close-circle-outline"></ion-icon>
+          </div>
+          <h2>The Pomodoro Method</h2>
+          <div class="state-descriptions">
+            <div class="state-item">
+              <img src="media/tomato.webp" alt="Tomato">
+              <h3>Pomodoro</h3>
+              <p>Once a pomodoro starts, it's go time! This period is for uninterrupted, distraction-free work.</p>
+            </div>
+            <div class="state-item">
+              <img src="media/coffee.png" alt="Coffee">
+              <h3>Short Break</h3>
+              <p>After a pomodoro ends, it's time to treat yourself to a quick mental break. Relax and unwind before the next pomodoro.</p>
+            </div>
+            <div class="state-item">
+              <img src="media/burger.png" alt="Burger">
+              <h3>Long Break</h3>
+              <p>Every few pomodoros, you deserve to relax for a bit longer. Take this time to step away from your work.</p>
+            </div>
+          </div>
+          <div class="distraction-descriptions">
+            <h3>Distractions</h3>
+            <p>Distractions are a natural pat of working, but studies show it can take up to 15 minutes to regain focus after 
+              being distracted! So it's important to be mindful by keeping track of what's pulling you away from your work.
+              Use the distraction log to write down distractions as they come up.
+            </p>
+          </div>
+          <button id="to-explicit-modal">Next</button>
+        </div>
+      </div>
+      <div id="explicit-modal" class="explicit-modal">
+        <div class="description">
+          <div class="close-container">
+            <ion-icon id="close-explicit-modal" class="icon" name="close-circle-outline"></ion-icon>
+          </div>
+          <h2>How to Use the Timer</h2>
+          <img src="media/info.JPG" alt="info">
+          <button id="finish-info">Got it</button>
+        </div>
+      </div>
     </main>
+
+    <div class="overlay" id="options-panel">
+      <form id="options-form">
+        <text id="opt-text">Options</text><br>
+        <hr style="width:90%;text-align:center;">
+        <label for="pom-length" id="pom-length-label">Pomodoro Length</label>
+        <input type="number" id="pom-length"/><br>
+        <label for="short-length" id="short-length-label">Short Break Length</label>
+        <input type="number" id="short-length"/><br>
+        <label for="long-length" id="long-length-label">Long Break Length</label>
+        <input type="number" id="long-length"/>
+        <button id="save-options">Save</button>
+      </form>
+    </div>
+
     <footer>
+      <ion-icon id="options-btn" name="cog-outline"></ion-icon>
       <p>CSE 110 Group 5</p>
     </footer>
   
@@ -84,5 +147,6 @@
     <script src="js/timer.js"></script>
     <script src="js/project.js"></script>
     <script src="js/pomodoro.js"></script>
+    <script src="js/info.js"></script>
 </body>
 </html>
