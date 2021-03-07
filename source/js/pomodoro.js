@@ -71,7 +71,7 @@ function initializePage() {
     let longLength      = document.getElementById('long-length');
     let cycleLength     = document.getElementById('cycle-length');
     let saveOptions     = document.getElementById('save-options');
-
+    let reduceMotion    = document.getElementById('reduce-motion');
 
     // Load in previous options (default without loading is 25/5/30)
     if (localStorage.getItem('pomLength') != null)
@@ -90,6 +90,13 @@ function initializePage() {
         cycleLength.value = localStorage.getItem('cycleLength');
     else cycleLength.value = 4;
 
+    if (localStorage.getItem('reduceMotion') != null) {
+        reduceMotion.checked = localStorage.getItem('reduceMotion') == 'none' ? true : false;
+        document.getElementById('rings').style.display = localStorage.getItem('reduceMotion');
+    } else {
+        document.getElementById('rings').style.display = 'inline';
+    }
+
     // Update storage on options edit
     saveOptions.addEventListener('click', e => {
         e.preventDefault();
@@ -97,6 +104,11 @@ function initializePage() {
         localStorage.setItem('shortLength', shortLength.value);
         localStorage.setItem('longLength', longLength.value);
         localStorage.setItem('cycleLength', cycleLength.value);
+    });
+
+    reduceMotion.addEventListener('click', e => {
+        document.getElementById('rings').style.display = reduceMotion.checked ? 'none' : 'inline';
+        localStorage.setItem('reduceMotion', reduceMotion.checked ? 'none' : 'inline');
     });
     
     // Initialize timer to be used by all events
