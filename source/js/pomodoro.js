@@ -92,7 +92,8 @@ function initializePage() {
     // Update storage on options edit
     saveOptions.addEventListener('click', e => {
         e.preventDefault();
-        if (document.querySelectorAll('#options-form > input').length == 0) {
+        if (document.querySelectorAll('#options-form > input:invalid').length == 0) {
+            console.log('test');
             localStorage.setItem('pomLength', pomLength.value);
             localStorage.setItem('shortLength', shortLength.value);
             localStorage.setItem('longLength', longLength.value);
