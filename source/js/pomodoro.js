@@ -96,7 +96,7 @@ function initializePage() {
         localStorage.setItem('pomLength', pomLength.value);
         localStorage.setItem('shortLength', shortLength.value);
         localStorage.setItem('longLength', longLength.value);
-        localStorage.setItem('cycleLength', cycleLenght.value);
+        localStorage.setItem('cycleLength', cycleLength.value);
     });
     
     // Initialize timer to be used by all events
