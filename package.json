@@ -26,6 +26,8 @@
   "homepage": "https://github.com/malcolmmcswain/cse110-w21-group5#readme",
   "jest": {
     "resetMocks": false,
-    "setupFiles": ["jest-localstorage-mock"]
+    "setupFiles": [
+      "jest-localstorage-mock"
+    ]
   }
 }

@@ -22,7 +22,6 @@ function convertStatusTextToState(statusText) {
 }
 
 window.onload = function () {
-
     refreshProjectList();
     initializePage();
 }
@@ -88,9 +87,11 @@ function initializePage() {
     // Update storage on options edit
     saveOptions.addEventListener('click', e => {
         e.preventDefault();
-        localStorage.setItem('pomLength', pomLength.value);
-        localStorage.setItem('shortLength', shortLength.value);
-        localStorage.setItem('longLength', longLength.value);
+        if (document.querySelectorAll('#options-form > input:invalid').length == 0) {
+            localStorage.setItem('pomLength', pomLength.value);
+            localStorage.setItem('shortLength', shortLength.value);
+            localStorage.setItem('longLength', longLength.value);
+        }
     });
     
     // Initialize timer to be used by all events
@@ -120,9 +121,9 @@ function initializePage() {
 
     startBtn.addEventListener('click', e => {
         // To be replaced with grabbing from settings menu
-        window.time.workMins = parseInt(pomLength.value);
-        window.time.shortBreakMins = parseInt(shortLength.value);
-        window.time.longBreakMins = parseInt(longLength.value);
+        window.time.workMins = parseInt(localStorage.getItem('pomLength'));
+        window.time.shortBreakMins = parseInt(localStorage.getItem('shortLength'));
+        window.time.longBreakMins = parseInt(localStorage.getItem('longLength'));
 
         // Begin working and display stop/reset buttons
         window.time.startWorking();
@@ -225,6 +226,9 @@ function initializePage() {
             alert('Please enter a project name!');
         }
     });
+
+    // Prevents keyboard shortcuts from being disabled while in an input field
+    document.querySelectorAll('input').forEach(el => el.onkeypress = function (e) { e.stopPropagation(); });
 }
 
 /**
