@@ -206,7 +206,7 @@ footer > p {
     align-content: center;
 }
 
-#pom-length-label, #short-length-label, #long-length-label {
+#pom-length-label, #short-length-label, #long-length-label, #cycle-length-label {
     color: #636363;
 }
 
@@ -218,11 +218,15 @@ footer > p {
     margin-right: 4px;
 }
 
-#short-length, #long-length {
+#cycle-length-label {
+    margin-right: 18px;
+}
+
+#short-length, #long-length, #cycle-length {
     margin-top: 15px;
 }
 
-#pom-length, #short-length, #long-length {
+#pom-length, #short-length, #long-length, #cycle-length {
     color: #636363;
     font-family: inherit;
     font-size: 1em;

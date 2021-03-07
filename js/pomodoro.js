@@ -69,6 +69,7 @@ function initializePage() {
     let pomLength       = document.getElementById('pom-length');
     let shortLength     = document.getElementById('short-length');
     let longLength      = document.getElementById('long-length');
+    let cycleLength     = document.getElementById('cycle-length');
     let saveOptions     = document.getElementById('save-options');
 
 
@@ -85,12 +86,17 @@ function initializePage() {
         longLength.value = localStorage.getItem('longLength');
     else longLength.value = 30;
 
+    if (localStorage.getItem('cycleLength') != null)
+        cycleLength.value = localStorage.getItem('cycleLength');
+    else cycleLength.value = 4;
+
     // Update storage on options edit
     saveOptions.addEventListener('click', e => {
         e.preventDefault();
         localStorage.setItem('pomLength', pomLength.value);
         localStorage.setItem('shortLength', shortLength.value);
         localStorage.setItem('longLength', longLength.value);
+        localStorage.setItem('cycleLength', cycleLength.value);
     });
     
     // Initialize timer to be used by all events
@@ -123,6 +129,7 @@ function initializePage() {
         window.time.workMins = parseInt(pomLength.value);
         window.time.shortBreakMins = parseInt(shortLength.value);
         window.time.longBreakMins = parseInt(longLength.value);
+        window.time.longBreakInterval = parseInt(cycleLength.value);
 
         // Begin working and display stop/reset buttons
         window.time.startWorking();
