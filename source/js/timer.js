@@ -11,6 +11,7 @@ const multipliers = {
  * @param {number} workMins - Length of work timer
  * @param {number} shortBreakMins - Length of short break timer
  * @param {number} longBreakMins - Length of long break timer
+ * @param {number} longBreakInterval - Pomos per long break
  */
 function timer(timeDisplay, backgroundRing, burndownRing, burndownAnim, counterText, counterState,
     workMins = 25, shortBreakMins = 5, longBreakMins = 15, longBreakInterval = 4) {

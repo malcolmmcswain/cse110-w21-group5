@@ -68,6 +68,7 @@ function initializePage() {
     let pomLength       = document.getElementById('pom-length');
     let shortLength     = document.getElementById('short-length');
     let longLength      = document.getElementById('long-length');
+    let cycleLength     = document.getElementById('cycle-length');
     let saveOptions     = document.getElementById('save-options');
 
 
@@ -84,13 +85,18 @@ function initializePage() {
         longLength.value = localStorage.getItem('longLength');
     else longLength.value = 30;
 
+    if (localStorage.getItem('cycleLength') != null)
+        cycleLength.value = localStorage.getItem('cycleLength');
+    else cycleLength.value = 4;
+
     // Update storage on options edit
     saveOptions.addEventListener('click', e => {
         e.preventDefault();
-        if (document.querySelectorAll('#options-form > input:invalid').length == 0) {
+        if (document.querySelectorAll('#options-form > input').length == 0) {
             localStorage.setItem('pomLength', pomLength.value);
             localStorage.setItem('shortLength', shortLength.value);
             localStorage.setItem('longLength', longLength.value);
+            localStorage.setItem('cycleLength', cycleLength.value);
         }
     });
     
@@ -124,7 +130,7 @@ function initializePage() {
         window.time.workMins = parseInt(localStorage.getItem('pomLength'));
         window.time.shortBreakMins = parseInt(localStorage.getItem('shortLength'));
         window.time.longBreakMins = parseInt(localStorage.getItem('longLength'));
-
+        window.time.longBreakInterval = parseInt(localStorage.getItem('cycleLength'));
         // Begin working and display stop/reset buttons
         window.time.startWorking();
         startBtn.style.display = 'none';
