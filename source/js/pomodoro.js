@@ -107,8 +107,19 @@ function initializePage() {
     });
     
     // Initialize timer to be used by all events
-    window.time = new timer(timeDisplay, distractionContainer, backgroundRing, burndownRing,
-        burndownAnim, counterText, counterState, 1, 1, 2);
+    window.time = new timer(
+        timeDisplay,
+        distractionContainer,
+        backgroundRing,
+        burndownRing,
+        burndownAnim,
+        counterText,
+        counterState,
+        1,
+        1,
+        2,
+        3
+    );
 
     refreshDistractionLog();
 

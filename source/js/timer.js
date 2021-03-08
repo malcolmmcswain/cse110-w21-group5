@@ -13,8 +13,19 @@ const multipliers = {
  * @param {number} longBreakMins - Length of long break timer
  * @param {number} longBreakInterval - Pomos per long break
  */
-function timer(timeDisplay, distractionLog, backgroundRing, burndownRing, burndownAnim, counterText, 
-    counterState, workMins = 25, shortBreakMins = 5, longBreakMins = 15, longBreakInterval = 4) {
+function timer(
+    timeDisplay, 
+    distractionLog, 
+    backgroundRing, 
+    burndownRing, 
+    burndownAnim, 
+    counterText, 
+    counterState, 
+    workMins = 25, 
+    shortBreakMins = 5, 
+    longBreakMins = 15, 
+    longBreakInterval = 4
+) {
     // State management
     this.state = 'reset';
     this.counter = 0;
