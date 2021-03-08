@@ -14,40 +14,269 @@
 *  5. Code report can be found in /source/coverage 
  */
 
+// describe('Info page', () => {
+//     beforeEach(() => {
+//         cy.visit('index.html');
+//       });
 
-describe('Tests for pomodoro', () => {
-    beforeEach(() => {
-      cy.visit('index.html');
-    });
+//     it('Info page is closed at default', () => {
+//         cy.get("#thematic-modal").should("not.be.visible");
+//         cy.get("#explicit-modal").should("not.be.visible");
+//     });
+
+//     it('Clicking on info button opens the thematic info page', () => {
+//         cy.get("#info-btn").click();
+//         cy.get("#thematic-modal").should("be.visible");
+
+//         cy.get("#close-thematic-modal").click();
+//         cy.get("#thematic-modal").should("not.be.visible");
+//     });
+
+//     it('Clicking on next button the thematic info page leads to the explicit info page', () => {
+//         cy.get("#info-btn").click();
+//         cy.get("#to-explicit-modal").click();
+//         cy.get("#thematic-modal").should("not.be.visible");
+//         cy.get("#explicit-modal").should("be.visible");
+
+//         cy.get("#close-explicit-modal").click();
+//         cy.get("#explicit-modal").should("not.be.visible");
+//     });
+
+//     it('Clicking on "Got it" button closes the info page', () => {
+//         cy.get("#info-btn").click();
+//         cy.get("#to-explicit-modal").click();
+//         cy.get("#finish-info").click();
+//         cy.get("#explicit-modal").should("not.be.visible");
+//         cy.get("#thematic-modal").should("not.be.visible");
+//     });    
+// });
+
+// describe('Tests for start button', () => {
+//     beforeEach(() => {
+//         cy.visit('index.html');
+//       });
+    
+//       it('Dummy Test', () => {
+//         expect(true).to.equal(true);
+//       });
+
+//     it('Clicking on start button starts the timer', () => {
+
+//         cy.get("#options-btn").click();
+//         cy.get("#pom-length").clear().type("25");
+//         cy.get("#save-options").click();
+//         cy.clock();
+//         cy.get("#time").should("have.text", "00:00");
+//         cy.get("#start").click();
+//         cy.tick(1000 * 60);
+//         cy.get("#time").should("have.text", "24:00");
+//     });
+// });
+
+
+// describe('Tests for options menu', () => {
+//     beforeEach(() => {
+//       cy.visit('index.html');
+//     });
   
-    it('Dummy Test', () => {
-      expect(true).to.equal(true);
-    });
+//     it('Dummy Test', () => {
+//       expect(true).to.equal(true);
+//     });
 
-    it('Clicking on options button opens the options menu', () => {
-        cy.get("#options-btn").click();
-        cy.get("#options-panel").should("be.visible");
-    });
 
-    it('Clicking on start button starts the timer', () => {
+//     it('Clicking on options button opens and closes the options menu', () => {
+//         cy.get("#options-btn").click();
+//         cy.get("#options-panel").should("be.visible");
+
+//         cy.get("#options-btn").click();
+//         cy.get("#options-panel").should("not.be.visible");
+//     });
+
+
+//     it('Options menu correctly controls timer settings & timer transitions between sessions correctly', () => {
+//         cy.get("#options-btn").click();
+//         cy.get("#pom-length").clear().type("5");
+//         cy.get("#short-length").clear().type("1");
+//         cy.get("#long-length").clear().type("2");
+//         cy.get("#cycle-length").clear().type("2");
+//         cy.get("#save-options").click();
+//         cy.clock();
+
+//         cy.get("#start").click();
+
+//         // Working session 1
+//         cy.tick(1000);
+//         cy.get("#time").should("have.text", "04:59");
+//         cy.tick(1000 * (60 * 5 - 1));
+
+//         // Short break session
+//         cy.tick(1000);
+//         cy.get("#time").should("have.text", "00:59");
+//         cy.tick(1000 * (60 * 1 - 1));
+
+//         // Working session 2
+//         cy.tick(1000);
+//         cy.get("#time").should("have.text", "04:59");
+//         cy.tick(1000 * (60 * 5 - 1));
+
+//         // Long break session 
+//         cy.tick(1000);
+//         cy.get("#time").should("have.text", "01:59");
+//         cy.tick(1000 * (60 * 2 - 1));
+
+//         // New working session
+//         cy.tick(1000);
+//         cy.get("#time").should("have.text", "04:59");
+//     });
+
+//     it('Options menu correctly controls timer settings: 2nd test', () => {
+//         cy.get("#options-btn").click();
+//         cy.get("#pom-length").clear().type("25");
+//         cy.get("#short-length").clear().type("5");
+//         cy.get("#long-length").clear().type("20");
+//         cy.get("#cycle-length").clear().type("4");
+//         cy.get("#save-options").click();
+//         cy.clock();
+
+//         cy.get("#start").click();
+
+//         // Working session 1
+//         cy.tick(1000);
+//         cy.get("#time").should("have.text", "24:59");
+//         cy.tick(1000 * (60 * 25 - 1));
+
+//         // Short break session 1
+//         cy.tick(1000);
+//         cy.get("#time").should("have.text", "04:59");
+//         cy.tick(1000 * (60 * 5 - 1));
+
+//         // Working session 2
+//         cy.tick(1000);
+//         cy.get("#time").should("have.text", "24:59");
+//         cy.tick(1000 * (60 * 25 - 1));
+
+//         // Short break session 2
+//         cy.tick(1000);
+//         cy.get("#time").should("have.text", "04:59");
+//         cy.tick(1000 * (60 * 5 - 1));
+
+//         // Working session 3
+//         cy.tick(1000);
+//         cy.get("#time").should("have.text", "24:59");
+//         cy.tick(1000 * (60 * 25 - 1));
+
+//         // Short break session 3
+//         cy.tick(1000);
+//         cy.get("#time").should("have.text", "04:59");
+//         cy.tick(1000 * (60 * 5 - 1));
+
+//         // Working session 4
+//         cy.tick(1000);
+//         cy.get("#time").should("have.text", "24:59");
+//         cy.tick(1000 * (60 * 25 - 1));
+
+//         // Long break session 
+//         cy.tick(1000);
+//         cy.get("#time").should("have.text", "19:59");
+//         cy.tick(1000 * (60 * 20 - 1));
+
+//         // New working session
+//         cy.tick(1000);
+//         cy.get("#time").should("have.text", "24:59"); 
+//     });
+
+// });
+
+
+// describe('Tests for reset button', () => {
+//     beforeEach(() => {
+//         cy.visit('index.html');
+//         cy.get("#options-btn").click();
+//         cy.get("#pom-length").clear().type("1");
+//         cy.get("#short-length").clear().type("1");
+//         cy.get("#long-length").clear().type("1");
+//         cy.get("#cycle-length").clear().type("2");
+//         cy.get("#save-options").click();
+//         cy.clock();
+//       });
+
+//     it('Resets during working session', () => {
+
+//         cy.get("#start").click();
+//         cy.tick(1000);
+//         cy.get("#reset").click();
+//         cy.get("#time").should("have.text", "00:00");
+//     });
+
+//     it('Resets during short break session', () => {
+//         cy.get("#start").click();
+//         cy.tick(1000 * 90);
+//         cy.get("#reset").click();
+//         cy.get("#time").should("have.text", "00:00");
+//     });
+
+//     it('Resets during long break session', () => {
+//         cy.get("#start").click();
+//         cy.tick(1000 * 150);
+//         cy.get("#reset").click();
+//         cy.get("#time").should("have.text", "00:00");
+//     });
+// });
+
+describe('Tests for status text', () => {
+    beforeEach(() => {
+        cy.visit('index.html');
         cy.get("#options-btn").click();
-        cy.get("#pom-length").clear().type("25");
+        cy.get("#pom-length").clear().type("1");
+        cy.get("#short-length").clear().type("1");
+        cy.get("#long-length").clear().type("1");
+        cy.get("#cycle-length").clear().type("2");
         cy.get("#save-options").click();
         cy.clock();
-        cy.get("#start").click();
-        cy.tick(1000 * 60);
-        cy.get("#time").should("have.text", "24:00"); // Now work session is set for 00:06
+
     });
 
-    it('Clicking on reset button resets the clock', () => {
-        cy.get("#options-btn").click();
-        cy.get("#pom-length").clear().type("25");
-        cy.get("#save-options").click();
-        cy.clock();
+    it('Default is stopped', () => {
+        cy.get("#pomodoro-state-text").should("contain.text", "Stopped");
+    });
+
+    it('Working session', () => {
         cy.get("#start").click();
-        cy.tick(1000 * 60);
-        cy.get("#reset").click();
-        cy.get("#time").should("have.text", "00:00");
+        cy.tick(1000);
+        cy.get("#pomodoro-state-text").should("contain.text", "Work");
+    });
+
+    it('Short break session', () => {
+        cy.get("#start").click();
+        cy.tick(1000 * (1 * 60));
+
+        cy.tick(1000);
+        cy.get("#pomodoro-state-text").should("contain.text", "Short Break");
+    });
+
+    it('Long break session', () => {
+        cy.get("#start").click();
+        cy.tick(1000 * (3 * 60));
+
+        cy.tick(1000);
+        cy.get("#pomodoro-state-text").should("contain.text", "Long Break");
+    });
+
+    it('Press reset', () => {
+        cy.get("#start").click();
+        cy.tick(1000);
+        cy.get("#reset").click()
+        cy.get("#pomodoro-state-text").should("contain.text", "Stopped");
+    });
+
+
+});
+
+
+describe('Tests for task list', () => {
+
+    beforeEach(() => {
+        cy.visit('index.html');
     });
 
     it('Clicking on hamburger button shows the task list', () => {
@@ -83,6 +312,28 @@ describe('Tests for pomodoro', () => {
         cy.get("#project-list").eq(0).should("contain.text", "Test");
     });
 
+    // it('Add multiple new tasks', () => {
+    //     cy.get("#hamburger").click();
+
+    //     cy.get("#add-project").click();
+    //     cy.get("#project-name").clear().type("Test1");
+    //     cy.get("#add-new-project").click();
+
+    //     cy.get("#add-project").click();
+    //     cy.get("#project-name").clear().type("Test2");
+    //     cy.get("#add-new-project").click();
+
+    //     cy.get("#add-project").click();
+    //     cy.get("#project-name").clear().type("Test3");
+    //     cy.get("#add-new-project").click();
+
+    //     cy.get("#project-list").should("have.length", 3);
+    //     cy.get("#project-list").eq(0).should("contain.text", "Test1");
+    //     cy.get("#project-list").eq(1).should("contain.text", "Test2");
+    //     cy.get("#project-list").eq(2).should("contain.text", "Test3");
+    // });
+
+
     it('Edit the name of a task', () => {
         cy.get("#hamburger").click();
         cy.get("#add-project").click();
@@ -104,10 +355,5 @@ describe('Tests for pomodoro', () => {
         cy.get("ion-icon[name='trash-outline']").eq(1).click();
         cy.get("#project-list").eq(0).should("contain.text", "My Project"); // This project is default in list
     });
-
-
-
-
-
 
 });
