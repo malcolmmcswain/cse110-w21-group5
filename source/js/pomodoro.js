@@ -74,6 +74,8 @@ function initializePage() {
     // Distraction Log
     let logModal = document.getElementById('log-modal');
     let closeLogModal = document.getElementById('close-log-modal');
+    let distraction = document.getElementById('distraction');
+    let logBtn = document.getElementById('log-btn');
 
     // Load in previous options (default without loading is 25/5/30)
     if (localStorage.getItem('pomLength') != null)
@@ -154,6 +156,11 @@ function initializePage() {
         logModal.classList.add('open');
     });
 
+    logBtn.addEventListener('click', e => {
+        logDistraction(distraction.value);
+        logModal.classList.remove('open');
+    });
+
     closeLogModal.addEventListener('click', e => {
         logModal.classList.remove('open');
     });
@@ -218,7 +225,6 @@ function initializePage() {
 
     closeExplicitModal.addEventListener('click', () => {
         explicitModal.classList.remove('open');
-        console.log('adfasdfsadf');
     });
 
     finishInfo.addEventListener('click', () => {

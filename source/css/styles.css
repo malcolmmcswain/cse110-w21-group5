@@ -405,7 +405,7 @@ nav .icon {
     cursor: pointer;
 }
 
-.modal #log {
+.modal #log-btn {
     background-color: #E46E6E;
     color: #8E4545;
 }
@@ -537,11 +537,11 @@ nav .icon {
     margin: 10px 25px 10px;
     background-color: #ebebeb;
 
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
 }
 
 #log-title {
