@@ -45,7 +45,7 @@ function createProject(project) {
 /**
  * Delete specified project from the list
  * @param {string} name of the project to be deleted
-  */
+ */
 function deleteProject(name) {
     if (localStorage.getItem("projectList") == null) {
         initializeLocalStorage();
@@ -102,3 +102,11 @@ function refreshProjectList() {
         projectListView.insertBefore(projectItem, addButton);
     });
 }
+
+module.exports = {
+    initializeLocalStorage,
+    getProject,
+    deleteProject,
+    updateProject,
+    createProject
+};
