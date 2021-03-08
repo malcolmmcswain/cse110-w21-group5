@@ -8,6 +8,7 @@
 
 - Gives users a recap of their efficiency during work sessions
 
+- Use this log function instead of a stop function: user cannot stop the timer, but they can log what distracts them during a working session.
 
 
 ### Outcomes:
