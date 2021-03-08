@@ -8,15 +8,26 @@
   <title>Pomodoro Timer</title>
   <!--DO NOT REMOVE: This tag links the css source file to the document-->
   <link rel="stylesheet" href="css/styles.css">
+  <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule="" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
     <header>
-      <h1>Pomodoro Timer</h1>
       <nav>
+        <div class='webpage-title'>
+          <h1>Pomodoro Timer</h1>
+          <ion-icon id='info-btn' class='help' name="help-circle"></ion-icon>
+        </div>
+
         <!--navigation links (v2 projects?)-->
         <!-- Template for task menu, drop-down menu not yet inplemented -->
-        <input type="image" src="./media/menu_icon.png" id="task_menu"/>
+        <ion-icon id="hamburger" class="icon" name="list-outline"></ion-icon>
 
+        <ul id="project-list">
+          <li id="add-project-wrapper">
+            <ion-icon id="add-project" name="add-circle-outline"></ion-icon>
+          </li>
+        </ul>
       </nav>
     </header>
     <main>
@@ -48,7 +59,7 @@
       </ul>
 
 
-        <!-- The text for session counter would be replaced once user starts working -->
+      <!-- The text for session counter would be replaced once user starts working -->
       <div id="pomodoro-state">
         <text> Pomodoro&nbsp; </text> 
         <text id="pomodoro-count-text"> 0 </text>
@@ -62,30 +73,98 @@
         <button id="reset" position="right">Reset</button>
       </div>
 
-      <div id="pop-window" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content" text-align='center'>
-          <span class="close">&times;</span>
-          <p id='log-text'>What distracted you ?</p>
-          <!-- Form that stores user input-->
-          <form action="/action_page.php">
-            <input type="text" id="distraction" placeholder='My dog barked...'><hr>
-          </form>
-          <button id="log">Log Distraction</button>
+      <div id="create-modal" class="modal">
+        <div class="project-prompt">
+          <div class="close-container">
+            <ion-icon id="close-add-project" class="icon" name="close-circle-outline"></ion-icon>
+          </div>
+          <h2>What are you working on?</h2>
+          <input id="project-name" placeholder="Enter the name of your project..."></input>
+          <button id="add-new-project">Create New Project</button>
         </div>
       </div>
-
-
-
+      <div id="edit-modal" class="modal">
+        <div class="project-prompt">
+          <div class="close-container">
+            <ion-icon id="close-edit-project" class="icon" name="close-circle-outline"></ion-icon>
+          </div>
+          <h2>Working on something else?</h2>
+          <input id="edit-project-name" placeholder="Enter a new name for your project..."></input>
+          <button id="edit-project">Save Project</button>
+        </div>
+      </div>
+      <div id="thematic-modal" class="thematic-modal">
+        <div class="description">
+          <div class="close-container">
+            <ion-icon id="close-thematic-modal" class="icon" name="close-circle-outline"></ion-icon>
+          </div>
+          <h2>The Pomodoro Method</h2>
+          <div class="state-descriptions">
+            <div class="state-item">
+              <img src="media/tomato.webp" alt="Tomato">
+              <h3>Pomodoro</h3>
+              <p>Once a pomodoro starts, it's go time! This period is for uninterrupted, distraction-free work.</p>
+            </div>
+            <div class="state-item">
+              <img src="media/coffee.png" alt="Coffee">
+              <h3>Short Break</h3>
+              <p>After a pomodoro ends, it's time to treat yourself to a quick mental break. Relax and unwind before the next pomodoro.</p>
+            </div>
+            <div class="state-item">
+              <img src="media/burger.png" alt="Burger">
+              <h3>Long Break</h3>
+              <p>Every few pomodoros, you deserve to relax for a bit longer. Take this time to step away from your work.</p>
+            </div>
+          </div>
+          <div class="distraction-descriptions">
+            <h3>Distractions</h3>
+            <p>Distractions are a natural pat of working, but studies show it can take up to 15 minutes to regain focus after 
+              being distracted! So it's important to be mindful by keeping track of what's pulling you away from your work.
+              Use the distraction log to write down distractions as they come up.
+            </p>
+          </div>
+          <button id="to-explicit-modal">Next</button>
+        </div>
+      </div>
+      <div id="explicit-modal" class="explicit-modal">
+        <div class="description">
+          <div class="close-container">
+            <ion-icon id="close-explicit-modal" class="icon" name="close-circle-outline"></ion-icon>
+          </div>
+          <h2>How to Use the Timer</h2>
+          <img src="media/info.JPG" alt="info">
+          <button id="finish-info">Got it</button>
+        </div>
+      </div>
     </main>
+
+    <div class="overlay" id="options-panel">
+      <form id="options-form">
+        <text id="opt-text">Options</text><br>
+        <hr style="width:90%;text-align:center;">
+        <label for="pom-length" id="pom-length-label">Pomodoro Length</label>
+        <input type="number" id="pom-length"/><br>
+        <label for="short-length" id="short-length-label">Short Break Length</label>
+        <input type="number" id="short-length"/><br>
+        <label for="long-length" id="long-length-label">Long Break Length</label>
+        <input type="number" id="long-length"/><br>
+        <label for="cycle-length" id="cycle-length-label">Pomos per Cycle</label>
+        <input type="number" id="cycle-length"/><br>
+        <button id="save-options">Save</button>
+      </form>
+    </div>
+
     <footer>
+      <ion-icon id="options-btn" name="cog-outline"></ion-icon>
       <p>CSE 110 Group 5</p>
     </footer>
   
     <!--DO NOT REMOVE: These tags link the javascript source files to the document-->
 
     <!-- Set to modules so that pomodoro.js can import timer.js -->
+    <script src="js/project.js"></script>
     <script src="js/timer.js"></script>
     <script src="js/pomodoro.js"></script>
+    <script src="js/info.js"></script>
 </body>
 </html>
