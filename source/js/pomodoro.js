@@ -71,6 +71,9 @@ function initializePage() {
     let cycleLength     = document.getElementById('cycle-length');
     let saveOptions     = document.getElementById('save-options');
 
+    // Distraction Log
+    let logModal = document.getElementById('log-modal');
+    let closeLogModal = document.getElementById('close-log-modal');
 
     // Load in previous options (default without loading is 25/5/30)
     if (localStorage.getItem('pomLength') != null)
@@ -148,7 +151,11 @@ function initializePage() {
     });
 
     stopBtn.addEventListener('click', e => {
-        window.time.stop(true);
+        logModal.classList.add('open');
+    });
+
+    closeLogModal.addEventListener('click', e => {
+        logModal.classList.remove('open');
     });
 
     resetBtn.addEventListener('click', e => {

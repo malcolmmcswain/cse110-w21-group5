@@ -31,8 +31,8 @@
       </nav>
     </header>
     <main>
-      <ul class="flex-container" display="flex" flex-wrap="wrap">
-        <li class="flex-item" >
+      <div class="interactive-container">
+        <div id="timer-container">
           <svg id="timer-display" viewBox="0 0 80 80">
             <!-- Used to transform the rings to begin animation at correct position -->
             <g id="rings">
@@ -44,20 +44,18 @@
             </g>
             <text id="time" x="40" y="48" font-size="20px" text-anchor="middle" fill="#E46E6E">00:00</text>
           </svg>
-        </li>
-        <!-- For now display log list regardless of state 
-          (Final version should only display list while resting)-->
-        <li class="flex-item" id="log-record" display="none">
-          <center margin-top=0><li id = "title">Distraction Log</li></center>
-            <ul class="log-list">
-              <li>Dog Barked<hr></li>
-              <li>Text from Mom<hr></li>
-              <li>Text from Dad<hr></li>
-              <li>...</li>
-            </ul>
-        </li>
-      </ul>
-
+        </div>
+        <div id="distraction-container">
+          <h2 id="log-title">Distraction Log</h2>
+          <ul id="log-list">
+            <li>Dog Barked</li>
+            <li>Text from Mom</li>
+            <li>Text from Dad</li>
+            <li>Anotha one</li>
+            <li>And anotha one</li>
+          </ul>
+        </div>
+      </div>
 
       <!-- The text for session counter would be replaced once user starts working -->
       <div id="pomodoro-state">
@@ -73,6 +71,16 @@
         <button id="reset" position="right">Reset</button>
       </div>
 
+      <div id="log-modal" class="modal">
+        <div class="project-prompt">
+          <div class="close-container">
+            <ion-icon id="close-log-modal" class="icon" name="close-circle-outline"></ion-icon>
+          </div>
+          <h2>Did you break your focus?</h2>
+          <input id="distraction" placeholder="Write a few words about what distracted you..."></input>
+          <button id="log">Log Distraction</button>
+        </div>
+      </div>
       <div id="create-modal" class="modal">
         <div class="project-prompt">
           <div class="close-container">
@@ -165,6 +173,5 @@
     <script src="js/project.js"></script>
     <script src="js/timer.js"></script>
     <script src="js/pomodoro.js"></script>
-    <script src="js/info.js"></script>
 </body>
 </html>
