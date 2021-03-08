@@ -13,8 +13,19 @@ const multipliers = {
  * @param {number} longBreakMins - Length of long break timer
  * @param {number} longBreakInterval - Pomos per long break
  */
-function timer(timeDisplay, backgroundRing, burndownRing, burndownAnim, counterText, counterState,
-    workMins = 25, shortBreakMins = 5, longBreakMins = 15, longBreakInterval = 4) {
+function timer(
+    timeDisplay, 
+    distractionLog, 
+    backgroundRing, 
+    burndownRing, 
+    burndownAnim, 
+    counterText, 
+    counterState, 
+    workMins = 25, 
+    shortBreakMins = 5, 
+    longBreakMins = 15, 
+    longBreakInterval = 4
+) {
     // State management
     this.state = 'reset';
     this.counter = 0;
@@ -29,6 +40,7 @@ function timer(timeDisplay, backgroundRing, burndownRing, burndownAnim, counterT
 
     // DOM Elements
     this.timeDisplay = timeDisplay;
+    this.distractionLog = distractionLog;
     this.backgroundRing = backgroundRing;
     this.burndownRing = burndownRing;
     this.burndownAnim = burndownAnim;
@@ -140,6 +152,7 @@ timer.prototype.startWorking = function () {
     // Set ring and display colors
     this.backgroundRing.style.stroke = '#E46E6E';
     this.timeDisplay.setAttribute('fill', '#E46E6E');
+    this.distractionLog.style.display = 'none';
 
     // Increment session counter
     this.counter++;
@@ -156,6 +169,7 @@ timer.prototype.startShortBreak = function () {
     // Set ring and display colors
     this.backgroundRing.style.stroke = '#6FEA9A';
     this.timeDisplay.setAttribute('fill', '#6FEA9A');
+    this.distractionLog.style.display = 'block';
 
     this.state = 'short_break';
     this.start(this.shortBreakMins);
@@ -168,6 +182,7 @@ timer.prototype.startLongBreak = function () {
     // Set ring and display colors
     this.backgroundRing.style.stroke = '#6FEA9A';
     this.timeDisplay.setAttribute('fill', '#6FEA9A');
+    this.distractionLog.style.display = 'block';
 
     this.state = 'long_break';
     this.start(this.longBreakMins);

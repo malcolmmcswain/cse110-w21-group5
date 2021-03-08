@@ -71,6 +71,12 @@ function initializePage() {
     let cycleLength     = document.getElementById('cycle-length');
     let saveOptions     = document.getElementById('save-options');
 
+    // Distraction Log
+    let distractionContainer = document.getElementById('distraction-container');
+    let logModal = document.getElementById('log-modal');
+    let closeLogModal = document.getElementById('close-log-modal');
+    let distraction = document.getElementById('distraction');
+    let logBtn = document.getElementById('log-btn');
 
     // Load in previous options (default without loading is 25/5/30)
     if (localStorage.getItem('pomLength') != null)
@@ -101,8 +107,21 @@ function initializePage() {
     });
     
     // Initialize timer to be used by all events
-    window.time = new timer(timeDisplay, backgroundRing, burndownRing,
-        burndownAnim, counterText, counterState, 1, 1, 2);
+    window.time = new timer(
+        timeDisplay,
+        distractionContainer,
+        backgroundRing,
+        burndownRing,
+        burndownAnim,
+        counterText,
+        counterState,
+        1,
+        1,
+        2,
+        3
+    );
+
+    refreshDistractionLog();
 
     window.addEventListener('keypress', e => {
         let working = startBtn.style.display == 'none';
@@ -148,7 +167,16 @@ function initializePage() {
     });
 
     stopBtn.addEventListener('click', e => {
-        window.time.stop(true);
+        logModal.classList.add('open');
+    });
+
+    logBtn.addEventListener('click', e => {
+        logDistraction(distraction.value);
+        logModal.classList.remove('open');
+    });
+
+    closeLogModal.addEventListener('click', e => {
+        logModal.classList.remove('open');
     });
 
     resetBtn.addEventListener('click', e => {
@@ -211,7 +239,6 @@ function initializePage() {
 
     closeExplicitModal.addEventListener('click', () => {
         explicitModal.classList.remove('open');
-        console.log('adfasdfsadf');
     });
 
     finishInfo.addEventListener('click', () => {

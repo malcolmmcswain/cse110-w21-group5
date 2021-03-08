@@ -5,6 +5,7 @@ function initializeLocalStorage() {
     let emtptyJSON = `[{"name": "My Project", "pomodoro": 0, "state": "reset"}]`;
     localStorage.setItem("projectList", emtptyJSON);
     localStorage.setItem("currentProject", "My Project");
+    localStorage.setItem("distractionLog", "[]");
 }
 
 /**
@@ -102,6 +103,45 @@ function refreshProjectList() {
         projectListView.insertBefore(projectItem, addButton);
     });
 }
+
+/**
+ * Get all distractions (as an array of strings) in localStorage
+ */
+function getAllDistractions() {
+    if (localStorage.getItem("distractionLog") == null) initializeLocalStorage();
+    return JSON.parse(localStorage.getItem("distractionLog"));
+}
+
+/**
+ * Log distraction to localStorage
+ * @param {string} distraction description of distraction
+ */
+function logDistraction(distraction) {
+    if (localStorage.getItem("distractionLog") == null) initializeLocalStorage();
+    let distractionLog = JSON.parse(localStorage.getItem("distractionLog"));
+    if (distractionLog.length >= 5) distractionLog.shift();
+    distractionLog.push(distraction);
+    localStorage.setItem("distractionLog", JSON.stringify(distractionLog));
+    refreshDistractionLog();
+}
+
+/**
+ * Update DOM to reflect changes in distractionLog
+ */
+ function refreshDistractionLog() {
+    if (localStorage.getItem("distractionLog") == null) initializeLocalStorage();
+    let distractionLog = JSON.parse(localStorage.getItem("distractionLog"));
+    let logList = document.getElementById('log-list');
+
+    logList.innerHTML = ``;
+
+    distractionLog.forEach((distraction) => {
+        let distractionItem = document.createElement('li');
+        distractionItem.innerHTML = distraction;
+        logList.appendChild(distractionItem);
+    });
+}
+
 
 module.exports = {
     initializeLocalStorage,

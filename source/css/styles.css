@@ -113,16 +113,6 @@ main {
     stroke: #D8D8D8;
 }
 
-/* Removed by Malcolm - Not currently in use
-#session-counter {
-    margin-top: 10px;
-    font-family: inherit;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    color: #767571;
-}*/
-
 #start, #stop, #reset {
     font-family: inherit;
     font-size: 1em;
@@ -415,6 +405,11 @@ nav .icon {
     cursor: pointer;
 }
 
+.modal #log-btn {
+    background-color: #E46E6E;
+    color: #8E4545;
+}
+
 /* modal for info pages, no inputs */ 
 .explicit-modal,
 .thematic-modal {
@@ -520,4 +515,52 @@ nav .icon {
 .explicit-modal .description img {
     height: 370px;
     margin-bottom: 20px;
+}
+
+.interactive-container {
+    display: flex;
+    flex-direction: row;
+}
+
+@media (max-width: 1000px) {
+    .interactive-container {
+        flex-direction: column;
+    }
+}
+
+#timer-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+#distraction-container {
+    display: none;
+    flex: 1;
+    margin: 10px 25px 10px;
+    background-color: #ebebeb;
+
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+#log-title {
+    margin-top: 25px;
+    text-align: center;
+}
+
+#log-list {
+    list-style-type: none;
+}
+
+#log-list li {
+    text-align: center;
+    color: #636363;
+    padding-top: 0.7em;
+    padding-bottom: 0.7em;
+    border-bottom: 1px solid #bbb;
+    margin-right: 2.5em;
 }

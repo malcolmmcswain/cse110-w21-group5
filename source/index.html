@@ -31,17 +31,25 @@
       </nav>
     </header>
     <main>
-      <svg id="timer-display" viewBox="0 0 80 80">
-        <!-- Used to transform the rings to begin animation at correct position -->
-        <g id="rings">
-          <circle cx="40" cy="40" r="36" fill="none" id="background-ring"/>
-          <circle cx="40" cy="40" r="36" fill="none" id="burndown-ring" stroke-dasharray="0 226">
-            <!-- SVG to animate the stroke of the circle. Started and duration edited by timer.js -->
-            <animate id="burndown-anim" attributeType="XML" attributeName="stroke-dasharray" from="0 226" to="226.08 226" begin="indefinite"/>
-          </circle>
-        </g>
-        <text id="time" x="40" y="48" font-size="20px" text-anchor="middle" fill="#E46E6E">00:00</text>
-      </svg>
+      <div class="interactive-container">
+        <div id="timer-container">
+          <svg id="timer-display" viewBox="0 0 80 80">
+            <!-- Used to transform the rings to begin animation at correct position -->
+            <g id="rings">
+              <circle cx="40" cy="40" r="36" fill="none" id="background-ring"/>
+              <circle cx="40" cy="40" r="36" fill="none" id="burndown-ring" stroke-dasharray="0 226">
+                <!-- SVG to animate the stroke of the circle. Started and duration edited by timer.js -->
+                <animate id="burndown-anim" attributeType="XML" attributeName="stroke-dasharray" from="0 226" to="226.08 226" begin="indefinite"/>
+              </circle>
+            </g>
+            <text id="time" x="40" y="48" font-size="20px" text-anchor="middle" fill="#E46E6E">00:00</text>
+          </svg>
+        </div>
+        <div id="distraction-container">
+          <h2 id="log-title">Distraction Log</h2>
+          <ul id="log-list"></ul>
+        </div>
+      </div>
 
       <!-- The text for session counter would be replaced once user starts working -->
       <div id="pomodoro-state">
@@ -53,10 +61,20 @@
       
       <div id="timer-control">
         <button id="start">Start</button>
-        <button id="stop">Stop</button>
+        <button id="stop">Log</button>
         <button id="reset">Reset</button>
       </div>
 
+      <div id="log-modal" class="modal">
+        <div class="project-prompt">
+          <div class="close-container">
+            <ion-icon id="close-log-modal" class="icon" name="close-circle-outline"></ion-icon>
+          </div>
+          <h2>Did you break your focus?</h2>
+          <input id="distraction" placeholder="Write a few words about what distracted you..."></input>
+          <button id="log-btn">Log Distraction</button>
+        </div>
+      </div>
       <div id="create-modal" class="modal">
         <div class="project-prompt">
           <div class="close-container">
@@ -149,6 +167,5 @@
     <script src="js/project.js"></script>
     <script src="js/timer.js"></script>
     <script src="js/pomodoro.js"></script>
-    <script src="js/info.js"></script>
 </body>
 </html>
