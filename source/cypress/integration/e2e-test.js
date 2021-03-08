@@ -24,19 +24,44 @@ describe('Tests for pomodoro', () => {
       expect(true).to.equal(true);
     });
 
+    it('Clicking on options button opens the options menu', () => {
+        cy.get("#options-btn").click();
+        cy.get("#options-panel").should("be.visible");
+    });
+
+    it('Clicking on start button starts the timer', () => {
+        cy.get("#options-btn").click();
+        cy.get("#pom-length").clear().type("25");
+        cy.get("#save-options").click();
+        cy.clock();
+        cy.get("#start").click();
+        cy.tick(1000 * 60);
+        cy.get("#time").should("have.text", "24:00"); // Now work session is set for 00:06
+    });
+
+    it('Clicking on reset button resets the clock', () => {
+        cy.get("#options-btn").click();
+        cy.get("#pom-length").clear().type("25");
+        cy.get("#save-options").click();
+        cy.clock();
+        cy.get("#start").click();
+        cy.tick(1000 * 60);
+        cy.get("#reset").click();
+        cy.get("#time").should("have.text", "00:00");
+    });
+
     it('Clicking on hamburger button shows the task list', () => {
         cy.get("#hamburger").click();
-        cy.get("#project-list").then(function($el) {
-            expect($el).to.have.attr("style", "opacity: 1; pointer-events: all;")
-        });
+        cy.get("#project-list").should("be.visible");
+        // cy.get("#project-list").then(function($el) {
+        //     expect($el).to.have.attr("style", "opacity: 1; pointer-events: all;")
+        // });
     });
 
     it('Clicking on hamburger button twice hides the task list', () => {
         cy.get("#hamburger").click();
         cy.get("#hamburger").click();
-        cy.get("#project-list").then(function($el) {
-            expect($el).to.have.attr("style", "opacity: 0; pointer-events: none;")
-        });
+        cy.get("#project-list").should("not.be.visible");
     });
 
     it('Task list is not visible at default', () => {
@@ -81,20 +106,7 @@ describe('Tests for pomodoro', () => {
     });
 
 
-    it('Clicking on start button starts the timer', () => {
-        cy.clock();
-        cy.get("#start").click();
-        cy.tick(1000 * 60);
-        cy.get("#time").should("have.text", "24:00"); // Now work session is set for 00:06
-        // TODO: Change this to dynamically get time left from settings menu
-    });
 
-    it('Clicking on reset button resets the clock', () => {
-        cy.get("#start").click();
-        cy.wait(500);
-        cy.get("#reset").click();
-        cy.get("#time").should("have.text", "00:00");
-    });
 
 
 
