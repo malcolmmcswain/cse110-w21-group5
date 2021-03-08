@@ -216,7 +216,5 @@ timer.prototype.switchState = function (newState) {
     this.updateStatusText();
 }
 
-// module.exports = timer;
-
 // Check if running in nodejs
 module.exports = timer;

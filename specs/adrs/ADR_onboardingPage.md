@@ -18,13 +18,15 @@
 - Juhmer: I don't have too much of an opinion but my main concern regarding the onboarding modal is to make sure that the user has the ability to quickly see and learn the core functions and settings.
 - Yunha: I think thematic is good since it is more descriptive than explicit but if the user is using the application then don't they already know the benefits, being the "why" of the app?
 - Kaiyuan: I was thinking it might be concise and effective if we just provide some sort of annotation under each button/functionality. I guess that's an explicit modal?
+- Tiffany: I think both explicit and thematic have their merits; if we want to emphasize the methodology of pomodoro I think thematic would be better
 
 
 ### Outcomes:
 
-We take thematic design:
+We take thematic & explicit design:
 
 - (+) Emphasiz the importance of the true pomodoro method throughout the meetings
+- (+) Clear instructions on how to use our app
 
 - (-) Might be a bit tedious in some aspects. Not concise enough.
 

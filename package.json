@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "jest-localstorage-mock": "^2.4.7",
+    "cypress": "^6.6.0",
     "jsdoc": "^3.6.6"
   },
   "scripts": {
