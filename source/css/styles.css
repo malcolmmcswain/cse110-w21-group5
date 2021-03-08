@@ -530,9 +530,12 @@ nav .icon {
 
 #timer-container {
     flex: 1;
+    display: flex;
+    justify-content: center;
 }
 
 #distraction-container {
+    display: none;
     flex: 1;
     margin: 10px 25px 10px;
     background-color: #ebebeb;

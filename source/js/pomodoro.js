@@ -72,6 +72,7 @@ function initializePage() {
     let saveOptions     = document.getElementById('save-options');
 
     // Distraction Log
+    let distractionContainer = document.getElementById('distraction-container');
     let logModal = document.getElementById('log-modal');
     let closeLogModal = document.getElementById('close-log-modal');
     let distraction = document.getElementById('distraction');
@@ -106,8 +107,10 @@ function initializePage() {
     });
     
     // Initialize timer to be used by all events
-    window.time = new timer(timeDisplay, backgroundRing, burndownRing,
+    window.time = new timer(timeDisplay, distractionContainer, backgroundRing, burndownRing,
         burndownAnim, counterText, counterState, 1, 1, 2);
+
+    refreshDistractionLog();
 
     window.addEventListener('keypress', e => {
         let working = startBtn.style.display == 'none';
