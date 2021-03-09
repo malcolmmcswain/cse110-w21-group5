@@ -71,23 +71,24 @@ function initializePage() {
     let cycleLength     = document.getElementById('cycle-length');
     let saveOptions     = document.getElementById('save-options');
 
+    // Distraction Log
+    let distractionContainer = document.getElementById('distraction-container');
+    let logModal = document.getElementById('log-modal');
+    let closeLogModal = document.getElementById('close-log-modal');
+    let distraction = document.getElementById('distraction');
+    let logBtn = document.getElementById('log-btn');
+
+    // Initialize default settings
+    if (localStorage.getItem('pomLength') === null) localStorage.setItem('pomLength', 25);
+    if (localStorage.getItem('shortLength') === null) localStorage.setItem('shortLength', 5);
+    if (localStorage.getItem('longLength') === null) localStorage.setItem('longLength', 15);
+    if (localStorage.getItem('cycleLength') === null) localStorage.setItem('cycleLength', 4);
 
     // Load in previous options (default without loading is 25/5/30)
-    if (localStorage.getItem('pomLength') != null)
-        pomLength.value = localStorage.getItem('pomLength');
-    else pomLength.value = 25;
-    
-    if (localStorage.getItem('shortLength') != null)
-        shortLength.value = localStorage.getItem('shortLength');
-    else shortLength.value = 5;
-
-    if (localStorage.getItem('longLength') != null)
-        longLength.value = localStorage.getItem('longLength');
-    else longLength.value = 30;
-
-    if (localStorage.getItem('cycleLength') != null)
-        cycleLength.value = localStorage.getItem('cycleLength');
-    else cycleLength.value = 4;
+    pomLength.value = localStorage.getItem('pomLength');
+    shortLength.value = localStorage.getItem('shortLength');
+    longLength.value = localStorage.getItem('longLength');
+    cycleLength.value = localStorage.getItem('cycleLength');
 
     // Update storage on options edit
     saveOptions.addEventListener('click', e => {
@@ -101,8 +102,21 @@ function initializePage() {
     });
     
     // Initialize timer to be used by all events
-    window.time = new timer(timeDisplay, backgroundRing, burndownRing,
-        burndownAnim, counterText, counterState, 1, 1, 2);
+    window.time = new timer(
+        timeDisplay,
+        distractionContainer,
+        backgroundRing,
+        burndownRing,
+        burndownAnim,
+        counterText,
+        counterState,
+        1,
+        1,
+        2,
+        3
+    );
+
+    refreshDistractionLog();
 
     window.addEventListener('keypress', e => {
         let working = startBtn.style.display == 'none';
@@ -148,7 +162,16 @@ function initializePage() {
     });
 
     stopBtn.addEventListener('click', e => {
-        window.time.stop(true);
+        logModal.classList.add('open');
+    });
+
+    logBtn.addEventListener('click', e => {
+        logDistraction(distraction.value);
+        logModal.classList.remove('open');
+    });
+
+    closeLogModal.addEventListener('click', e => {
+        logModal.classList.remove('open');
     });
 
     resetBtn.addEventListener('click', e => {
@@ -211,7 +234,6 @@ function initializePage() {
 
     closeExplicitModal.addEventListener('click', () => {
         explicitModal.classList.remove('open');
-        console.log('adfasdfsadf');
     });
 
     finishInfo.addEventListener('click', () => {
