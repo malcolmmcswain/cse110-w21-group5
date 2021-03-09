@@ -202,24 +202,24 @@ timer.prototype.updateStatusText = function () {
     let stateText;
     switch (this.state) {
         case 'work':
-            stateText = 'Work';
+            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
             break;
         case 'short_break':
-            stateText = 'Short Break';
+            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/short-break.png"></image>';
             break;
         case 'long_break':
-            stateText = 'Long Break';
+            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/long-break.png"></image>';
             break;
         case 'stopped':
-            stateText = 'Stopped';
+            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
             break;
         case 'reset':
-            stateText = 'Reset';
+            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
         default:
-            stateText = 'Stopped';
+            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
     }
-    this.counterText.textContent = this.counter;
-    this.counterState.textContent = stateText;
+    // this.counterText.textContent = this.counter;
+    this.counterState.innerHTML = stateText;
 }
 
 /* 
