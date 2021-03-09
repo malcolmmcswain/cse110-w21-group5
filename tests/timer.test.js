@@ -15,16 +15,25 @@ let pomo;
 beforeEach(() => {
     // Create a fresh document before each test.
     document.body.innerHTML = `
-    <svg id="timer-display" viewBox="0 0 80 80">
-        <g id="rings">
+    <div class="interactive-container">
+        <div id="timer-container">
+        <svg id="timer-display" viewBox="0 0 80 80">
+            <!-- Used to transform the rings to begin animation at correct position -->
+            <g id="rings">
             <circle cx="40" cy="40" r="36" fill="none" id="background-ring"/>
             <circle cx="40" cy="40" r="36" fill="none" id="burndown-ring" stroke-dasharray="0 226">
                 <!-- SVG to animate the stroke of the circle. Started and duration edited by timer.js -->
                 <animate id="burndown-anim" attributeType="XML" attributeName="stroke-dasharray" from="0 226" to="226.08 226" begin="indefinite"/>
             </circle>
-        </g>
-        <text id="time" x="40" y="48" font-size="20px" text-anchor="middle" fill="#E46E6E">00:00</text>
-    </svg>
+            </g>
+            <text id="time" x="40" y="48" font-size="20px" text-anchor="middle" fill="#E46E6E">00:00</text>
+        </svg>
+        </div>
+        <div id="distraction-container">
+        <h2 id="log-title">Distraction Log</h2>
+        <ul id="log-list"></ul>
+        </div>
+    </div>
 
     <!-- The text for session counter would be replaced once user starts working -->
     <div id="pomodoro-state">
@@ -42,6 +51,7 @@ beforeEach(() => {
 
     // Get all elements used to pass into pomodoro
     let timeDisplay = document.getElementById('time');
+    let distractionContainer = document.getElementById('distraction-container');
     let backgroundRing = document.getElementById('background-ring');
     let burndownRing = document.getElementById('burndown-ring');
     let burndownAnim = document.getElementById('burndown-anim');
@@ -55,7 +65,7 @@ beforeEach(() => {
     burndownAnim.ownerSVGElement.unpauseAnimations = mockFn;
     burndownAnim.ownerSVGElement.pauseAnimations = mockFn;
 
-    pomo = new timer(timeDisplay, backgroundRing, burndownRing, burndownAnim, counterText, counterState);
+    pomo = new timer(timeDisplay, distractionContainer, backgroundRing, burndownRing, burndownAnim, counterText, counterState);
 });
 
 test('Timer resets properly', () => {

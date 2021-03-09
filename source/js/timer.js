@@ -11,9 +11,21 @@ const multipliers = {
  * @param {number} workMins - Length of work timer
  * @param {number} shortBreakMins - Length of short break timer
  * @param {number} longBreakMins - Length of long break timer
+ * @param {number} longBreakInterval - Pomos per long break
  */
-function timer(timeDisplay, backgroundRing, burndownRing, burndownAnim, counterText, counterState,
-               workMins = 25, shortBreakMins = 5, longBreakMins = 15, longBreakInterval = 4) {
+function timer(
+    timeDisplay, 
+    distractionLog, 
+    backgroundRing, 
+    burndownRing, 
+    burndownAnim, 
+    counterText, 
+    counterState, 
+    workMins = 25, 
+    shortBreakMins = 5, 
+    longBreakMins = 15, 
+    longBreakInterval = 4
+) {
     // State management
     this.state = 'reset';
     this.counter = 0;
@@ -28,6 +40,7 @@ function timer(timeDisplay, backgroundRing, burndownRing, burndownAnim, counterT
 
     // DOM Elements
     this.timeDisplay = timeDisplay;
+    this.distractionLog = distractionLog;
     this.backgroundRing = backgroundRing;
     this.burndownRing = burndownRing;
     this.burndownAnim = burndownAnim;
@@ -44,8 +57,8 @@ function timer(timeDisplay, backgroundRing, burndownRing, burndownAnim, counterT
  * Resets the count down timer
  * @param {boolean} force If timer is forcibly reset
  */
-timer.prototype.reset = function(force = false) {
-    this.stop(true);
+timer.prototype.reset = function (force = false) {
+    if (force && this.state !== 'stopped') this.stop(true);
     this.state = 'reset';
 
     this.countDownDate = null;
@@ -58,7 +71,7 @@ timer.prototype.reset = function(force = false) {
 
     // If forcibly reset, prepare for next start
     if (force) {
-        this.counter--;
+        --this.counter;
         this.backgroundRing.style.stroke = '#E46E6E';
         this.timeDisplay.setAttribute('fill', '#E46E6E');
         this.burndownAnim.endElement();
@@ -70,13 +83,12 @@ timer.prototype.reset = function(force = false) {
  * Stops the count down timer
  * @param {boolean} force If timer is forcibly stopped
  */
-timer.prototype.stop = function(force = false) {
+timer.prototype.stop = function (force = false) {
     if (this.countDownTimeout) clearInterval(this.countDownTimeout);
-    console.log('stopped in state '+this.state);
+    // console.log('stopped in state '+this.state);
 
     // If forcibly stopped, wait for reset
     if (force) {
-        this.counter = 0;
         this.state = 'stopped';
         this.updateStatusText();
         this.burndownAnim.ownerSVGElement.pauseAnimations();
@@ -96,7 +108,7 @@ timer.prototype.stop = function(force = false) {
  * Start countDown based on passed in param countDownMins
  * @param {number} countDownMins count down time in minutes
  */
-timer.prototype.start = function(countDownMins) {
+timer.prototype.start = function (countDownMins) {
     const now = new Date();
     const countDownOffset = countDownMins * multipliers.MINUTE;
     this.countDownDate = new Date(now.getTime() + countDownOffset);
@@ -111,11 +123,11 @@ timer.prototype.start = function(countDownMins) {
     this.countDownTimeout = setInterval(this.countDown.bind(this), 500);
     this.updateStatusText();
 }
-    
+
 /**
  * Update timeLeft based on current time and countDownDate
  */
-timer.prototype.countDown = function() {
+timer.prototype.countDown = function () {
     function timerPad(timerField) {
         return timerField.toString().padStart(2, '0');
     }
@@ -136,14 +148,15 @@ timer.prototype.countDown = function() {
 /**
  * Start work timer
  */
-timer.prototype.startWorking = function() {
+timer.prototype.startWorking = function () {
     // Set ring and display colors
     this.backgroundRing.style.stroke = '#E46E6E';
     this.timeDisplay.setAttribute('fill', '#E46E6E');
-    
+    this.distractionLog.style.display = 'none';
+
     // Increment session counter
     this.counter++;
-    console.log(this.counter);  // Print counter for debugging purposes
+    // console.log(this.counter); // Print counter for debugging purposes
 
     this.state = 'work';
     this.start(this.workMins);
@@ -152,10 +165,11 @@ timer.prototype.startWorking = function() {
 /**
  * Start short break timer
  */
-timer.prototype.startShortBreak = function() {
+timer.prototype.startShortBreak = function () {
     // Set ring and display colors
     this.backgroundRing.style.stroke = '#6FEA9A';
     this.timeDisplay.setAttribute('fill', '#6FEA9A');
+    this.distractionLog.style.display = 'block';
 
     this.state = 'short_break';
     this.start(this.shortBreakMins);
@@ -164,11 +178,12 @@ timer.prototype.startShortBreak = function() {
 /**
  * Start long break timer
  */
-timer.prototype.startLongBreak = function() {
+timer.prototype.startLongBreak = function () {
     // Set ring and display colors
     this.backgroundRing.style.stroke = '#6FEA9A';
     this.timeDisplay.setAttribute('fill', '#6FEA9A');
-    
+    this.distractionLog.style.display = 'block';
+
     this.state = 'long_break';
     this.start(this.longBreakMins);
 }
@@ -183,7 +198,7 @@ timer.prototype.resume = () => {
 /* 
  * Update the text for pomodoro status
  */
-timer.prototype.updateStatusText = function() {
+timer.prototype.updateStatusText = function () {
     let stateText;
     switch (this.state) {
         case 'work':
@@ -212,7 +227,14 @@ timer.prototype.updateStatusText = function() {
         stateText;
 }
 
-// module.exports = timer;
+/* 
+ * Switch timer's state to a different project context
+ */
+timer.prototype.switchState = function (newState) {
+    this.counter = newState.pomodoro;
+    this.state = newState.state;
+    this.updateStatusText();
+}
 
 // Check if running in nodejs
 module.exports = timer;

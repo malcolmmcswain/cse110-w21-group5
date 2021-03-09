@@ -12,6 +12,7 @@ Held on zoom at 9:00PM PST
 - Maybe reclarify what our roles are
 
 <img width="666" alt="Screen Shot 2021-02-21 at 10 13 27 PM" src="https://user-images.githubusercontent.com/50184924/108665557-6e545580-7492-11eb-8c49-6a0c68c9d639.png">
+
 ## Workload
 - Workload is mostly reasonable
 - Review Quizzes/ labs can be a bit stressful
