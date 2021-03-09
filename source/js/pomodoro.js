@@ -22,7 +22,6 @@ function convertStatusTextToState(statusText) {
 }
 
 window.onload = function () {
-
     refreshProjectList();
     initializePage();
 }
@@ -73,22 +72,25 @@ function initializePage() {
     let saveOptions     = document.getElementById('save-options');
     let reduceMotion    = document.getElementById('reduce-motion');
 
+
+    // Distraction Log
+    let distractionContainer = document.getElementById('distraction-container');
+    let logModal = document.getElementById('log-modal');
+    let closeLogModal = document.getElementById('close-log-modal');
+    let distraction = document.getElementById('distraction');
+    let logBtn = document.getElementById('log-btn');
+
+    // Initialize default settings
+    if (localStorage.getItem('pomLength') === null) localStorage.setItem('pomLength', 25);
+    if (localStorage.getItem('shortLength') === null) localStorage.setItem('shortLength', 5);
+    if (localStorage.getItem('longLength') === null) localStorage.setItem('longLength', 15);
+    if (localStorage.getItem('cycleLength') === null) localStorage.setItem('cycleLength', 4);
+
     // Load in previous options (default without loading is 25/5/30)
-    if (localStorage.getItem('pomLength') != null)
-        pomLength.value = localStorage.getItem('pomLength');
-    else pomLength.value = 25;
-    
-    if (localStorage.getItem('shortLength') != null)
-        shortLength.value = localStorage.getItem('shortLength');
-    else shortLength.value = 5;
-
-    if (localStorage.getItem('longLength') != null)
-        longLength.value = localStorage.getItem('longLength');
-    else longLength.value = 30;
-
-    if (localStorage.getItem('cycleLength') != null)
-        cycleLength.value = localStorage.getItem('cycleLength');
-    else cycleLength.value = 4;
+    pomLength.value = localStorage.getItem('pomLength');
+    shortLength.value = localStorage.getItem('shortLength');
+    longLength.value = localStorage.getItem('longLength');
+    cycleLength.value = localStorage.getItem('cycleLength');
 
     if (localStorage.getItem('reduceMotion') != null) {
         reduceMotion.checked = localStorage.getItem('reduceMotion') == 'none' ? true : false;
@@ -100,10 +102,12 @@ function initializePage() {
     // Update storage on options edit
     saveOptions.addEventListener('click', e => {
         e.preventDefault();
-        localStorage.setItem('pomLength', pomLength.value);
-        localStorage.setItem('shortLength', shortLength.value);
-        localStorage.setItem('longLength', longLength.value);
-        localStorage.setItem('cycleLength', cycleLength.value);
+        if (document.querySelectorAll('#options-form > input:invalid').length == 0) {
+            localStorage.setItem('pomLength', pomLength.value);
+            localStorage.setItem('shortLength', shortLength.value);
+            localStorage.setItem('longLength', longLength.value);
+            localStorage.setItem('cycleLength', cycleLength.value);
+        }
     });
 
     reduceMotion.addEventListener('click', e => {
@@ -112,8 +116,21 @@ function initializePage() {
     });
     
     // Initialize timer to be used by all events
-    window.time = new timer(timeDisplay, backgroundRing, burndownRing,
-        burndownAnim, counterText, counterState, 1, 1, 2);
+    window.time = new timer(
+        timeDisplay,
+        distractionContainer,
+        backgroundRing,
+        burndownRing,
+        burndownAnim,
+        counterText,
+        counterState,
+        1,
+        1,
+        2,
+        3
+    );
+
+    refreshDistractionLog();
 
     window.addEventListener('keypress', e => {
         let working = startBtn.style.display == 'none';
@@ -138,11 +155,10 @@ function initializePage() {
 
     startBtn.addEventListener('click', e => {
         // To be replaced with grabbing from settings menu
-        window.time.workMins = parseInt(pomLength.value);
-        window.time.shortBreakMins = parseInt(shortLength.value);
-        window.time.longBreakMins = parseInt(longLength.value);
-        window.time.longBreakInterval = parseInt(cycleLength.value);
-
+        window.time.workMins = parseInt(localStorage.getItem('pomLength'));
+        window.time.shortBreakMins = parseInt(localStorage.getItem('shortLength'));
+        window.time.longBreakMins = parseInt(localStorage.getItem('longLength'));
+        window.time.longBreakInterval = parseInt(localStorage.getItem('cycleLength'));
         // Begin working and display stop/reset buttons
         window.time.startWorking();
         startBtn.style.display = 'none';
@@ -160,7 +176,16 @@ function initializePage() {
     });
 
     stopBtn.addEventListener('click', e => {
-        window.time.stop(true);
+        logModal.classList.add('open');
+    });
+
+    logBtn.addEventListener('click', e => {
+        logDistraction(distraction.value);
+        logModal.classList.remove('open');
+    });
+
+    closeLogModal.addEventListener('click', e => {
+        logModal.classList.remove('open');
     });
 
     resetBtn.addEventListener('click', e => {
@@ -223,7 +248,6 @@ function initializePage() {
 
     closeExplicitModal.addEventListener('click', () => {
         explicitModal.classList.remove('open');
-        console.log('adfasdfsadf');
     });
 
     finishInfo.addEventListener('click', () => {
@@ -244,6 +268,9 @@ function initializePage() {
             alert('Please enter a project name!');
         }
     });
+
+    // Prevents keyboard shortcuts from being disabled while in an input field
+    document.querySelectorAll('input').forEach(el => el.onkeypress = function (e) { e.stopPropagation(); });
 }
 
 /**
