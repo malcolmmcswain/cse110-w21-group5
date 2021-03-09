@@ -193,17 +193,13 @@ footer > p {
     position: absolute;
     bottom: 5em;
     display: none;
-    width: 15%;
+    width: 17%;
     font-family: inherit;
     border-radius: 10px 10px 0px 0px;
     background-color: #e0e0e0;
     text-align: center;
 }
 
-#options-wrapper {
-    display: inline-block;
-    text-align: left;
-}
 
 .overlay {
     position: absolute; 
@@ -216,7 +212,7 @@ footer > p {
 }
 
 #pom-length-label {
-    margin-right: 8px;
+    margin-right: 6px;
 }
 
 #long-length-label {
@@ -243,7 +239,7 @@ footer > p {
     border-radius: 20px;
     border: none;
     font-size: 16px;
-    width: 80px;
+    width: 50%;
     height: 30px;
     resize: none;
 }
