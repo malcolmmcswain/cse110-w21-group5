@@ -88,6 +88,10 @@ beforeEach(() => {
 
     localStorage.clear();
     project.initializeLocalStorage();
+
+    // Mocks window alert function to prevent jest error
+    const mock = jest.fn(() => undefined);
+    window.alert = mock;
 });
 
 test('Project added to list/localstorage', () => {
