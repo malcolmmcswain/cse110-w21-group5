@@ -1,7 +1,7 @@
 # Sprint Review Meeting
 
 ### Attendance and Time
-Absent: No one
+Absent: Yunha
 
 Held on zoom at 9:00PM PST
 
