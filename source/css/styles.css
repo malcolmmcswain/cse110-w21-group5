@@ -564,3 +564,9 @@ nav .icon {
     border-bottom: 1px solid #bbb;
     margin-right: 2.5em;
 }
+
+#pomodoro-state-icon {
+    margin-bottom: -5px;
+    width: 1.25em;
+    height: 1.25em;    
+}
