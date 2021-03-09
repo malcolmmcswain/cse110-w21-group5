@@ -202,29 +202,24 @@ timer.prototype.updateStatusText = function () {
     let stateText;
     switch (this.state) {
         case 'work':
-            stateText = this.counter + ' | Working  ' +
-            '<image id="pomodoro-state-icon" src="./media/tomato.png" style="float:none;width:1.5em;height:1.5em;"></image>';
+            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
             break;
         case 'short_break':
-            stateText = this.counter + ' | Short Break  ' +
-            '<image id="pomodoro-state-icon" src="./media/coffee.png" style="width:2em;height:2em;"></image>';
+            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/short-break.png"></image>';
             break;
         case 'long_break':
-            stateText = this.counter + ' | Long Break  ' +
-            '<image id="pomodoro-state-icon" src="./media/sandwich.png" style="width:2em;height:2em;"></image>';
+            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/long-break.png"></image>';
             break;
         case 'stopped':
-            stateText = 'Stopped';
+            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
             break;
         case 'reset':
-            stateText = 'Reset';
+            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
         default:
-            stateText = 'Stopped';
+            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
     }
     // this.counterText.textContent = this.counter;
-    this.counterState.innerHTML = 
-        '<text style="color:rgba(163,160,160,0.8)">Pomodoro </text>'+
-        stateText;
+    this.counterState.innerHTML = stateText;
 }
 
 /* 
