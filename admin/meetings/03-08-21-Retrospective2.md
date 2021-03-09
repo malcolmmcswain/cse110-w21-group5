@@ -1,8 +1,7 @@
 # Retrospective Meeting
 
 ### Attendance and Time
-Absent: No one
-
+Absent: Yunha
 Held on zoom at 8:30PM PST
 
 ## How Does Our Team Feel on Average?
