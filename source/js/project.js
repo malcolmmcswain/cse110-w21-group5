@@ -145,10 +145,10 @@ function logDistraction(distraction) {
 }
 
 
-module.exports = {
-    initializeLocalStorage,
-    getProject,
-    deleteProject,
-    updateProject,
-    createProject
-};
+// module.exports = {
+//     initializeLocalStorage,
+//     getProject,
+//     deleteProject,
+//     updateProject,
+//     createProject
+// };

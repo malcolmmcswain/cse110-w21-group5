@@ -232,4 +232,4 @@ timer.prototype.switchState = function (newState) {
 }
 
 // Check if running in nodejs
-module.exports = timer;
+// module.exports = timer;
