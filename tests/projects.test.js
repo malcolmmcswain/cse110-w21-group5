@@ -1,6 +1,6 @@
 const {
-    test,
-    expect
+  test,
+  expect
 } = require('@jest/globals');
 
 require('console');
@@ -11,8 +11,8 @@ const project = require('../source/js/project.js');
 jest.useFakeTimers('modern');
 
 beforeEach(() => {
-    // Create a fresh document before each test.
-    document.body.innerHTML = `
+  // Create a fresh document before each test.
+  document.body.innerHTML = `
     <header>
       <nav>
         <h1>Pomodoro Timer</h1>
@@ -86,25 +86,91 @@ beforeEach(() => {
     <script src="js/project.js"></script>
     <script src="js/pomodoro.js"></script>`;
 
-    localStorage.clear();
-    project.initializeLocalStorage();
+  localStorage.clear();
+  project.initializeLocalStorage();
 
-    // Mocks window alert function to prevent jest error
-    const mock = jest.fn(() => undefined);
-    window.alert = mock;
+  // Mocks window alert function to prevent jest error
+  const mock = jest.fn(() => undefined);
+  window.alert = mock;
 });
 
 test('Project added to list/localstorage', () => {
-    expect(project.createProject('unit testing')).toBe(true);
+  expect(JSON.parse(localStorage.__STORE__['projectList']).length).toBe(1);
+  expect(project.createProject({
+    name: 'unit test',
+    pomodoro: 0,
+    state: 'reset'
+  })).toBe(true);
+  expect(JSON.parse(localStorage.__STORE__['projectList']).length).toBe(2);
+  expect(project.getProject('unit test').name).toBe('unit test');
+});
+
+test('Not allowed to create duplicate projects', () => {
+  expect(project.createProject({
+    name: 'unit test',
+    pomodoro: 0,
+    state: 'reset'
+  })).toBe(true);
+  expect(JSON.parse(localStorage.__STORE__['projectList']).length).toBe(2);
+  expect(project.createProject({
+    name: 'unit test',
+    pomodoro: 0,
+    state: 'reset'
+  })).toBe(false);
 });
 
 test('Project deleted from list/localstorage', () => {
-    expect(project.createProject('unit testing')).toBe(true);
-    expect(project.deleteProject('unit testing')).toBe(true);
+  expect(project.createProject({
+    name: 'unit test',
+    pomodoro: 0,
+    state: 'reset'
+  })).toBe(true);
+  expect(JSON.parse(localStorage.__STORE__['projectList']).length).toBe(2);
+  expect(project.deleteProject('unit test')).toBe(true);
+  expect(JSON.parse(localStorage.__STORE__['projectList']).length).toBe(1);
 });
 
 test('Project updates correctly', () => {
-    expect(project.createProject('unit testing')).toBe(true);
-    project.updateProject('unit testing', 'testing unit');
-    expect(project.deleteProject('testing unit')).toBe(true);
-})
+  expect(project.createProject({
+    name: 'unit test',
+    pomodoro: 0,
+    state: 'reset'
+  })).toBe(true);
+  expect(JSON.parse(localStorage.__STORE__['projectList']).length).toBe(2);
+  project.updateProject('unit test', {
+    name: 'long unit test',
+    pomodoro: 0,
+    state: 'reset'
+  });
+  expect(JSON.parse(localStorage.__STORE__['projectList']).length).toBe(2);
+  expect(project.getProject('long unit test').name).toBe('long unit test');
+});
+
+test('Get all project functions correctly', () => {
+  expect(project.getAllProjects()).toStrictEqual([{
+    name: 'My Project',
+    pomodoro: 0,
+    state: 'reset'
+  }]);
+  expect(project.createProject({
+    name: 'unit test',
+    pomodoro: 0,
+    state: 'reset'
+  })).toBe(true);
+  expect(project.getAllProjects()).toStrictEqual([{
+      name: 'My Project',
+      pomodoro: 0,
+      state: 'reset'
+    },
+    {
+      name: 'unit test',
+      pomodoro: 0,
+      state: 'reset'
+    }
+  ]);
+});
+
+test('Edit project correct functionality', () => {
+  project.editProject('unit test');
+  expect(document.getElementById('edit-project-name').value).toBe('unit test');
+});
