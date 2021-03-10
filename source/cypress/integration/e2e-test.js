@@ -359,6 +359,22 @@ describe('Tests for task list', () => {
         cy.get("#project-list").eq(0).should("contain.text", "My Project"); // This project is default in list
     });
 
+    it('Adding duplicate project should show an alert', () => {
+        cy.get("#hamburger").click();
+
+        cy.get("#add-project").click();
+        cy.get("#project-name").clear().type("Test1");
+        cy.get("#add-new-project").click();
+
+        cy.get("#add-project").click();
+        cy.get("#project-name").clear().type("Test1");
+        cy.get("#add-new-project").click();
+
+        cy.on("window:alert", (txt) => {
+            expect(txt).to.contains("Project already exists!");
+        });
+    });
+
 });
 
 describe('Tests for distraction log', () => {
