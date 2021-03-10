@@ -100,6 +100,7 @@ function refreshProjectList() {
             <ion-icon name="create-outline" onclick="editProject('${project.name}')"></ion-icon>
             <ion-icon name="trash-outline" onclick="deleteProject('${project.name}')"></ion-icon>
         </div>`;
+        projectItem.classList.add("project-item");
         projectListView.insertBefore(projectItem, addButton);
     });
 }
@@ -138,6 +139,7 @@ function logDistraction(distraction) {
     distractionLog.forEach((distraction) => {
         let distractionItem = document.createElement('li');
         distractionItem.innerHTML = distraction;
+        distractionItem.classList.add("log-item");
         logList.appendChild(distractionItem);
     });
 }
