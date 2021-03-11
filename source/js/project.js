@@ -128,7 +128,7 @@ function logDistraction(distraction) {
 /**
  * Update DOM to reflect changes in distractionLog
  */
- function refreshDistractionLog() {
+function refreshDistractionLog() {
     if (localStorage.getItem("distractionLog") == null) initializeLocalStorage();
     let distractionLog = JSON.parse(localStorage.getItem("distractionLog"));
     let logList = document.getElementById('log-list');
@@ -145,8 +145,13 @@ function logDistraction(distraction) {
 
 module.exports = {
     initializeLocalStorage,
+    getAllProjects,
     getProject,
     deleteProject,
+    editProject,
     updateProject,
-    createProject
+    createProject,
+    getAllDistractions,
+    logDistraction,
+    refreshDistractionLog
 };

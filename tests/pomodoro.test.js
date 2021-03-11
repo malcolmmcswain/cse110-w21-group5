@@ -7,8 +7,6 @@ require('console');
 require('jest-localstorage-mock');
 
 const pomodoro = require('../source/js/pomodoro.js');
-const timer = require('../source/js/timer.js');
-let pomo;
 
 // Using modern fake timers allows date functions to be mocked and settimeout functions to be mocked.
 jest.useFakeTimers('modern');
@@ -185,8 +183,6 @@ test('Status text to state conversion correct', () => {
   expect(pomodoro.convertStatusTextToState('gotem')).toBe('stopped');
 });
 
-test('Localstorage responds correctly to page initialization', () => {
-  pomodoro.initializePage();
-
-  expect(JSON.parse(localStorage.__STORE__['pomLength'])).toBe(25);
-});
+// test('Localstorage responds correctly to page initialization', () => {
+//   pomodoro.initializePage();
+// });
