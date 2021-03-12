@@ -222,6 +222,19 @@ describe('Tests for options menu', () => {
 
 });
 
+describe('Tests for status icon', () => {
+    beforeEach(() => {
+        cy.visit('index.html');
+        cy.get("#options-btn").click();
+        cy.get("#pom-length").clear().type("1");
+        cy.get("#short-length").clear().type("1");
+        cy.get("#long-length").clear().type("1");
+        cy.get("#cycle-length").clear().type("2");
+        cy.get("#save-options").click();
+        cy.clock();
+
+    });
+
     it('Short break session', () => {
         cy.get("#start").click();
         cy.tick(1000 * (1 * 60));
