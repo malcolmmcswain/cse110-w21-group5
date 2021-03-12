@@ -185,54 +185,46 @@ describe('Tests for options menu', () => {
         cy.get("#time").should("have.text", "24:59"); 
     });
 
-});
 
-
-describe('Tests for reset button', () => {
-    beforeEach(() => {
-        cy.visit('index.html');
+    it('Reduce motion functions correctly', () => {
         cy.get("#options-btn").click();
-        cy.get("#pom-length").clear().type("1");
-        cy.get("#short-length").clear().type("1");
-        cy.get("#long-length").clear().type("1");
-        cy.get("#cycle-length").clear().type("2");
+        cy.get("#reduce-motion-wrap").click();
         cy.get("#save-options").click();
-        cy.clock();
-      });
-
-    it('Resets during working session', () => {
-
+        cy.get("#rings").then(function($el) {
+            expect($el).to.have.css("display", "none");
+        });
         cy.get("#start").click();
+        cy.clock();
+
         cy.tick(1000);
-        cy.get("#reset").click();
-        cy.get("#time").should("have.text", "00:00");
+        cy.get("#rings").then(function($el) {
+            expect($el).to.have.css("display", "none");
+        });
+        cy.get("#reduce-motion-wrap").click();
+        cy.get("#save-options").click();
+        cy.get("#rings").then(function($el) {
+            expect($el).to.have.css("display", "block");
+        });
+
+        cy.tick(1000);
+        cy.get("#rings").then(function($el) {
+            expect($el).to.have.css("display", "block");
+        });
+        cy.get("#reduce-motion-wrap").click();
+        cy.get("#save-options").click();
+        cy.get("#rings").then(function($el) {
+            expect($el).to.have.css("display", "none");
+        });
+
+
+
     });
 
-    it('Resets during short break session', () => {
-        cy.get("#start").click();
-        cy.tick(1000 * 90);
-        cy.get("#reset").click();
-        cy.get("#time").should("have.text", "00:00");
-    });
-
-    it('Resets during long break session', () => {
-        cy.get("#start").click();
-        cy.tick(1000 * 150);
-        cy.get("#reset").click();
-        cy.get("#time").should("have.text", "00:00");
-    });
 });
 
-describe('Tests for status icon', () => {
-    beforeEach(() => {
-        cy.visit('index.html');
-        cy.get("#options-btn").click();
-        cy.get("#pom-length").clear().type("1");
-        cy.get("#short-length").clear().type("1");
-        cy.get("#long-length").clear().type("1");
-        cy.get("#cycle-length").clear().type("2");
-        cy.get("#save-options").click();
-        cy.clock();
+    it('Short break session', () => {
+        cy.get("#start").click();
+        cy.tick(1000 * (1 * 60));
 
     });
 
