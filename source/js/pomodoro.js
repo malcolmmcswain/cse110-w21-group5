@@ -85,19 +85,17 @@ function initializePage() {
     if (localStorage.getItem('shortLength') === null) localStorage.setItem('shortLength', 5);
     if (localStorage.getItem('longLength') === null) localStorage.setItem('longLength', 15);
     if (localStorage.getItem('cycleLength') === null) localStorage.setItem('cycleLength', 4);
+    if (localStorage.getItem('reduceMotion') === null) localStorage.setItem('reduceMotion', false);
 
     // Load in previous options (default without loading is 25/5/30)
     pomLength.value = localStorage.getItem('pomLength');
     shortLength.value = localStorage.getItem('shortLength');
     longLength.value = localStorage.getItem('longLength');
     cycleLength.value = localStorage.getItem('cycleLength');
+    reduceMotion.checked = (localStorage.getItem('reduceMotion') === 'true');
 
-    if (localStorage.getItem('reduceMotion') != null) {
-        reduceMotion.checked = localStorage.getItem('reduceMotion') == 'none' ? true : false;
-        document.getElementById('rings').style.display = localStorage.getItem('reduceMotion');
-    } else {
-        document.getElementById('rings').style.display = 'inline';
-    }
+    // Change display based on if reduceMotion would be checked
+    document.getElementById('rings').style.display = reduceMotion.checked ? 'none' : 'inline';
 
     // Update storage on options edit
     saveOptions.addEventListener('click', e => {
@@ -107,12 +105,10 @@ function initializePage() {
             localStorage.setItem('shortLength', shortLength.value);
             localStorage.setItem('longLength', longLength.value);
             localStorage.setItem('cycleLength', cycleLength.value);
-        }
-    });
+            localStorage.setItem('reduceMotion', reduceMotion.checked);
 
-    reduceMotion.addEventListener('click', e => {
-        document.getElementById('rings').style.display = reduceMotion.checked ? 'none' : 'inline';
-        localStorage.setItem('reduceMotion', reduceMotion.checked ? 'none' : 'inline');
+            document.getElementById('rings').style.display = reduceMotion.checked ? 'none' : 'inline';
+        }
     });
     
     // Initialize timer to be used by all events
