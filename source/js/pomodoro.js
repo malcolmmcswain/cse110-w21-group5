@@ -95,7 +95,7 @@ function initializePage() {
     reduceMotion.checked = (localStorage.getItem('reduceMotion') === 'true');
 
     // Change display based on if reduceMotion would be checked
-    document.getElementById('rings').style.display = reduceMotion.checked ? 'none' : 'inline';
+    document.getElementById('rings').style.display = reduceMotion.checked ? 'none' : 'block';
 
     // Update storage on options edit
     saveOptions.addEventListener('click', e => {
@@ -107,7 +107,7 @@ function initializePage() {
             localStorage.setItem('cycleLength', cycleLength.value);
             localStorage.setItem('reduceMotion', reduceMotion.checked);
 
-            document.getElementById('rings').style.display = reduceMotion.checked ? 'none' : 'inline';
+            document.getElementById('rings').style.display = reduceMotion.checked ? 'none' : 'block';
         }
     });
     
