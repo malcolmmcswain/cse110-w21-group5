@@ -235,12 +235,6 @@ describe('Tests for status icon', () => {
 
     });
 
-    it('Short break session', () => {
-        cy.get("#start").click();
-        cy.tick(1000 * (1 * 60));
-
-    });
-
     it('Default is stopped', () => {
         cy.get("#pomodoro-state-icon").should("have.attr","src", "./media/pomodoro.png");
     });
