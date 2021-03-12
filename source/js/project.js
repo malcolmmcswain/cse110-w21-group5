@@ -11,10 +11,10 @@ function initializeLocalStorage() {
 /**
  * Get all projects (as an array of JSON objects) in localStorage
  */
-function getAllProjects() {
-    if (localStorage.getItem("projectList") == null) initializeLocalStorage();
-    return JSON.parse(localStorage.getItem("projectList"));
-}
+// function getAllProjects() {
+//     if (localStorage.getItem("projectList") == null) initializeLocalStorage();
+//     return JSON.parse(localStorage.getItem("projectList"));
+// }
 
 /**
  * Get a single project (as a JSON object) in localStorage
@@ -108,10 +108,10 @@ function refreshProjectList() {
 /**
  * Get all distractions (as an array of strings) in localStorage
  */
-function getAllDistractions() {
-    if (localStorage.getItem("distractionLog") == null) initializeLocalStorage();
-    return JSON.parse(localStorage.getItem("distractionLog"));
-}
+// function getAllDistractions() {
+//     if (localStorage.getItem("distractionLog") == null) initializeLocalStorage();
+//     return JSON.parse(localStorage.getItem("distractionLog"));
+// }
 
 /**
  * Log distraction to localStorage
