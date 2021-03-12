@@ -190,13 +190,14 @@ footer > p {
     text-align: center;
 }
 
+
 .overlay {
     position: absolute; 
     bottom: 3.8em;
     align-content: center;
 }
 
-#pom-length-label, #short-length-label, #long-length-label, #cycle-length-label {
+#pom-length-label, #short-length-label, #long-length-label, #cycle-length-label, #reduce-motion-label {
     color: #636363;
 }
 
@@ -212,7 +213,11 @@ footer > p {
     margin-right: 18px;
 }
 
-#short-length, #long-length, #cycle-length {
+#reduce-motion-label {
+    margin-right: 30px;
+}
+
+#short-length, #long-length, #cycle-length, #reduce-motion-wrap {
     margin-top: 15px;
 }
 
@@ -517,6 +522,7 @@ nav .icon {
     margin-bottom: 20px;
 }
 
+
 .interactive-container {
     display: flex;
     flex-direction: row;
@@ -570,3 +576,68 @@ nav .icon {
     width: 1.25em;
     height: 1.25em;    
 }
+
+
+/* Below are from https://www.w3schools.com/howto/howto_css_switch.asp */
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    transform: translateX(20px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
