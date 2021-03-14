@@ -147,13 +147,11 @@ function refreshDistractionLog() {
 
 module.exports = {
     initializeLocalStorage,
-    getAllProjects,
     getProject,
     deleteProject,
     editProject,
     updateProject,
     createProject,
-    getAllDistractions,
     logDistraction,
     refreshDistractionLog
 };

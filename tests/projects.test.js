@@ -146,29 +146,29 @@ test('Project updates correctly', () => {
   expect(project.getProject('long unit test').name).toBe('long unit test');
 });
 
-test('Get all project functions correctly', () => {
-  expect(project.getAllProjects()).toStrictEqual([{
-    name: 'My Project',
-    pomodoro: 0,
-    state: 'reset'
-  }]);
-  expect(project.createProject({
-    name: 'unit test',
-    pomodoro: 0,
-    state: 'reset'
-  })).toBe(true);
-  expect(project.getAllProjects()).toStrictEqual([{
-      name: 'My Project',
-      pomodoro: 0,
-      state: 'reset'
-    },
-    {
-      name: 'unit test',
-      pomodoro: 0,
-      state: 'reset'
-    }
-  ]);
-});
+// test('Get all project functions correctly', () => {
+//   expect(project.getAllProjects()).toStrictEqual([{
+//     name: 'My Project',
+//     pomodoro: 0,
+//     state: 'reset'
+//   }]);
+//   expect(project.createProject({
+//     name: 'unit test',
+//     pomodoro: 0,
+//     state: 'reset'
+//   })).toBe(true);
+//   expect(project.getAllProjects()).toStrictEqual([{
+//       name: 'My Project',
+//       pomodoro: 0,
+//       state: 'reset'
+//     },
+//     {
+//       name: 'unit test',
+//       pomodoro: 0,
+//       state: 'reset'
+//     }
+//   ]);
+// });
 
 test('Edit project correct functionality', () => {
   project.editProject('unit test');

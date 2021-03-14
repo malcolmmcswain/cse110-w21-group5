@@ -1,6 +1,6 @@
 const {
-    test,
-    expect
+  test,
+  expect
 } = require('@jest/globals');
 
 require('console');
@@ -11,8 +11,8 @@ const project = require('../source/js/project.js');
 jest.useFakeTimers('modern');
 
 beforeEach(() => {
-    // Create a fresh document before each test.
-    document.body.innerHTML = `
+  // Create a fresh document before each test.
+  document.body.innerHTML = `
     <header>
     <nav>
       <div class='webpage-title'>
@@ -166,18 +166,18 @@ beforeEach(() => {
   <script src="js/timer.js"></script>
   <script src="js/pomodoro.js"></script>`;
 
-    localStorage.clear();
-    project.initializeLocalStorage();
+  localStorage.clear();
+  project.initializeLocalStorage();
 
-    // Mocks window alert function to prevent jest error
-    const mock = jest.fn(() => undefined);
-    window.alert = mock;
+  // Mocks window alert function to prevent jest error
+  const mock = jest.fn(() => undefined);
+  window.alert = mock;
 });
 
 test('Distractions logged correctly', () => {
-    expect(project.getAllDistractions()).toStrictEqual([]);
-    project.logDistraction('league of legends');
-    expect(project.getAllDistractions()).toStrictEqual(['league of legends']);
-    project.logDistraction('netflix');
-    expect(project.getAllDistractions()).toStrictEqual(['league of legends', 'netflix']);
+  expect(JSON.parse(localStorage.__STORE__['distractionLog'])).toStrictEqual([]);
+  project.logDistraction('league of legends');
+  expect(JSON.parse(localStorage.__STORE__['distractionLog'])).toStrictEqual(['league of legends']);
+  project.logDistraction('netflix');
+  expect(JSON.parse(localStorage.__STORE__['distractionLog'])).toStrictEqual(['league of legends', 'netflix']);
 });
