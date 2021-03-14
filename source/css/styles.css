@@ -8,6 +8,7 @@
 
 html {
     height: 100%;
+    min-width: 320px;
 }
 
 body {
@@ -59,6 +60,8 @@ nav .webpage-title > h1 {
 
 main {
     width: 60%;
+    min-width: 290px;
+    max-width: 60vh;
     margin: auto;
 
     display: flex;
@@ -94,8 +97,6 @@ main {
 #timer-display {
     align-self: center;
     width: 100%;
-    max-width: 60vh;
-    max-height: 60vw;
 }
 
 #rings {
@@ -184,6 +185,7 @@ footer > p {
     bottom: 5em;
     display: none;
     width: 17%;
+    min-width: 150px;
     font-family: inherit;
     border-radius: 10px 10px 0px 0px;
     background-color: #e0e0e0;
@@ -259,22 +261,23 @@ v2 styling
 
 nav {
     display: grid;
-    grid-template-columns: 60% 1fr 1fr 10%;
-    height: 8vh;
+    grid-template-columns: 80% 1fr 5%;
     align-items: center;
 }
 
 #project-list {
     list-style: none;
     width: 20vw;
+    min-width: 260px;
     position: absolute;
     right: 0;
-    top: 8vh;
+    top: 68px;
     border-radius: 0px 0px 10px 10px;
     padding-top: 20px;
     padding-bottom: 10px;
     padding-inline-start: 30px;
     padding-inline-end: 30px;
+    margin-block-start: 0em;
     background: #e0e0e0;
 
     /* change in js to (block)*/
@@ -360,6 +363,7 @@ nav .icon {
     background-color: white;
     height: 200px;
     width: 400px;
+    max-width: 90%;
     text-align: center;
     align-items: center;
     border-radius: 20px;
