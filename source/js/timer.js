@@ -114,14 +114,14 @@ timer.prototype.start = function (countDownMins) {
     this.countDownDate = new Date(now.getTime() + countDownOffset);
     this.countDownMins = countDownMins;
 
-    // Begin svg element
-    this.burndownAnim.setAttribute('dur', `${countDownMins * 60}`);
-    this.burndownAnim.beginElement();
-
     // Begin countdown
     this.countDown();
     this.countDownTimeout = setInterval(this.countDown.bind(this), 500);
     this.updateStatusText();
+
+    // Begin svg element
+    this.burndownAnim.setAttribute('dur', `${countDownMins * 60}`);
+    this.burndownAnim.beginElement();
 }
 
 /**
