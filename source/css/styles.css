@@ -8,7 +8,6 @@
 
 html {
     height: 100%;
-    min-width: 320px;
 }
 
 body {
@@ -20,6 +19,53 @@ body {
     display: flex;
     flex-direction: column;
 }
+.dark-mode {
+    background-color: rgb(38, 38, 38);
+}
+.dark-mode header{
+    background-color: rgb(21, 21, 21);
+    
+}
+.dark-mode footer {
+    background-color: rgb(21, 21, 21);
+    
+}
+.dark-mode #project-list{
+    background-color: #4f4f4f;
+}
+
+.dark-mode #options-panel{
+    background-color: #4f4f4f;
+}
+.dark-mode #pom-length-label {
+    color: rgb(196, 196, 196);
+}
+.dark-mode #short-length-label{
+    color: rgb(196,196, 196);
+}
+.dark-mode #opt-text{
+    color: rgb(196,196, 196);
+}
+.dark-mode #reduce-motion-label{
+    color: rgb(196,196, 196);
+}
+.dark-mode #long-length-label{
+    color: rgb(196,196, 196);
+}
+.dark-mode #cycle-length-label{
+    color: rgb(196,196, 196);
+}
+.dark-mode #darkmode-label{
+    color: rgb(196,196, 196);
+}
+.dark-mode nav ul li{
+    color: rgb(196,196, 196);
+}
+.dark-mode #pomodoro-state-text{
+    color: rgb(196,196, 196);
+}
+
+
 
 header, footer {
     padding: 0.5em;
@@ -95,8 +141,8 @@ main {
 #timer-display {
     align-self: center;
     width: 100%;
-    min-width: 290px;
     max-width: 60vh;
+    max-height: 60vw;
 }
 
 #rings {
@@ -185,7 +231,6 @@ footer > p {
     bottom: 5em;
     display: none;
     width: 17%;
-    min-width: 150px;
     font-family: inherit;
     border-radius: 10px 10px 0px 0px;
     background-color: #e0e0e0;
@@ -199,7 +244,7 @@ footer > p {
     align-content: center;
 }
 
-#pom-length-label, #short-length-label, #long-length-label, #cycle-length-label, #reduce-motion-label {
+#pom-length-label, #short-length-label, #long-length-label, #cycle-length-label, #reduce-motion-label,#darkmode-label{
     color: #636363;
 }
 
@@ -218,8 +263,11 @@ footer > p {
 #reduce-motion-label {
     margin-right: 30px;
 }
+#darkmode-label {
+    margin-right: 30px;
+}
 
-#short-length, #long-length, #cycle-length, #reduce-motion-wrap {
+#short-length, #long-length, #cycle-length, #reduce-motion-wrap #darkmode-wrap{
     margin-top: 15px;
 }
 
@@ -261,23 +309,22 @@ v2 styling
 
 nav {
     display: grid;
-    grid-template-columns: 80% 1fr 5%;
+    grid-template-columns: 60% 1fr 1fr 10%;
+    height: 8vh;
     align-items: center;
 }
 
 #project-list {
     list-style: none;
     width: 20vw;
-    min-width: 260px;
     position: absolute;
     right: 0;
-    top: 68px;
+    top: 8vh;
     border-radius: 0px 0px 10px 10px;
     padding-top: 20px;
     padding-bottom: 10px;
     padding-inline-start: 30px;
     padding-inline-end: 30px;
-    margin-block-start: 0em;
     background: #e0e0e0;
 
     /* change in js to (block)*/
@@ -363,7 +410,6 @@ nav .icon {
     background-color: white;
     height: 200px;
     width: 400px;
-    max-width: 90%;
     text-align: center;
     align-items: center;
     border-radius: 20px;
@@ -549,8 +595,6 @@ nav .icon {
     flex: 1;
     margin: 10px 25px 10px;
     background-color: #ebebeb;
-    min-width: 290px;
-    max-width: 60vh;
 
     border-radius: 20px;
     -webkit-border-radius: 20px;
