@@ -3,6 +3,7 @@
  * properly first. I would wait until most of the timer logic is complete before
  * attempting to work on this file.
  ************************************************************************************/
+
 function convertStatusTextToState(statusText) {
     switch (statusText) {
         case 'Work':
@@ -32,14 +33,14 @@ function initializePage() {
     let resetBtn = document.getElementById('reset');
 
     // Timer Graphics
-    let timeDisplay = document.getElementById('time');
-    let backgroundRing = document.getElementById('background-ring');
-    let burndownRing = document.getElementById('burndown-ring');
-    let burndownAnim = document.getElementById('burndown-anim');
-    let counterText = document.getElementById('pomodoro-count-text');
-    let counterState = document.getElementById('pomodoro-state-text');
-    let options = document.getElementById('options-btn');
-    let opt_panel = document.getElementById('options-panel');
+    let timeDisplay     = document.getElementById('time');
+    let backgroundRing  = document.getElementById('background-ring');
+    let burndownRing    = document.getElementById('burndown-ring');
+    let burndownAnim    = document.getElementById('burndown-anim');
+    let counterText     = document.getElementById('pomodoro-count-text');
+    let counterState    = document.getElementById('pomodoro-state-text');
+    let options        = document.getElementById('options-btn');
+    let opt_panel      = document.getElementById('options-panel');
 
     // Projects List Controls
     let hamburger = document.getElementById('hamburger');
@@ -64,12 +65,13 @@ function initializePage() {
     let finishInfo = document.getElementById('finish-info');
 
     // Pomodoro Options
-    let pomLength = document.getElementById('pom-length');
-    let shortLength = document.getElementById('short-length');
-    let longLength = document.getElementById('long-length');
-    let cycleLength = document.getElementById('cycle-length');
-    let saveOptions = document.getElementById('save-options');
-    let reduceMotion = document.getElementById('reduce-motion');
+    let pomLength       = document.getElementById('pom-length');
+    let shortLength     = document.getElementById('short-length');
+    let longLength      = document.getElementById('long-length');
+    let cycleLength     = document.getElementById('cycle-length');
+    let saveOptions     = document.getElementById('save-options');
+    let reduceMotion    = document.getElementById('reduce-motion');
+    let darkmode    = document.getElementById('darkmode');
 
 
     // Distraction Log
@@ -85,6 +87,7 @@ function initializePage() {
     if (localStorage.getItem('longLength') === null) localStorage.setItem('longLength', 15);
     if (localStorage.getItem('cycleLength') === null) localStorage.setItem('cycleLength', 4);
     if (localStorage.getItem('reduceMotion') === null) localStorage.setItem('reduceMotion', false);
+    if (localStorage.getItem('darkmode') === null) localStorage.setItem('darkmode', false);
 
     // Load in previous options (default without loading is 25/5/30)
     pomLength.value = localStorage.getItem('pomLength');
@@ -92,10 +95,11 @@ function initializePage() {
     longLength.value = localStorage.getItem('longLength');
     cycleLength.value = localStorage.getItem('cycleLength');
     reduceMotion.checked = (localStorage.getItem('reduceMotion') === 'true');
+    darkmode.checked = (localStorage.getItem('darkmode') === 'true');
 
     // Change display based on if reduceMotion would be checked
     document.getElementById('rings').style.display = reduceMotion.checked ? 'none' : 'block';
-
+    document.body.classList.toggle("dark-mode");
     // Update storage on options edit
     saveOptions.addEventListener('click', e => {
         e.preventDefault();
@@ -105,11 +109,16 @@ function initializePage() {
             localStorage.setItem('longLength', longLength.value);
             localStorage.setItem('cycleLength', cycleLength.value);
             localStorage.setItem('reduceMotion', reduceMotion.checked);
+            localStorage.setItem('darkmode', darkmode.checked);
 
             document.getElementById('rings').style.display = reduceMotion.checked ? 'none' : 'block';
+
         }
     });
-
+    darkmode.addEventListener('click', e => {
+        document.body.classList.toggle("dark-mode");
+    });
+    
     // Initialize timer to be used by all events
     window.time = new timer(
         timeDisplay,
@@ -160,14 +169,14 @@ function initializePage() {
         stopBtn.style.display = 'block';
         resetBtn.style.display = 'block';
     });
-
+    
     options.addEventListener('click', e => {
-        // toggle options panel        
-        if (opt_panel.style.display == 'block')
-            opt_panel.style.display = 'none';
-        else
-            opt_panel.style.display = 'block';
-
+    // toggle options panel        
+            if(opt_panel.style.display == 'block')
+               opt_panel.style.display = 'none';
+            else
+               opt_panel.style.display = 'block';
+        
     });
 
     stopBtn.addEventListener('click', e => {
@@ -265,9 +274,7 @@ function initializePage() {
     });
 
     // Prevents keyboard shortcuts from being disabled while in an input field
-    document.querySelectorAll('input').forEach(el => el.onkeypress = function (e) {
-        e.stopPropagation();
-    });
+    document.querySelectorAll('input').forEach(el => el.onkeypress = function (e) { e.stopPropagation(); });
 }
 
 /**
@@ -275,32 +282,16 @@ function initializePage() {
  * @param {string} name name of project 
  */
 function changeProject(name) {
-    let startBtn = document.getElementById('start');
-    let stopBtn = document.getElementById('stop');
-    let resetBtn = document.getElementById('reset');
-
     currentProject = localStorage.getItem("currentProject");
-    let newProject = getProject(name);
-    localStorage.setItem("currentProject", newProject.name);
     updateProject(currentProject, {
         name: currentProject,
-        pomodoro: window.time.counter,
-        state: window.time.state
+        pomodoro: Number(document.getElementById('pomodoro-count-text').innerHTML),
+        state: convertStatusTextToState(document.getElementById('pomodoro-state-text').innerHTML)
     });
-    window.time.reset(true);
+    let newProject = getProject(name);
+    localStorage.setItem("currentProject", newProject.name);
     window.time.switchState({
         pomodoro: newProject.pomodoro,
         state: newProject.state
     });
-    window.time.updateStatusText();
-
-    startBtn.style.display = 'block';
-    stopBtn.style.display = 'none';
-    resetBtn.style.display = 'none';
-}
-
-module.exports = {
-    convertStatusTextToState,
-    initializePage,
-    changeProject
 }
