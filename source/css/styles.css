@@ -60,8 +60,6 @@ nav .webpage-title > h1 {
 
 main {
     width: 60%;
-    min-width: 290px;
-    max-width: 60vh;
     margin: auto;
 
     display: flex;
@@ -97,6 +95,8 @@ main {
 #timer-display {
     align-self: center;
     width: 100%;
+    min-width: 290px;
+    max-width: 60vh;
 }
 
 #rings {
@@ -549,6 +549,8 @@ nav .icon {
     flex: 1;
     margin: 10px 25px 10px;
     background-color: #ebebeb;
+    min-width: 290px;
+    max-width: 60vh;
 
     border-radius: 20px;
     -webkit-border-radius: 20px;
