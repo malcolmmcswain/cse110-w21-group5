@@ -64,8 +64,17 @@ function deleteProject(name) {
  * @param {object} newState new project object
  */
 function updateProject(name, newState) {
-    deleteProject(name);
-    createProject(newState);
+    if (localStorage.getItem("projectList") == null) initializeLocalStorage();
+    let projectList = JSON.parse(localStorage.getItem("projectList"));
+    if (projectList.find(p => p.name == name)) {
+        let projectIndex = projectList.findIndex(p => p.name == name);
+        projectList[projectIndex] = newState;
+        refreshProjectList();
+        return true;
+    } else {
+        alert('Project '+name+' doesn\'t exist!');
+        return false;
+    }
 }
 
 /**
@@ -91,15 +100,25 @@ function refreshProjectList() {
         projectListView.removeChild(projectListView.firstChild);
     }
 
-    let projectList = JSON.parse(localStorage.getItem("projectList"));
+    let currentProject = localStorage.getItem('currentProject');
+    let projectList = JSON.parse(localStorage.getItem('projectList'));
     projectList.forEach((project) => {
         let projectItem = document.createElement('li');
-        projectItem.innerHTML = `
-        <a onclick="changeProject('${project.name}')">${project.name}</a>
-        <div class="project-action-container">
-            <ion-icon name="create-outline" onclick="editProject('${project.name}')"></ion-icon>
-            <ion-icon name="trash-outline" onclick="deleteProject('${project.name}')"></ion-icon>
-        </div>`;
+        if (project.name == currentProject) {
+            projectItem.innerHTML = `
+            <a style="font-weight: bold;" onclick="changeProject('${project.name}')">${project.name}</a>
+            <div class="project-action-container">
+                <ion-icon name="create-outline" onclick="editProject('${project.name}')"></ion-icon>
+                <ion-icon name="trash-outline" onclick="deleteProject('${project.name}')"></ion-icon>
+            </div>`;
+        } else {
+            projectItem.innerHTML = `
+            <a onclick="changeProject('${project.name}')">${project.name}</a>
+            <div class="project-action-container">
+                <ion-icon name="create-outline" onclick="editProject('${project.name}')"></ion-icon>
+                <ion-icon name="trash-outline" onclick="deleteProject('${project.name}')"></ion-icon>
+            </div>`;
+        }
         projectItem.classList.add("project-item");
         projectListView.insertBefore(projectItem, addButton);
     });
