@@ -3,7 +3,6 @@
  * properly first. I would wait until most of the timer logic is complete before
  * attempting to work on this file.
  ************************************************************************************/
-
 function convertStatusTextToState(statusText) {
     switch (statusText) {
         case 'Work':
@@ -33,14 +32,14 @@ function initializePage() {
     let resetBtn = document.getElementById('reset');
 
     // Timer Graphics
-    let timeDisplay     = document.getElementById('time');
-    let backgroundRing  = document.getElementById('background-ring');
-    let burndownRing    = document.getElementById('burndown-ring');
-    let burndownAnim    = document.getElementById('burndown-anim');
-    let counterText     = document.getElementById('pomodoro-count-text');
-    let counterState    = document.getElementById('pomodoro-state-text');
-    let options        = document.getElementById('options-btn');
-    let opt_panel      = document.getElementById('options-panel');
+    let timeDisplay = document.getElementById('time');
+    let backgroundRing = document.getElementById('background-ring');
+    let burndownRing = document.getElementById('burndown-ring');
+    let burndownAnim = document.getElementById('burndown-anim');
+    let counterText = document.getElementById('pomodoro-count-text');
+    let counterState = document.getElementById('pomodoro-state-text');
+    let options = document.getElementById('options-btn');
+    let opt_panel = document.getElementById('options-panel');
 
     // Projects List Controls
     let hamburger = document.getElementById('hamburger');
@@ -65,12 +64,12 @@ function initializePage() {
     let finishInfo = document.getElementById('finish-info');
 
     // Pomodoro Options
-    let pomLength       = document.getElementById('pom-length');
-    let shortLength     = document.getElementById('short-length');
-    let longLength      = document.getElementById('long-length');
-    let cycleLength     = document.getElementById('cycle-length');
-    let saveOptions     = document.getElementById('save-options');
-    let reduceMotion    = document.getElementById('reduce-motion');
+    let pomLength = document.getElementById('pom-length');
+    let shortLength = document.getElementById('short-length');
+    let longLength = document.getElementById('long-length');
+    let cycleLength = document.getElementById('cycle-length');
+    let saveOptions = document.getElementById('save-options');
+    let reduceMotion = document.getElementById('reduce-motion');
 
 
     // Distraction Log
@@ -110,7 +109,7 @@ function initializePage() {
             document.getElementById('rings').style.display = reduceMotion.checked ? 'none' : 'block';
         }
     });
-    
+
     // Initialize timer to be used by all events
     window.time = new timer(
         timeDisplay,
@@ -161,14 +160,14 @@ function initializePage() {
         stopBtn.style.display = 'block';
         resetBtn.style.display = 'block';
     });
-    
+
     options.addEventListener('click', e => {
-    // toggle options panel        
-            if(opt_panel.style.display == 'block')
-               opt_panel.style.display = 'none';
-            else
-               opt_panel.style.display = 'block';
-        
+        // toggle options panel        
+        if (opt_panel.style.display == 'block')
+            opt_panel.style.display = 'none';
+        else
+            opt_panel.style.display = 'block';
+
     });
 
     stopBtn.addEventListener('click', e => {
@@ -266,7 +265,9 @@ function initializePage() {
     });
 
     // Prevents keyboard shortcuts from being disabled while in an input field
-    document.querySelectorAll('input').forEach(el => el.onkeypress = function (e) { e.stopPropagation(); });
+    document.querySelectorAll('input').forEach(el => el.onkeypress = function (e) {
+        e.stopPropagation();
+    });
 }
 
 /**
@@ -286,4 +287,10 @@ function changeProject(name) {
         pomodoro: newProject.pomodoro,
         state: newProject.state
     });
+}
+
+module.exports = {
+    convertStatusTextToState,
+    initializePage,
+    changeProject
 }
