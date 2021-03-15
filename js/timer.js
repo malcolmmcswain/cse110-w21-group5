@@ -202,21 +202,21 @@ timer.prototype.updateStatusText = function () {
     let stateText;
     switch (this.state) {
         case 'work':
-            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
+            stateText = this.counter + '&nbsp;&nbsp;&middot;&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
             break;
         case 'short_break':
-            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/short-break.png"></image>';
+            stateText = this.counter + '&nbsp;&nbsp;&middot;&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/short-break.png"></image>';
             break;
         case 'long_break':
-            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/long-break.png"></image>';
+            stateText = this.counter + '&nbsp;&nbsp;&middot;&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/long-break.png"></image>';
             break;
         case 'stopped':
-            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
+            stateText = this.counter + '&nbsp;&nbsp;&middot;&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
             break;
         case 'reset':
-            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
+            stateText = this.counter + '&nbsp;&nbsp;&middot;&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
         default:
-            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
+            stateText = this.counter + '&nbsp;&nbsp;&middot;&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
     }
     // this.counterText.textContent = this.counter;
     this.counterState.innerHTML = stateText;
