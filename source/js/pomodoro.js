@@ -275,18 +275,28 @@ function initializePage() {
  * @param {string} name name of project 
  */
 function changeProject(name) {
+    let startBtn = document.getElementById('start');
+    let stopBtn = document.getElementById('stop');
+    let resetBtn = document.getElementById('reset');
+
     currentProject = localStorage.getItem("currentProject");
-    updateProject(currentProject, {
-        name: currentProject,
-        pomodoro: Number(document.getElementById('pomodoro-count-text').innerHTML),
-        state: convertStatusTextToState(document.getElementById('pomodoro-state-text').innerHTML)
-    });
     let newProject = getProject(name);
     localStorage.setItem("currentProject", newProject.name);
+    updateProject(currentProject, {
+        name: currentProject,
+        pomodoro: window.time.counter,
+        state: window.time.state
+    });
+    window.time.reset(true);
     window.time.switchState({
         pomodoro: newProject.pomodoro,
         state: newProject.state
     });
+    window.time.updateStatusText();
+
+    startBtn.style.display = 'block';
+    stopBtn.style.display = 'none';
+    resetBtn.style.display = 'none';
 }
 
 module.exports = {
