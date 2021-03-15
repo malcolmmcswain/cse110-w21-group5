@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.17% </span>
+                <span class="strong">5.88% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/162</span>
+                <span class='fraction'>10/170</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.54% </span>
+                <span class="strong">6.21% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/153</span>
+                <span class='fraction'>10/161</span>
             </div>
         
             
@@ -352,7 +352,17 @@
 <a name='L293'></a><a href='#L293'>293</a>
 <a name='L294'></a><a href='#L294'>294</a>
 <a name='L295'></a><a href='#L295'>295</a>
-<a name='L296'></a><a href='#L296'>296</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L296'></a><a href='#L296'>296</a>
+<a name='L297'></a><a href='#L297'>297</a>
+<a name='L298'></a><a href='#L298'>298</a>
+<a name='L299'></a><a href='#L299'>299</a>
+<a name='L300'></a><a href='#L300'>300</a>
+<a name='L301'></a><a href='#L301'>301</a>
+<a name='L302'></a><a href='#L302'>302</a>
+<a name='L303'></a><a href='#L303'>303</a>
+<a name='L304'></a><a href='#L304'>304</a>
+<a name='L305'></a><a href='#L305'>305</a>
+<a name='L306'></a><a href='#L306'>306</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -631,16 +641,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -924,18 +944,28 @@ function <span class="fstat-no" title="function not covered" >initializePage(</s
  * @param {string} name name of project 
  */
 function <span class="fstat-no" title="function not covered" >changeProject(</span>name) {
+    let startBtn = <span class="cstat-no" title="statement not covered" >document.getElementById('start');</span>
+    let stopBtn = <span class="cstat-no" title="statement not covered" >document.getElementById('stop');</span>
+    let resetBtn = <span class="cstat-no" title="statement not covered" >document.getElementById('reset');</span>
+&nbsp;
 <span class="cstat-no" title="statement not covered" >    currentProject = localStorage.getItem("currentProject");</span>
-<span class="cstat-no" title="statement not covered" >    updateProject(currentProject, {</span>
-        name: currentProject,
-        pomodoro: Number(document.getElementById('pomodoro-count-text').innerHTML),
-        state: convertStatusTextToState(document.getElementById('pomodoro-state-text').innerHTML)
-    });
     let newProject = <span class="cstat-no" title="statement not covered" >getProject(name);</span>
 <span class="cstat-no" title="statement not covered" >    localStorage.setItem("currentProject", newProject.name);</span>
+<span class="cstat-no" title="statement not covered" >    updateProject(currentProject, {</span>
+        name: currentProject,
+        pomodoro: window.time.counter,
+        state: window.time.state
+    });
+<span class="cstat-no" title="statement not covered" >    window.time.reset(true);</span>
 <span class="cstat-no" title="statement not covered" >    window.time.switchState({</span>
         pomodoro: newProject.pomodoro,
         state: newProject.state
     });
+<span class="cstat-no" title="statement not covered" >    window.time.updateStatusText();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    startBtn.style.display = 'block';</span>
+<span class="cstat-no" title="statement not covered" >    stopBtn.style.display = 'none';</span>
+<span class="cstat-no" title="statement not covered" >    resetBtn.style.display = 'none';</span>
 }
 &nbsp;
 module.exports = {
@@ -949,7 +979,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Mar 13 2021 16:23:03 GMT-0800 (Pacific Standard Time)
+                at Mon Mar 15 2021 13:27:46 GMT-0700 (Pacific Daylight Time)
             </div>
         </div>
         <script src="prettify.js"></script>
