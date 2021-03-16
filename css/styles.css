@@ -30,6 +30,7 @@ header, footer {
 footer {
     display: flex;
     flex-direction: row;
+    position: relative;
 }
 
 nav {
