@@ -168,7 +168,7 @@ timer.prototype.tickTock = function() {
         return;
     }
 
-    // new Audio(audioReferences.tickingSound).play();
+    new Audio(audioReferences.tickingSound).play();
 }
 
 /**
@@ -206,7 +206,7 @@ timer.prototype.startShortBreak = function () {
     this.distractionLog.style.display = 'block';
 
     if (this.alertEnabled) {
-        // new Audio(audioReferences.alertSound).play();
+        new Audio(audioReferences.alertSound).play();
     }
 
     this.state = 'short_break';
@@ -223,7 +223,7 @@ timer.prototype.startLongBreak = function () {
     this.distractionLog.style.display = 'block';
 
     if (this.alertEnabled) {
-        // new Audio(audioReferences.alertSound).play();
+        new Audio(audioReferences.alertSound).play();
     }
 
     this.state = 'long_break';
