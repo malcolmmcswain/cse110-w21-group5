@@ -5,6 +5,11 @@ const multipliers = {
     MINUTE: 60000
 }
 
+const audioReferences = {
+    alertSound   : 'media/alert.mp3',
+    tickingSound : 'media/tick-tock.mp3'
+}
+
 /**
  * Represents a timer object
  * @constructor
@@ -24,7 +29,9 @@ function timer(
     workMins = 25, 
     shortBreakMins = 5, 
     longBreakMins = 15, 
-    longBreakInterval = 4
+    longBreakInterval = 4,
+    alertEnabled = true,
+    tickingEnabled = true
 ) {
     // State management
     this.state = 'reset';
@@ -33,10 +40,13 @@ function timer(
     // Properties
     this.countDownDate = null;
     this.countDownTimeout = null;
+    this.tickTockTimeout = null;
     this.workMins = workMins;
     this.shortBreakMins = shortBreakMins;
     this.longBreakMins = longBreakMins;
     this.longBreakInterval = longBreakInterval;
+    this.alertEnabled = alertEnabled;
+    this.tickingEnabled = tickingEnabled;
 
     // DOM Elements
     this.timeDisplay = timeDisplay;
@@ -63,6 +73,10 @@ timer.prototype.reset = function (force = false) {
 
     this.countDownDate = null;
     this.countDownTimeout = null;
+
+    clearInterval(this.tickTockTimeout);
+    this.tickTockTimeout = null;
+
     this.minutesLeft = 0;
     this.secondsLeft = 0;
     this.countDownMins = 0;
@@ -114,14 +128,14 @@ timer.prototype.start = function (countDownMins) {
     this.countDownDate = new Date(now.getTime() + countDownOffset);
     this.countDownMins = countDownMins;
 
-    // Begin svg element
-    this.burndownAnim.setAttribute('dur', `${countDownMins * 60}`);
-    this.burndownAnim.beginElement();
-
     // Begin countdown
     this.countDown();
     this.countDownTimeout = setInterval(this.countDown.bind(this), 500);
     this.updateStatusText();
+
+    // Begin svg element
+    this.burndownAnim.setAttribute('dur', `${countDownMins * 60}`);
+    this.burndownAnim.beginElement();
 }
 
 /**
@@ -146,9 +160,24 @@ timer.prototype.countDown = function () {
 }
 
 /**
+ * Ticking sound function
+ */
+timer.prototype.tickTock = function() {
+    if (this.state !== 'work') {
+        clearInterval(this.tickTockTimeout);
+        return;
+    }
+
+    new Audio(audioReferences.tickingSound).play();
+}
+
+/**
  * Start work timer
  */
 timer.prototype.startWorking = function () {
+    this.state = 'work';
+    this.start(this.workMins);
+
     // Set ring and display colors
     this.backgroundRing.style.stroke = '#E46E6E';
     this.timeDisplay.setAttribute('fill', '#E46E6E');
@@ -158,8 +187,13 @@ timer.prototype.startWorking = function () {
     this.counter++;
     // console.log(this.counter); // Print counter for debugging purposes
 
-    this.state = 'work';
-    this.start(this.workMins);
+    if (this.alertEnabled) {
+        new Audio(audioReferences.alertSound).play();
+    }
+
+    if (this.tickingEnabled) {
+        this.tickTockTimeout = setInterval(this.tickTock.bind(this), 1000); 
+    }
 }
 
 /**
@@ -170,6 +204,10 @@ timer.prototype.startShortBreak = function () {
     this.backgroundRing.style.stroke = '#6FEA9A';
     this.timeDisplay.setAttribute('fill', '#6FEA9A');
     this.distractionLog.style.display = 'block';
+
+    if (this.alertEnabled) {
+        new Audio(audioReferences.alertSound).play();
+    }
 
     this.state = 'short_break';
     this.start(this.shortBreakMins);
@@ -183,6 +221,10 @@ timer.prototype.startLongBreak = function () {
     this.backgroundRing.style.stroke = '#6FEA9A';
     this.timeDisplay.setAttribute('fill', '#6FEA9A');
     this.distractionLog.style.display = 'block';
+
+    if (this.alertEnabled) {
+        new Audio(audioReferences.alertSound).play();
+    }
 
     this.state = 'long_break';
     this.start(this.longBreakMins);
@@ -202,21 +244,21 @@ timer.prototype.updateStatusText = function () {
     let stateText;
     switch (this.state) {
         case 'work':
-            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
+            stateText = this.counter + '&nbsp;&nbsp;&middot;&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
             break;
         case 'short_break':
-            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/short-break.png"></image>';
+            stateText = this.counter + '&nbsp;&nbsp;&middot;&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/short-break.png"></image>';
             break;
         case 'long_break':
-            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/long-break.png"></image>';
+            stateText = this.counter + '&nbsp;&nbsp;&middot;&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/long-break.png"></image>';
             break;
         case 'stopped':
-            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
+            stateText = this.counter + '&nbsp;&nbsp;&middot;&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
             break;
         case 'reset':
-            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
+            stateText = this.counter + '&nbsp;&nbsp;&middot;&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
         default:
-            stateText = this.counter + '&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
+            stateText = this.counter + '&nbsp;&nbsp;&middot;&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image>';
     }
     // this.counterText.textContent = this.counter;
     this.counterState.innerHTML = stateText;

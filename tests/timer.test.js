@@ -64,6 +64,7 @@ beforeEach(() => {
     burndownAnim.endElement = mockFn;
     burndownAnim.ownerSVGElement.unpauseAnimations = mockFn;
     burndownAnim.ownerSVGElement.pauseAnimations = mockFn;
+    HTMLMediaElement.prototype.play = mockFn;
 
     pomo = new timer(timeDisplay, distractionContainer, backgroundRing, burndownRing, burndownAnim, counterText, counterState);
 });

@@ -53,7 +53,7 @@
 
       <!-- The text for session counter would be replaced once user starts working -->
       <div id="pomodoro-state">
-        <text id="pomodoro-state-text">0&nbsp;&nbsp;|&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image></text>
+        <text id="pomodoro-state-text">0&nbsp;&nbsp;&middot;&nbsp;&nbsp;<image id="pomodoro-state-icon" src="./media/pomodoro.png"></image></text>
       </div>
       
       <div id="timer-control">
@@ -142,16 +142,26 @@
         <text id="opt-text">Options</text><br>
         <hr style="width:90%;text-align:center;">
         <label for="pom-length" id="pom-length-label">Pomodoro Length</label>
-        <input type="number" id="pom-length"/><br>
+        <input type="number" id="pom-length" min="15" max="180" required/><br>
         <label for="short-length" id="short-length-label">Short Break Length</label>
-        <input type="number" id="short-length"/><br>
+        <input type="number" id="short-length" min="5" max="15" required/><br>
         <label for="long-length" id="long-length-label">Long Break Length</label>
-        <input type="number" id="long-length"/><br>
+        <input type="number" id="long-length" min="10" max="30" required/><br>
         <label for="cycle-length" id="cycle-length-label">Pomos per Cycle</label>
-        <input type="number" id="cycle-length"/><br>
+        <input type="number" id="cycle-length" min="2" max="8" required/><br>
         <label for="reduce-motion" id="reduce-motion-label">Reduce Motion</label>
         <label class="switch" id="reduce-motion-wrap">
           <input type="checkbox" id="reduce-motion">
+          <span class="slider round"></span>
+        </label><br>
+        <label for="alert-sound" id="alert-sound-label">Alert Sound</label>
+        <label class="switch" id="alert-sound-wrap">
+          <input type="checkbox" id="alert-sound">
+          <span class="slider round"></span>
+        </label><br>
+        <label for="ticking-sound" id="ticking-sound-label">Ticking Sound</label>
+        <label class="switch" id="ticking-sound-wrap">
+          <input type="checkbox" id="ticking-sound">
           <span class="slider round"></span>
         </label><br>
         <button id="save-options">Save</button>

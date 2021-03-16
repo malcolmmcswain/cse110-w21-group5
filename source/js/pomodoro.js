@@ -3,7 +3,6 @@
  * properly first. I would wait until most of the timer logic is complete before
  * attempting to work on this file.
  ************************************************************************************/
-
 function convertStatusTextToState(statusText) {
     switch (statusText) {
         case 'Work':
@@ -33,14 +32,14 @@ function initializePage() {
     let resetBtn = document.getElementById('reset');
 
     // Timer Graphics
-    let timeDisplay     = document.getElementById('time');
-    let backgroundRing  = document.getElementById('background-ring');
-    let burndownRing    = document.getElementById('burndown-ring');
-    let burndownAnim    = document.getElementById('burndown-anim');
-    let counterText     = document.getElementById('pomodoro-count-text');
-    let counterState    = document.getElementById('pomodoro-state-text');
-    let options        = document.getElementById('options-btn');
-    let opt_panel      = document.getElementById('options-panel');
+    let timeDisplay = document.getElementById('time');
+    let backgroundRing = document.getElementById('background-ring');
+    let burndownRing = document.getElementById('burndown-ring');
+    let burndownAnim = document.getElementById('burndown-anim');
+    let counterText = document.getElementById('pomodoro-count-text');
+    let counterState = document.getElementById('pomodoro-state-text');
+    let options = document.getElementById('options-btn');
+    let opt_panel = document.getElementById('options-panel');
 
     // Projects List Controls
     let hamburger = document.getElementById('hamburger');
@@ -65,13 +64,14 @@ function initializePage() {
     let finishInfo = document.getElementById('finish-info');
 
     // Pomodoro Options
-    let pomLength       = document.getElementById('pom-length');
-    let shortLength     = document.getElementById('short-length');
-    let longLength      = document.getElementById('long-length');
-    let cycleLength     = document.getElementById('cycle-length');
-    let saveOptions     = document.getElementById('save-options');
-    let reduceMotion    = document.getElementById('reduce-motion');
-
+    let pomLength = document.getElementById('pom-length');
+    let shortLength = document.getElementById('short-length');
+    let longLength = document.getElementById('long-length');
+    let cycleLength = document.getElementById('cycle-length');
+    let saveOptions = document.getElementById('save-options');
+    let reduceMotion = document.getElementById('reduce-motion');
+    let alertSound = document.getElementById('alert-sound');
+    let tickingSound = document.getElementById('ticking-sound');
 
     // Distraction Log
     let distractionContainer = document.getElementById('distraction-container');
@@ -86,6 +86,8 @@ function initializePage() {
     if (localStorage.getItem('longLength') === null) localStorage.setItem('longLength', 15);
     if (localStorage.getItem('cycleLength') === null) localStorage.setItem('cycleLength', 4);
     if (localStorage.getItem('reduceMotion') === null) localStorage.setItem('reduceMotion', false);
+    if (localStorage.getItem('alertSound') === null) localStorage.setItem('alertSound', true);
+    if (localStorage.getItem('tickingSound') === null) localStorage.setItem('tickingSound', true);
 
     // Load in previous options (default without loading is 25/5/30)
     pomLength.value = localStorage.getItem('pomLength');
@@ -93,6 +95,8 @@ function initializePage() {
     longLength.value = localStorage.getItem('longLength');
     cycleLength.value = localStorage.getItem('cycleLength');
     reduceMotion.checked = (localStorage.getItem('reduceMotion') === 'true');
+    alertSound.checked = (localStorage.getItem('alertSound') === 'true');
+    tickingSound.checked = (localStorage.getItem('tickingSound') === 'true');
 
     // Change display based on if reduceMotion would be checked
     document.getElementById('rings').style.display = reduceMotion.checked ? 'none' : 'block';
@@ -107,11 +111,15 @@ function initializePage() {
             localStorage.setItem('cycleLength', cycleLength.value);
             localStorage.setItem('reduceMotion', reduceMotion.checked);
 
+            localStorage.setItem('alertSound', alertSound.checked);
+            localStorage.setItem('tickingSound', tickingSound.checked);
+
             document.getElementById('rings').style.display = reduceMotion.checked ? 'none' : 'block';
         }
     });
-    
+
     // Initialize timer to be used by all events
+
     window.time = new timer(
         timeDisplay,
         distractionContainer,
@@ -155,20 +163,24 @@ function initializePage() {
         window.time.shortBreakMins = parseInt(localStorage.getItem('shortLength'));
         window.time.longBreakMins = parseInt(localStorage.getItem('longLength'));
         window.time.longBreakInterval = parseInt(localStorage.getItem('cycleLength'));
+
+        window.time.alertEnabled = localStorage.getItem('alertSound') === 'true';
+        window.time.tickingEnabled = localStorage.getItem('tickingSound') === 'true';
+
         // Begin working and display stop/reset buttons
         window.time.startWorking();
         startBtn.style.display = 'none';
         stopBtn.style.display = 'block';
         resetBtn.style.display = 'block';
     });
-    
+
     options.addEventListener('click', e => {
-    // toggle options panel        
-            if(opt_panel.style.display == 'block')
-               opt_panel.style.display = 'none';
-            else
-               opt_panel.style.display = 'block';
-        
+        // toggle options panel        
+        if (opt_panel.style.display == 'block')
+            opt_panel.style.display = 'none';
+        else
+            opt_panel.style.display = 'block';
+
     });
 
     stopBtn.addEventListener('click', e => {
@@ -266,7 +278,9 @@ function initializePage() {
     });
 
     // Prevents keyboard shortcuts from being disabled while in an input field
-    document.querySelectorAll('input').forEach(el => el.onkeypress = function (e) { e.stopPropagation(); });
+    document.querySelectorAll('input').forEach(el => el.onkeypress = function (e) {
+        e.stopPropagation();
+    });
 }
 
 /**
@@ -274,16 +288,32 @@ function initializePage() {
  * @param {string} name name of project 
  */
 function changeProject(name) {
+    let startBtn = document.getElementById('start');
+    let stopBtn = document.getElementById('stop');
+    let resetBtn = document.getElementById('reset');
+
     currentProject = localStorage.getItem("currentProject");
-    updateProject(currentProject, {
-        name: currentProject,
-        pomodoro: Number(document.getElementById('pomodoro-count-text').innerHTML),
-        state: convertStatusTextToState(document.getElementById('pomodoro-state-text').innerHTML)
-    });
     let newProject = getProject(name);
     localStorage.setItem("currentProject", newProject.name);
+    updateProject(currentProject, {
+        name: currentProject,
+        pomodoro: window.time.counter,
+        state: window.time.state
+    });
+    window.time.reset(true);
     window.time.switchState({
         pomodoro: newProject.pomodoro,
         state: newProject.state
     });
+    window.time.updateStatusText();
+
+    startBtn.style.display = 'block';
+    stopBtn.style.display = 'none';
+    resetBtn.style.display = 'none';
+}
+
+module.exports = {
+    convertStatusTextToState,
+    initializePage,
+    changeProject
 }
