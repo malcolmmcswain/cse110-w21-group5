@@ -188,11 +188,10 @@ timer.prototype.startWorking = function () {
     // console.log(this.counter); // Print counter for debugging purposes
 
     if (this.alertEnabled) {
-        // new Audio(audioReferences.alertSound).play();
+        new Audio(audioReferences.alertSound).play();
     }
 
     if (this.tickingEnabled) {
-        console.log(this.tickingEnabled);
         this.tickTockTimeout = setInterval(this.tickTock.bind(this), 1000); 
     }
 }
