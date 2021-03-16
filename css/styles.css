@@ -199,7 +199,7 @@ footer > p {
     align-content: center;
 }
 
-#pom-length-label, #short-length-label, #long-length-label, #cycle-length-label, #reduce-motion-label {
+#options-form > label {
     color: #636363;
 }
 
@@ -219,7 +219,15 @@ footer > p {
     margin-right: 30px;
 }
 
-#short-length, #long-length, #cycle-length, #reduce-motion-wrap {
+#alert-sound-label {
+    margin-right: 55px;
+}
+
+#ticking-sound-label {
+    margin-right: 35px;
+}
+
+#short-length, #long-length, #cycle-length, #reduce-motion-wrap, #alert-sound-wrap, #ticking-sound-wrap {
     margin-top: 15px;
 }
 
