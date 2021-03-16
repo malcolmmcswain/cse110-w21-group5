@@ -31,7 +31,7 @@ function timer(
     longBreakMins = 15, 
     longBreakInterval = 4,
     alertEnabled = true,
-    tickingEnabled = true,
+    tickingEnabled = true
 ) {
     // State management
     this.state = 'reset';

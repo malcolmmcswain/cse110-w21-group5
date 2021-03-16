@@ -164,7 +164,6 @@ function initializePage() {
         window.time.longBreakMins = parseInt(localStorage.getItem('longLength'));
         window.time.longBreakInterval = parseInt(localStorage.getItem('cycleLength'));
 
-        // TODO Change alert and ticking sound enabled in timer object
         window.time.alertEnabled = localStorage.getItem('alertSound') === 'true';
         window.time.tickingEnabled = localStorage.getItem('tickingSound') === 'true';
 
