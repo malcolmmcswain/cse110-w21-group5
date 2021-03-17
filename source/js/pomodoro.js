@@ -296,7 +296,7 @@ function changeProject(name) {
     resetBtn.style.display = 'none';
 }
 
-// module.exports = {
-//     initializePage,
-//     changeProject
-// }
+module.exports = {
+    initializePage,
+    changeProject
+}
