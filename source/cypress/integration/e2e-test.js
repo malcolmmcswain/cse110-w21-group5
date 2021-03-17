@@ -15,10 +15,38 @@
 *  5. Code report can be found in /source/coverage 
  */
 
+
+describe('Keyboard shortcuts', () => {
+    beforeEach(() => {
+        cy.visit('index.html');
+    });
+
+    it('Press enter key to start', () => {
+        cy.get('body').trigger('keydown', { keycode: 13, release: true });
+        cy.clock();
+        cy.get("#time").should("have.text", "00:00");
+        cy.get("#start").click();
+        cy.tick(1000 * 60);
+        cy.get("#time").should("have.text", "24:00");
+    });
+
+    it('Press key to start', () => {
+        cy.get('body').trigger('keydown', { keycode: 13, release: true });
+        cy.clock();
+        cy.get("#time").should("have.text", "00:00");
+        cy.get("#start").click();
+        cy.tick(1000 * 60);
+        cy.get("#time").should("have.text", "24:00");
+    });
+
+
+});
+
+
 describe('Info page', () => {
     beforeEach(() => {
         cy.visit('index.html');
-      });
+    });
 
     it('Info page is closed at default', () => {
         cy.get("#thematic-modal").should("not.be.visible");
@@ -151,62 +179,6 @@ describe('Tests for options menu', () => {
         // New working session
         cy.tick(1000);
         cy.get("#time").should("have.text", "04:59");
-    });
-
-    it('Options menu correctly controls timer settings: 2nd test', () => {
-        cy.get("#options-btn").click();
-        cy.get("#pom-length").clear().type("25");
-        cy.get("#short-length").clear().type("5");
-        cy.get("#long-length").clear().type("20");
-        cy.get("#cycle-length").clear().type("4");
-        cy.get("#save-options").click();
-        cy.clock();
-
-        cy.get("#start").click();
-
-        // Working session 1
-        cy.tick(1000);
-        cy.get("#time").should("have.text", "24:59");
-        cy.tick(1000 * (60 * 25 - 1));
-
-        // Short break session 1
-        cy.tick(1000);
-        cy.get("#time").should("have.text", "04:59");
-        cy.tick(1000 * (60 * 5 - 1));
-
-        // Working session 2
-        cy.tick(1000);
-        cy.get("#time").should("have.text", "24:59");
-        cy.tick(1000 * (60 * 25 - 1));
-
-        // Short break session 2
-        cy.tick(1000);
-        cy.get("#time").should("have.text", "04:59");
-        cy.tick(1000 * (60 * 5 - 1));
-
-        // Working session 3
-        cy.tick(1000);
-        cy.get("#time").should("have.text", "24:59");
-        cy.tick(1000 * (60 * 25 - 1));
-
-        // Short break session 3
-        cy.tick(1000);
-        cy.get("#time").should("have.text", "04:59");
-        cy.tick(1000 * (60 * 5 - 1));
-
-        // Working session 4
-        cy.tick(1000);
-        cy.get("#time").should("have.text", "24:59");
-        cy.tick(1000 * (60 * 25 - 1));
-
-        // Long break session 
-        cy.tick(1000);
-        cy.get("#time").should("have.text", "19:59");
-        cy.tick(1000 * (60 * 20 - 1));
-
-        // New working session
-        cy.tick(1000);
-        cy.get("#time").should("have.text", "24:59"); 
     });
 
 

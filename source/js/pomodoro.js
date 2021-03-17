@@ -3,22 +3,6 @@
  * properly first. I would wait until most of the timer logic is complete before
  * attempting to work on this file.
  ************************************************************************************/
-function convertStatusTextToState(statusText) {
-    switch (statusText) {
-        case 'Work':
-            return 'work';
-        case 'Short Break':
-            return 'short_break';
-        case 'Long Break':
-            return 'long_break';
-        case 'Stopped':
-            return 'stopped';
-        case 'Reset':
-            return 'reset';
-        default:
-            return 'stopped';
-    }
-}
 
 window.onload = function () {
     refreshProjectList();
@@ -143,13 +127,13 @@ function initializePage() {
             case 'Enter': // Start timer
                 if (!working) startBtn.click();
                 break;
-            case 's': // Stop timer
+            case 'l': // Log function
                 if (working) stopBtn.click();
                 break;
             case 'r': // Reset timer
                 if (working) resetBtn.click();
                 break;
-            case 'l': // Open up todolist
+            case 't': // Open up todolist
                 hamburger.click();
                 break;
             default:
@@ -313,7 +297,6 @@ function changeProject(name) {
 }
 
 // module.exports = {
-//     convertStatusTextToState,
 //     initializePage,
 //     changeProject
 // }
