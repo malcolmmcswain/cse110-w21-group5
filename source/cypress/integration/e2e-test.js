@@ -30,14 +30,33 @@ describe('Keyboard shortcuts', () => {
         cy.get("#time").should("have.text", "24:00");
     });
 
-    it('Press key to start', () => {
-        cy.get('body').trigger('keydown', { keycode: 13, release: true });
+    it('Press "l" key to log', () => {
         cy.clock();
-        cy.get("#time").should("have.text", "00:00");
         cy.get("#start").click();
-        cy.tick(1000 * 60);
-        cy.get("#time").should("have.text", "24:00");
+        cy.tick(1000);
+        cy.get('body').type("l")
+        cy.get("#log-modal").should("be.visible");
     });
+
+    it('Press "r" key to reset', () => {
+        cy.clock();
+        cy.get("#start").click();
+        cy.tick(1000);
+        cy.get("#time").should("have.text", "24:59");
+        cy.get('body').type("r");
+        cy.get("#time").should("have.text", "00:00");
+    });
+
+
+    it('Press "t" key to open task list', () => {
+        cy.get('body').type("t");
+        cy.get("#project-list").should("be.visible");
+        
+    });
+
+
+
+
 
 
 });
