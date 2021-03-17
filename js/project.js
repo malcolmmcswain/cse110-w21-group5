@@ -69,6 +69,7 @@ function updateProject(name, newState) {
     if (projectList.find(p => p.name == name)) {
         let projectIndex = projectList.findIndex(p => p.name == name);
         projectList[projectIndex] = newState;
+        localStorage.setItem("projectList", JSON.stringify(projectList));
         refreshProjectList();
         return true;
     } else {
@@ -108,15 +109,15 @@ function refreshProjectList() {
             projectItem.innerHTML = `
             <a style="font-weight: bold;" onclick="changeProject('${project.name}')">${project.name}</a>
             <div class="project-action-container">
-                <ion-icon name="create-outline" onclick="editProject('${project.name}')"></ion-icon>
-                <ion-icon name="trash-outline" onclick="deleteProject('${project.name}')"></ion-icon>
+                <ion-icon name="create-outline" class="edit-task" onclick="editProject('${project.name}')"></ion-icon>
+                <ion-icon name="trash-outline" class="delete-task" onclick="deleteProject('${project.name}')"></ion-icon>
             </div>`;
         } else {
             projectItem.innerHTML = `
             <a onclick="changeProject('${project.name}')">${project.name}</a>
             <div class="project-action-container">
-                <ion-icon name="create-outline" onclick="editProject('${project.name}')"></ion-icon>
-                <ion-icon name="trash-outline" onclick="deleteProject('${project.name}')"></ion-icon>
+                <ion-icon name="create-outline" class="edit-task" onclick="editProject('${project.name}')"></ion-icon>
+                <ion-icon name="trash-outline" class="delete-task" onclick="deleteProject('${project.name}')"></ion-icon>
             </div>`;
         }
         projectItem.classList.add("project-item");
