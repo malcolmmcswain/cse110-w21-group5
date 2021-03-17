@@ -148,6 +148,7 @@ function logDistraction(distraction) {
 
 /**
  * Update DOM to reflect changes in distractionLog
+ * Comment for tour
  */
 function refreshDistractionLog() {
     if (localStorage.getItem("distractionLog") == null) initializeLocalStorage();
