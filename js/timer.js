@@ -175,6 +175,10 @@ timer.prototype.tickTock = function() {
  * Start work timer
  */
 timer.prototype.startWorking = function () {
+    // Increment session counter
+    this.counter++;
+    // console.log(this.counter); // Print counter for debugging purposes
+    
     this.state = 'work';
     this.start(this.workMins);
 
@@ -182,10 +186,6 @@ timer.prototype.startWorking = function () {
     this.backgroundRing.style.stroke = '#E46E6E';
     this.timeDisplay.setAttribute('fill', '#E46E6E');
     this.distractionLog.style.display = 'none';
-
-    // Increment session counter
-    this.counter++;
-    // console.log(this.counter); // Print counter for debugging purposes
 
     if (this.alertEnabled) {
         new Audio(audioReferences.alertSound).play();
