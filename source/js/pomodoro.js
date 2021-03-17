@@ -312,8 +312,8 @@ function changeProject(name) {
     resetBtn.style.display = 'none';
 }
 
-module.exports = {
-    convertStatusTextToState,
-    initializePage,
-    changeProject
-}
+// module.exports = {
+//     convertStatusTextToState,
+//     initializePage,
+//     changeProject
+// }
