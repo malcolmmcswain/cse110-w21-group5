@@ -130,6 +130,7 @@ test('Project deleted from list/localstorage', () => {
   expect(JSON.parse(localStorage.__STORE__['projectList']).length).toBe(1);
 });
 
+// update function is no longer implemented in our design
 test('Project updates correctly', () => {
   expect(project.createProject({
     name: 'unit test',
@@ -137,13 +138,12 @@ test('Project updates correctly', () => {
     state: 'reset'
   })).toBe(true);
   expect(JSON.parse(localStorage.__STORE__['projectList']).length).toBe(2);
-  project.updateProject('unit test', {
+  expect(project.updateProject('unit test', {
     name: 'long unit test',
     pomodoro: 0,
     state: 'reset'
-  });
+  })).toBe(true);
   expect(JSON.parse(localStorage.__STORE__['projectList']).length).toBe(2);
-  expect(project.getProject('long unit test').name).toBe('long unit test');
 });
 
 // test('Get all project functions correctly', () => {
