@@ -5,7 +5,6 @@ const {
 
 require('console');
 require('jest-localstorage-mock');
-const pomo = require('../source/js/pomodoro.js');
 
 // Using modern fake timers allows date functions to be mocked and settimeout functions to be mocked.
 jest.useFakeTimers('modern');
