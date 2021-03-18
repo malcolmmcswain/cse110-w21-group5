@@ -8,7 +8,6 @@
 
 html {
     height: 100%;
-    min-width: 320px;
 }
 
 body {
@@ -19,6 +18,22 @@ body {
 
     display: flex;
     flex-direction: column;
+}
+.dark-mode {
+    background-color: rgb(38, 38, 38);
+}
+
+.dark-mode :is(header, footer) { /* Allows selection of multiple descendents*/
+    background-color: rgb(21, 21, 21);
+    
+}
+
+.dark-mode :is(#project-list, #options-panel) {
+    background-color: #4f4f4f;
+}
+
+.dark-mode :is(#options-form > label, #burndown-ring, li, #pomodoro-state-text) {
+    color: #c4c4c4;
 }
 
 header, footer {
@@ -96,8 +111,8 @@ main {
 #timer-display {
     align-self: center;
     width: 100%;
-    min-width: 290px;
     max-width: 60vh;
+    max-height: 60vw;
 }
 
 #rings {
@@ -186,7 +201,6 @@ footer > p {
     bottom: 5em;
     display: none;
     width: 17%;
-    min-width: 150px;
     font-family: inherit;
     border-radius: 10px 10px 0px 0px;
     background-color: #e0e0e0;
@@ -228,7 +242,11 @@ footer > p {
     margin-right: 35px;
 }
 
-#short-length, #long-length, #cycle-length, #reduce-motion-wrap, #alert-sound-wrap, #ticking-sound-wrap {
+#darkmode-label {
+    margin-right: 60px;
+}
+
+#short-length, #long-length, #cycle-length, #reduce-motion-wrap, #alert-sound-wrap, #ticking-sound-wrap, #darkmode-wrap {
     margin-top: 15px;
 }
 
@@ -271,23 +289,22 @@ v2 styling
 
 nav {
     display: grid;
-    grid-template-columns: 80% 1fr 5%;
+    grid-template-columns: 60% 1fr 1fr 10%;
+    height: 8vh;
     align-items: center;
 }
 
 #project-list {
     list-style: none;
     width: 20vw;
-    min-width: 260px;
     position: absolute;
     right: 0;
-    top: 68px;
+    top: 8vh;
     border-radius: 0px 0px 10px 10px;
     padding-top: 20px;
     padding-bottom: 10px;
     padding-inline-start: 30px;
     padding-inline-end: 30px;
-    margin-block-start: 0em;
     background: #e0e0e0;
 
     /* change in js to (block)*/
@@ -373,7 +390,6 @@ nav .icon {
     background-color: white;
     height: 200px;
     width: 400px;
-    max-width: 90%;
     text-align: center;
     align-items: center;
     border-radius: 20px;
@@ -559,8 +575,6 @@ nav .icon {
     flex: 1;
     margin: 10px 25px 10px;
     background-color: #ebebeb;
-    min-width: 290px;
-    max-width: 60vh;
 
     border-radius: 20px;
     -webkit-border-radius: 20px;
@@ -601,17 +615,17 @@ nav .icon {
     display: inline-block;
     width: 50px;
     height: 28px;
-  }
-  
-  /* Hide default HTML checkbox */
-  .switch input {
+}
+
+/* Hide default HTML checkbox */
+.switch input {
     opacity: 0;
     width: 0;
     height: 0;
-  }
-  
-  /* The slider */
-  .slider {
+}
+
+/* The slider */
+.slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -621,9 +635,9 @@ nav .icon {
     background-color: #ccc;
     -webkit-transition: .4s;
     transition: .4s;
-  }
-  
-  .slider:before {
+}
+
+.slider:before {
     position: absolute;
     content: "";
     height: 20px;
@@ -633,27 +647,27 @@ nav .icon {
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
-  }
-  
-  input:checked + .slider {
+}
+
+input:checked + .slider {
     background-color: #2196F3;
-  }
-  
-  input:focus + .slider {
+}
+
+input:focus + .slider {
     box-shadow: 0 0 1px #2196F3;
-  }
-  
-  input:checked + .slider:before {
+}
+
+input:checked + .slider:before {
     -webkit-transform: translateX(20px);
     -ms-transform: translateX(20px);
     transform: translateX(20px);
-  }
-  
-  /* Rounded sliders */
-  .slider.round {
+}
+
+/* Rounded sliders */
+.slider.round {
     border-radius: 34px;
-  }
-  
-  .slider.round:before {
+}
+
+.slider.round:before {
     border-radius: 50%;
-  }
+}
