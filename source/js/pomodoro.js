@@ -283,11 +283,12 @@ function changeProject(name) {
     currentProject = localStorage.getItem("currentProject");
     updateProject(currentProject, {
         name: currentProject,
-        pomodoro: Number(document.getElementById('pomodoro-count-text').innerHTML),
-        state: convertStatusTextToState(document.getElementById('pomodoro-state-text').innerHTML)
+        pomodoro: Number(document.getElementById('pomodoro-state-text').innerText.match(/\d/g)),
+        state: window.time.state
     });
     let newProject = getProject(name);
     localStorage.setItem("currentProject", newProject.name);
+    refreshProjectList();
     window.time.switchState({
         pomodoro: newProject.pomodoro,
         state: newProject.state
