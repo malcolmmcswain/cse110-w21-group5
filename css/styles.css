@@ -19,22 +19,6 @@ body {
     display: flex;
     flex-direction: column;
 }
-.dark-mode {
-    background-color: rgb(38, 38, 38);
-}
-
-.dark-mode :is(header, footer) { /* Allows selection of multiple descendents*/
-    background-color: rgb(21, 21, 21);
-    
-}
-
-.dark-mode :is(#project-list, #options-panel) {
-    background-color: #4f4f4f;
-}
-
-.dark-mode :is(#options-form > label, #burndown-ring, li, #pomodoro-state-text) {
-    color: #c4c4c4;
-}
 
 header, footer {
     padding: 0.5em;
@@ -670,4 +654,25 @@ input:checked + .slider:before {
 
 .slider.round:before {
     border-radius: 50%;
+}
+
+.dark-mode {
+    background-color: rgb(38, 38, 38);
+}
+
+.dark-mode header, 
+.dark-mode footer {
+    background-color: rgb(21, 21, 21);
+}
+
+.dark-mode #project-list, 
+.dark-mode #options-panel {
+    background-color: #4f4f4f;
+}
+
+.dark-mode #options-form > label,
+.dark-mode #burndown-ring, 
+.dark-mode li, 
+.dark-mode #pomodoro-state-text {
+    color: #c4c4c4;
 }
