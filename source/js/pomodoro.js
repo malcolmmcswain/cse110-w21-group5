@@ -4,23 +4,6 @@
  * attempting to work on this file.
  ************************************************************************************/
 
-function convertStatusTextToState(statusText) {
-    switch (statusText) {
-        case 'Work':
-            return 'work';
-        case 'Short Break':
-            return 'short_break';
-        case 'Long Break':
-            return 'long_break';
-        case 'Stopped':
-            return 'stopped';
-        case 'Reset':
-            return 'reset';
-        default:
-            return 'stopped';
-    }
-}
-
 window.onload = function () {
     refreshProjectList();
     initializePage();
@@ -65,14 +48,16 @@ function initializePage() {
     let finishInfo = document.getElementById('finish-info');
 
     // Pomodoro Options
-    let pomLength       = document.getElementById('pom-length');
-    let shortLength     = document.getElementById('short-length');
-    let longLength      = document.getElementById('long-length');
-    let cycleLength     = document.getElementById('cycle-length');
-    let saveOptions     = document.getElementById('save-options');
-    let reduceMotion    = document.getElementById('reduce-motion');
-    let darkmode    = document.getElementById('darkmode');
+    let pomLength = document.getElementById('pom-length');
+    let shortLength = document.getElementById('short-length');
+    let longLength = document.getElementById('long-length');
+    let cycleLength = document.getElementById('cycle-length');
+    let saveOptions = document.getElementById('save-options');
 
+    let reduceMotion = document.getElementById('reduce-motion');
+    let alertSound = document.getElementById('alert-sound');
+    let tickingSound = document.getElementById('ticking-sound');
+    let darkmode    = document.getElementById('darkmode');
 
     // Distraction Log
     let distractionContainer = document.getElementById('distraction-container');
@@ -86,7 +71,10 @@ function initializePage() {
     if (localStorage.getItem('shortLength') === null) localStorage.setItem('shortLength', 5);
     if (localStorage.getItem('longLength') === null) localStorage.setItem('longLength', 15);
     if (localStorage.getItem('cycleLength') === null) localStorage.setItem('cycleLength', 4);
+
     if (localStorage.getItem('reduceMotion') === null) localStorage.setItem('reduceMotion', false);
+    if (localStorage.getItem('alertSound') === null) localStorage.setItem('alertSound', true);
+    if (localStorage.getItem('tickingSound') === null) localStorage.setItem('tickingSound', true);
     if (localStorage.getItem('darkmode') === null) localStorage.setItem('darkmode', false);
 
     // Load in previous options (default without loading is 25/5/30)
@@ -94,12 +82,16 @@ function initializePage() {
     shortLength.value = localStorage.getItem('shortLength');
     longLength.value = localStorage.getItem('longLength');
     cycleLength.value = localStorage.getItem('cycleLength');
+    
     reduceMotion.checked = (localStorage.getItem('reduceMotion') === 'true');
+    alertSound.checked = (localStorage.getItem('alertSound') === 'true');
+    tickingSound.checked = (localStorage.getItem('tickingSound') === 'true');
     darkmode.checked = (localStorage.getItem('darkmode') === 'true');
 
     // Change display based on if reduceMotion would be checked
     document.getElementById('rings').style.display = reduceMotion.checked ? 'none' : 'block';
-    document.body.classList.toggle("dark-mode");
+    document.body.classList.toggle("dark-mode", darkmode.checked);
+
     // Update storage on options edit
     saveOptions.addEventListener('click', e => {
         e.preventDefault();
@@ -111,15 +103,17 @@ function initializePage() {
             localStorage.setItem('reduceMotion', reduceMotion.checked);
             localStorage.setItem('darkmode', darkmode.checked);
 
+            localStorage.setItem('alertSound', alertSound.checked);
+            localStorage.setItem('tickingSound', tickingSound.checked);
+
             document.getElementById('rings').style.display = reduceMotion.checked ? 'none' : 'block';
 
+            document.body.classList.toggle("dark-mode", darkmode.checked);
         }
-    });
-    darkmode.addEventListener('click', e => {
-        document.body.classList.toggle("dark-mode");
     });
     
     // Initialize timer to be used by all events
+
     window.time = new timer(
         timeDisplay,
         distractionContainer,
@@ -143,13 +137,13 @@ function initializePage() {
             case 'Enter': // Start timer
                 if (!working) startBtn.click();
                 break;
-            case 's': // Stop timer
+            case 'l': // Log function
                 if (working) stopBtn.click();
                 break;
             case 'r': // Reset timer
                 if (working) resetBtn.click();
                 break;
-            case 'l': // Open up todolist
+            case 't': // Open up todolist
                 hamburger.click();
                 break;
             default:
@@ -163,6 +157,10 @@ function initializePage() {
         window.time.shortBreakMins = parseInt(localStorage.getItem('shortLength'));
         window.time.longBreakMins = parseInt(localStorage.getItem('longLength'));
         window.time.longBreakInterval = parseInt(localStorage.getItem('cycleLength'));
+
+        window.time.alertEnabled = localStorage.getItem('alertSound') === 'true';
+        window.time.tickingEnabled = localStorage.getItem('tickingSound') === 'true';
+
         // Begin working and display stop/reset buttons
         window.time.startWorking();
         startBtn.style.display = 'none';
@@ -294,4 +292,9 @@ function changeProject(name) {
         pomodoro: newProject.pomodoro,
         state: newProject.state
     });
+}
+
+module.exports = {
+    initializePage,
+    changeProject
 }

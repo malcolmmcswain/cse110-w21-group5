@@ -22,50 +22,19 @@ body {
 .dark-mode {
     background-color: rgb(38, 38, 38);
 }
-.dark-mode header{
+
+.dark-mode :is(header, footer) { /* Allows selection of multiple descendents*/
     background-color: rgb(21, 21, 21);
     
 }
-.dark-mode footer {
-    background-color: rgb(21, 21, 21);
-    
-}
-.dark-mode #project-list{
+
+.dark-mode :is(#project-list, #options-panel) {
     background-color: #4f4f4f;
 }
 
-.dark-mode #options-panel{
-    background-color: #4f4f4f;
+.dark-mode :is(#options-form > label, #burndown-ring, li, #pomodoro-state-text) {
+    color: #c4c4c4;
 }
-.dark-mode #pom-length-label {
-    color: rgb(196, 196, 196);
-}
-.dark-mode #short-length-label{
-    color: rgb(196,196, 196);
-}
-.dark-mode #opt-text{
-    color: rgb(196,196, 196);
-}
-.dark-mode #reduce-motion-label{
-    color: rgb(196,196, 196);
-}
-.dark-mode #long-length-label{
-    color: rgb(196,196, 196);
-}
-.dark-mode #cycle-length-label{
-    color: rgb(196,196, 196);
-}
-.dark-mode #darkmode-label{
-    color: rgb(196,196, 196);
-}
-.dark-mode nav ul li{
-    color: rgb(196,196, 196);
-}
-.dark-mode #pomodoro-state-text{
-    color: rgb(196,196, 196);
-}
-
-
 
 header, footer {
     padding: 0.5em;
@@ -76,6 +45,7 @@ header, footer {
 footer {
     display: flex;
     flex-direction: row;
+    position: relative;
 }
 
 nav {
@@ -244,7 +214,7 @@ footer > p {
     align-content: center;
 }
 
-#pom-length-label, #short-length-label, #long-length-label, #cycle-length-label, #reduce-motion-label,#darkmode-label{
+#options-form > label {
     color: #636363;
 }
 
@@ -263,11 +233,20 @@ footer > p {
 #reduce-motion-label {
     margin-right: 30px;
 }
-#darkmode-label {
-    margin-right: 30px;
+
+#alert-sound-label {
+    margin-right: 55px;
 }
 
-#short-length, #long-length, #cycle-length, #reduce-motion-wrap #darkmode-wrap{
+#ticking-sound-label {
+    margin-right: 35px;
+}
+
+#darkmode-label {
+    margin-right: 60px;
+}
+
+#short-length, #long-length, #cycle-length, #reduce-motion-wrap, #alert-sound-wrap, #ticking-sound-wrap, #darkmode-wrap {
     margin-top: 15px;
 }
 
@@ -299,6 +278,7 @@ footer > p {
     color: #636363;
     font-weight: bolder;
     font-family: inherit;
+    cursor: pointer;
 }
 
 /* 
@@ -635,17 +615,17 @@ nav .icon {
     display: inline-block;
     width: 50px;
     height: 28px;
-  }
-  
-  /* Hide default HTML checkbox */
-  .switch input {
+}
+
+/* Hide default HTML checkbox */
+.switch input {
     opacity: 0;
     width: 0;
     height: 0;
-  }
-  
-  /* The slider */
-  .slider {
+}
+
+/* The slider */
+.slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -655,9 +635,9 @@ nav .icon {
     background-color: #ccc;
     -webkit-transition: .4s;
     transition: .4s;
-  }
-  
-  .slider:before {
+}
+
+.slider:before {
     position: absolute;
     content: "";
     height: 20px;
@@ -667,27 +647,27 @@ nav .icon {
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
-  }
-  
-  input:checked + .slider {
+}
+
+input:checked + .slider {
     background-color: #2196F3;
-  }
-  
-  input:focus + .slider {
+}
+
+input:focus + .slider {
     box-shadow: 0 0 1px #2196F3;
-  }
-  
-  input:checked + .slider:before {
+}
+
+input:checked + .slider:before {
     -webkit-transform: translateX(20px);
     -ms-transform: translateX(20px);
     transform: translateX(20px);
-  }
-  
-  /* Rounded sliders */
-  .slider.round {
+}
+
+/* Rounded sliders */
+.slider.round {
     border-radius: 34px;
-  }
-  
-  .slider.round:before {
+}
+
+.slider.round:before {
     border-radius: 50%;
-  }
+}
