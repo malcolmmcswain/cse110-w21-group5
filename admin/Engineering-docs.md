@@ -24,3 +24,7 @@ Our coverage report
 ## CI/CD Pipeline
 
 <img width="805" alt="Screen Shot 2021-03-20 at 5 16 30 PM" src="https://user-images.githubusercontent.com/50184924/111888205-05cc9b80-89a0-11eb-9f11-a98c1d6d2bb1.png">
+
+Video of how it works:
+
+https://user-images.githubusercontent.com/48825479/108962991-603b3c00-762e-11eb-9580-0ce5daf5e500.mp4
